@@ -17,6 +17,9 @@ ClassLoader::addDirectories(array(
 	app_path().'/controllers',
 	app_path().'/models',
 	app_path().'/database/seeds',
+	app_path().'/libraries',
+	app_path().'/libraries/Presenters',
+	app_path().'/presenters',
 
 ));
 
@@ -31,7 +34,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+Log::useFiles(storage_path().'/logs/laravel-'.date('Y').'-'.date('m').'.log');
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +51,21 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+	$unique_id = uniqid();
+	Log::error('Unique ID: '.$unique_id.': '.$exception);
+
+	if ($code != '404' && App::environment() == 'production')
+	{
+		// For production messages
+		Mail::send('emails.errors.internal', array('exception'=> $exception, 'unique_id'=>$unique_id), function (Illuminate\Mail\Message $message) {
+			$message->from('no-reply@carsnow.com.ph', 'Carsnow Error Observer');
+			$message->replyTo('no-reply@carsnow.com.ph', 'Carsnow Error Observer');
+			$message->subject('Carsnow Error');
+			$message->to('rex@lightmedia.com.au', 'Rex Taylor');
+		});
+	}
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +80,16 @@ App::error(function(Exception $exception, $code)
 
 App::down(function()
 {
-	return Response::make("Be right back!", 503);
+	if (Request::segment(1) == "admin")
+	{
+		$ac = new \Base\AdminController();
+		return Response::view('admin.down', $ac->data, 503);
+	}
+	else
+	{
+		$pc = new \Base\FrontendController();
+		return Response::view($pc->baseView.'down', $pc->data, 503);
+	}
 });
 
 /*
@@ -78,4 +103,6 @@ App::down(function()
 |
 */
 
+
+require app_path().'/includes/custom-validation.php';
 require app_path().'/filters.php';

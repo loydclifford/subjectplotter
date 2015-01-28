@@ -1,0 +1,75 @@
+ul.ui-sortable {
+  padding: 0;
+  margin: 0;
+  padding: 0 47px 20px 0;
+
+  > li {
+    list-style: none;
+    position: relative;
+    background: #fbfbfb;
+    border: 1px solid #ddd;
+    padding: 8px 15px 8px 36px;
+    margin-top: -1px;
+
+    .fa.sortable-handle {
+      position: absolute;
+      cursor: grab;
+      text-align: center;
+      margin-top: 6px;
+      left: 12px;
+      font-size: 15px;
+    }
+
+    .ui-actions {
+      display: none;
+      position: absolute;
+      right: 0;
+      height: 100%;
+      top: 0px;
+      vertical-align: middle;
+      padding-right: 20px;
+
+      a {
+        display: block;
+        float: left;
+        padding: 12px 6px;
+        text-align: center;
+      }
+
+      &:hover {
+        display: block !important;
+      }
+    }
+
+    a.ui-action-delete {
+      font-style: normal;
+      color: rgb(255, 112, 112);
+      font-size: 22px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin-top: 7px;
+      margin-right: -31px;
+    }
+
+    input[type="text"].ui-sortable-input {
+      font-size: 15px;
+      width: 100%;
+      border: 1px solid transparent;
+      box-shadow: none;
+
+      &:hover,&:focus {
+        box-shadow: inherit;
+        border: inherit;
+      }
+
+      &:focus {
+        padding-right: 62px !important;
+
+        & + .ui-actions {
+          display: block;
+        }
+      }
+    }
+  }
+}

@@ -6,8 +6,9 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"barryvdh/laravel-debugbar": "1.7.7",
-	  	"nerweb/laravel-tblist": "1.2.x"
+	  	"barryvdh/laravel-ide-helper": "1.11.*@dev",
+	  	"nerweb/laravel-tblist": "1.2.x",
+	  	"anahkiasen/former": "3.4.x"
 	},
 	"autoload": {
 		"classmap": [
@@ -17,6 +18,17 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
+		],
+		"files": [
+		  "app/libraries/helpers/helpers.php",
+		  "app/libraries/helpers/agent_helpers.php",
+		  "app/libraries/helpers/input_helpers.php",
+		  "app/libraries/helpers/auth_helpers.php",
+		  "app/libraries/helpers/meta_helpers.php",
+		  "app/libraries/helpers/date_helpers.php",
+		  "app/libraries/helpers/pagination_helpers.php",
+		  "app/libraries/helpers/media_helpers.php",
+		  "app/libraries/helpers/html_helpers.php"
 		]
 	},
 	"scripts": {
@@ -25,8 +37,9 @@
 			"php artisan optimize"
 		],
 		"post-update-cmd": [
-			"php artisan clear-compiled",
-			"php artisan optimize"
+		  "php artisan clear-compiled",
+		  "php artisan ide-helper:generate",
+		  "php artisan optimize"
 		],
 		"post-create-project-cmd": [
 			"php artisan key:generate"

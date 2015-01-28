@@ -1,0 +1,71 @@
+
+#pupload-drop-area {
+  margin-bottom: 10px;
+  padding: 47px 17px;
+
+  .drop-inner {
+    text-align: center;
+  }
+
+  .drop-info {
+    color: #AAAAAA;
+    font-size: 26px;
+    font-weight: bold;
+  }
+
+  &.drag-over {
+    border: 4px dashed #52B1BF;
+    background: none repeat scroll 0 0 rgba(82, 177, 191, 0.35);
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+
+    .drop-inner {
+      display:none;
+    }
+
+    .transition(0.3s ease-in);
+    .transition(0.4s ease-out);
+  }
+}
+
+
+#pupload-ui {
+
+  #pupload-drop-area {border: 4px dashed #CCCCCC;}
+  #pupload-filelist {
+    width: 700px;
+    margin-top: 20px;
+
+    .file-item {
+      .clearfix();
+      border: 1px solid #DDDDDD;
+      margin-top: -1px;
+      padding: 5px 10px;
+
+      .thumbnail {
+        float:left;
+        margin: 0px 10px 0px 0px;
+        width: 40px;
+      }
+
+      .file-actions {
+        float: right;
+
+        a,span {
+          line-height: 40px;
+          display:block;
+          padding: 0px 5px;
+          text-align: center;
+        }
+      }
+
+      &.updating {
+        background: #F2D4C7!important;
+      }
+
+    }
+  }
+}

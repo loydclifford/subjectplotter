@@ -11,6 +11,25 @@
 |
 */
 
+Route::filter('guest', function()
+{
+	if (user_check())
+	{
+		return Redirect::intended(admin_url('/dashboard'));
+	}
+});
+
+Route::filter('auth', function()
+{
+	if ( ! user_check())
+	{
+		return Response::json(array(
+			'status' => RESULT_NOT_LOG_IN
+		), 401);
+	}
+});
+
+
 App::before(function($request)
 {
 	//

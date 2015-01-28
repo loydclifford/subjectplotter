@@ -1,0 +1,131 @@
+.product-images {
+  margin-bottom: 23px;
+
+  .product-image-item {
+    -webkit-transition: all 0.5s ease;
+    -o-transition:all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+    margin-bottom: 20px;
+
+    .product-image-wrapper {
+      border: 1px solid rgba(0,0,0,.1);
+      height: 110px;
+      position: relative;
+      overflow: hidden;
+
+      .product-item-actions {
+        position: absolute;
+        top: 0;
+        display: none;
+        -webkit-transition: all 0.5s ease;
+        width: 100%;
+        height: 100%;
+        padding-top: 34px;
+        text-align: center;
+      }
+
+      &:hover .product-item-actions {
+        display: block;
+        background: rgba(0,0,0,.60);
+      }
+    }
+
+    .text-ellipsis {
+      width: 100%;
+    }
+
+  }
+
+  .product-image-add, .product-image-progress, .product-image-failed {
+    .product-image-wrapper{
+      border: 1px solid rgba(0,0,0,.1);
+    }
+  }
+
+  .product-image-add {
+
+    .product-image-wrapper {
+      border: 5px dashed rgb(225, 225, 225);
+      cursor: pointer;
+
+      .fa.fa-plus {
+        color: rgb(204, 204, 204);
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        margin-left: -12px;
+        left: 50%;
+        margin-top: -15px;
+      }
+
+      &:hover,
+      &.hover {
+        border-color: rgb(154, 194, 216);
+        background: rgb(216, 237, 240);
+
+        .fa.fa-plus {
+          color: rgb(154, 194, 216);
+        }
+      }
+    }
+
+    &.drop-over {
+      .product-image-wrapper {
+        .fa-plus {
+          font-size: 58px!important;
+          margin-left: -25px!important;
+          margin-top: -24px!important;
+        }
+      }
+    }
+
+    &.drop-over .product-image-wrapper,
+    .product-image-wrapper:active,
+    .product-image-wrapper.active {
+      border-color: rgb(127, 183, 214);
+
+      .fa.fa-plus {
+        color: rgb(127, 183, 214);
+      }
+    }
+  }
+
+  .product-image-progress {
+
+    .progress-wrapper {
+      padding: 37px 27px;
+
+      .progress {
+        margin-bottom: 0px;
+        height: 26px;
+        background: #e1e1e1;
+
+        .progress-bar-light-blue, .progress-bar-primary {
+          background-color: #9c9c9c;
+        }
+      }
+    }
+
+  }
+
+  .product-image-failed {
+
+    .product-image-wrapper {
+      border-color: #ebccd1;
+      color: #b94a48;
+      padding: 20px;
+      text-align: center;
+      background: #f2dede;
+      a {
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Fixed bug on html5 append on nto
+
+}
+

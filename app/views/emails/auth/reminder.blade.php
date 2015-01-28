@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en-US">
-	<head>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<h2>Password Reset</h2>
+<html lang="{{ App::getLocale() }}">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h2>{{ trans('user::global.Reset password') }}</h2>
 
-		<div>
-			To reset your password, complete this form: {{ URL::to('password/reset', array($token)) }}.<br/>
-			This link will expire in {{ Config::get('auth.reminder.expire', 60) }} minutes.
-		</div>
-	</body>
+        <div>
+            {{ trans('user::global.To reset your password, complete this form:') }} {{ Html::link(URL::to('/account/reset', array($token)), 'Click here') }}.
+        </div>
+        <p>{{ lang('user::global.Or point your browser to this address:') }} <br /> {{  URL::to('/account/reset', array($token)) }}</p>
+    </body>
 </html>
