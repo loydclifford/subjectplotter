@@ -51,7 +51,7 @@
 </head>
 
 {{-- <body class="skin-black|skin-blue fixed"> --}}
-<body class="skin-black">
+<body class="skin-blue">
     @yield('before-header')
 
     @include('admin._partials._header')
