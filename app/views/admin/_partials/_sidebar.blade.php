@@ -25,7 +25,7 @@
                 </a>
             </li>
 
-            <li class="tree-separator">{{ lang('texts.tree_separator.car_listing') }}</li>
+            <li class="tree-separator">Users</li>
 
 
             {{-- Users/User --}}
@@ -33,12 +33,12 @@
                 <li class="treeview">
                     <a href="{{ admin_url('/user') }}" data-url="^/admin/users/[0-9]+">
                         <i class="fa  fa-group"></i>
-                        <span>{{ lang('user::texts.sidebar_main_title') }}</span>
+                        <span>Users</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a data-url="^/admin/users" href="{{ admin_url('/users') }}"><i class="fa fa-angle-double-right"></i> {{ lang('user::texts.sidebar_all') }} </a></li>
-                        <li><a data-url="^/admin/users/create$" href="{{ admin_url('/users/create') }}"><i class="fa fa-angle-double-right"></i>{{ lang('user::texts.sidebar_new') }}</a></li>
+                        <li><a data-url="^/admin/users" href="{{ admin_url('/users') }}"><i class="fa fa-angle-double-right"></i> All </a></li>
+                        <li><a data-url="^/admin/users/create$" href="{{ admin_url('/users/create') }}"><i class="fa fa-angle-double-right"></i>Create</a></li>
                     </ul>
                 </li>
             @endif

@@ -276,6 +276,11 @@ Class Utils
     }
 
 
+    public static function formatDateTime($timestamp)
+    {
+        return date('Y-m-d g:i s', $timestamp);
+    }
+
     public static function today($formatResult = true)
     {
         $timezone = Session::get(SESSION_TIMEZONE);

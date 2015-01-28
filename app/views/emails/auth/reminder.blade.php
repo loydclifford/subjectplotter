@@ -9,6 +9,6 @@
         <div>
             {{ trans('user::global.To reset your password, complete this form:') }} {{ Html::link(URL::to('/account/reset', array($token)), 'Click here') }}.
         </div>
-        <p>{{ lang('user::global.Or point your browser to this address:') }} <br /> {{  URL::to('/account/reset', array($token)) }}</p>
+        <p>{{ lang('user/global.Or point your browser to this address:') }} <br /> {{  URL::to('/account/reset', array($token)) }}</p>
     </body>
 </html>

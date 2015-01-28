@@ -22,7 +22,7 @@ class RemindersController extends BaseController {
 
 			case Password::REMINDER_SENT:
 				Event::fire('user.forgot', Input::get('email'));
-				return Redirect::back()->with(SUCCESS_MESSAGE, lang('user::reminders.password_forgot'));
+				return Redirect::back()->with(SUCCESS_MESSAGE, lang('user/reminders.password_forgot'));
 		}
 	}
 
@@ -74,7 +74,7 @@ class RemindersController extends BaseController {
 			case Password::PASSWORD_RESET:
 				Event::fire('user.reset', Input::get('popup_forgot.email'));
 				return Redirect::to('/')
-					->with('POPUP_LOGIN_'.SUCCESS_MESSAGE, lang('user::global.password_reset'))
+					->with('POPUP_LOGIN_'.SUCCESS_MESSAGE, lang('user/global.password_reset'))
 					->with(DO_SHOW_POPUP, Input::get('_popup_modal'));
 				break;
 		}

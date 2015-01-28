@@ -128,10 +128,10 @@ class UserPresenter extends Presenter{
             <ul class="dropdown-menu pull-right text-left">
                 <li>
                     <a href="<?php echo $this->editUrl() ?>">
-                        <?php echo lang('customer::texts.edit') ?>
+                        <?php echo lang('user/texts.edit') ?>
                     </a>
-                    <a class="confirm_action" data-message="<?php echo lang('customer::texts.delete_confirmation') ?>" href="<?php echo $this->deleteUrl() ?>">
-                        <?php echo lang('customer::texts.delete') ?>
+                    <a class="confirm_action" data-message="<?php echo lang('user/texts.delete_confirmation') ?>" href="<?php echo $this->deleteUrl() ?>">
+                        <?php echo lang('user/texts.delete') ?>
                     </a>
                 </li>
             </ul>
@@ -144,7 +144,7 @@ class UserPresenter extends Presenter{
     public function editButton()
     {
         ob_start(); ?>
-        <a href="<?php echo $this->editUrl() ?>" class="btn btn-primary"><?php echo lang('customer::texts.edit') ?></a>
+        <a href="<?php echo $this->editUrl() ?>" class="btn btn-primary"><?php echo lang('user/texts.edit') ?></a>
         <?php
         return ob_get_clean();
     }
@@ -152,7 +152,7 @@ class UserPresenter extends Presenter{
     public function viewButton()
     {
         ob_start(); ?>
-        <a href="<?php echo $this->viewUrl() ?>" class="btn btn-primary"><?php echo lang('customer::texts.view') ?></a>
+        <a href="<?php echo $this->viewUrl() ?>" class="btn btn-primary"><?php echo lang('user/texts.view') ?></a>
         <?php
         return ob_get_clean();
     }
@@ -160,8 +160,8 @@ class UserPresenter extends Presenter{
     public function deleteButton()
     {
         ob_start(); ?>
-        <a class="btn btn-warning confirm_action" href="<?php echo $this->deleteUrl() ?>" data-message="<?php echo lang('customer::texts.delete_confirmation') ?>">
-            <?php echo lang('customer::texts.delete') ?>
+        <a class="btn btn-warning confirm_action" href="<?php echo $this->deleteUrl() ?>" data-message="<?php echo lang('user/texts.delete_confirmation') ?>">
+            <?php echo lang('user/texts.delete') ?>
         </a>
         <?php
         return ob_get_clean();
@@ -171,7 +171,7 @@ class UserPresenter extends Presenter{
     {
         ob_start(); ?>
         <a class="btn btn-info" href="<?php echo $this->exportUrl() ?>" target="_blank">
-            <?php echo lang('customer::texts.export') ?>
+            <?php echo lang('user/texts.export') ?>
         </a>
         <?php
         return ob_get_clean();
