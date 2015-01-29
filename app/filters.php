@@ -23,9 +23,14 @@ Route::filter('auth', function()
 {
 	if ( ! user_check())
 	{
-		return Response::json(array(
-			'status' => RESULT_NOT_LOG_IN
-		), 401);
+		if (Request::ajax())
+		{
+			return Response::json(array(
+				'status' => RESULT_NOT_LOG_IN
+			), 401);
+		}
+
+		return Redirect::guest('/login');
 	}
 });
 

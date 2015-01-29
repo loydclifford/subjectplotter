@@ -1,29 +1,15 @@
 
 <!-- Main Content -->
-<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="users_tblist_form">
+<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="rooms_tblist_form">
     <div class="row form-inline tblist-form-toolbar" >
         <div class="col-sm-9">
             <div class="form-group">
-                <label class="sr-only" for="input_user_id">{{ lang('user/attributes.labels.user_name') }}</label>
-                <input type="text" name="user_id" class="form-control" placeholder="{{ lang('user/attributes.placeholders.user_id') }}" value="{{ Input::get('user_id') }}" style="width:180px">
+                <label class="sr-only" for="input_room_id">{{ lang('room/attributes.labels.room_id') }}</label>
+                <input type="text" name="room_id" class="form-control" placeholder="{{ lang('room/attributes.placeholders.room_id') }}" value="{{ Input::get('room_id') }}" style="width:180px">
             </div>
             <div class="form-group">
-                <label class="sr-only" for="input_name">{{ lang('user/attributes.labels.user_name') }}</label>
-                <input type="text" name="name" class="form-control" id="input_name" placeholder="{{ lang('user/attributes.placeholders.name') }}" value="{{ Input::get('name') }}">
-            </div>
-
-            <div class="form-group">
-                <label class="sr-only" for="action_bulk">{{ lang('user/attributes.labels.status') }}</label>
-                <select name="status" class="form-control">
-                    <option value="">{{ lang('user/attributes.placeholders.status') }}</option>
-                    @foreach(User::$statuses as $key=>$value)
-                    <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="input_email">{{ lang('user/texts.label.email') }}</label>
-                <input type="text" name="email" class="form-control" id="input_email" placeholder="{{ lang('user/attributes.placeholders.email') }}" value="{{ Input::get('email') }}">
+                <label class="sr-only" for="input_description">{{ lang('room/attributes.labels.description') }}</label>
+                <input type="text" name="description" class="form-control" id="input_description" placeholder="{{ lang('room/attributes.placeholders.description') }}" value="{{ Input::get('description') }}">
             </div>
         </div>
         <div class="col-sm-3">
@@ -72,7 +58,7 @@
 </form>
 <script>
     $(function(){
-        var $tblist = $('#users_tblist_form');
+        var $tblist = $('#rooms_tblist_form');
 
         var $backAction = new utils.buckAction();
         $backAction.init($tblist,function(actionData)
@@ -82,15 +68,15 @@
                 switch (actionData.action)
                 {
                     case 'delete':
-                        bootbox.confirm('{{ lang("user::texts.delete_confirmation_many") }}', function(result) {
+                        bootbox.confirm('{{ lang("room::texts.delete_confirmation_many") }}', function(result) {
                             if (result === true)
                             {
-                                utils.redirect(utils.adminUrl('/users/delete'+actionData.param));
+                                utils.redirect(utils.adminUrl('/rooms/delete'+actionData.param));
                             }
                         });
                         break;
                     case 'export':
-                        utils.newTab(utils.adminUrl('/users/export'+actionData.param));
+                        utils.newTab(utils.adminUrl('/rooms/export'+actionData.param));
                         break;
                 }
             }

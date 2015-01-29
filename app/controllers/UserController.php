@@ -27,8 +27,6 @@ class UserController extends BaseController {
         $this->data['page_title']   = lang('user/texts.create_page_title');
 
         // Form data
-        $this->data['salutations']   = Utils::getSalutations();
-        $this->data['countries']     = Country::all();
         $this->data['url']           = URL::current();
         $this->data['method']        = 'POST';
         $this->data['return_url']    = admin_url('/users/create');
@@ -58,8 +56,6 @@ class UserController extends BaseController {
         $this->data['meta']->title  = lang('user/texts.update_meta_title');
         $this->data['page_title']   = lang('user/texts.update_page_title');
 
-        $this->data['salutations']  = Utils::getSalutations();
-        $this->data['countries']    = Country::all();
         $this->data['url']          = URL::current();
         $this->data['method']       = 'POST';
         $this->data['return_url']   = admin_url("/users/{$user->id}/edit");

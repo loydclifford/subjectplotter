@@ -64,7 +64,7 @@ if ( ! function_exists('conf'))
  */
 function admin_url($path = '', $parameters = array(), $secure = null)
 {
-    return URL::to("admin" . $path,$parameters,$secure);
+    return URL::to("/admin" . $path,$parameters,$secure);
 }
 
 /**

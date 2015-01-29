@@ -1,9 +1,14 @@
 <?php
 
+
 Route::model('user','User');
+Route::model('room','Room');
+Route::model('course','Course');
 
 include(__DIR__.'/routes/admin_routes.php');
 include(__DIR__.'/routes/users_routes.php');
+include(__DIR__.'/routes/rooms_routes.php');
+include(__DIR__.'/routes/courses_routes.php');
 
 
 define('ENV_DEVELOPMENT', 'local');

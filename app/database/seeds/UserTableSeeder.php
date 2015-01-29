@@ -18,7 +18,7 @@ class UserTableSeeder extends Seeder {
         $user->password = Hash::make('password');
         $user->status = 1;
         $user->confirmed = 1;
-        $user->user_type = User::USER_TYPE_INSTRUCTOR;
+        $user->user_type = User::USER_TYPE_ADMIN;
         $user->save();
 
 	}

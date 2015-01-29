@@ -23,7 +23,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface{
         self::STATUS_INACTIVE               => self::STATUS_INACTIVE
     );
 
-    const USER_TYPE_INSTRUCTOR = 1;
+    const USER_TYPE_ADMIN = 1;
+    const USER_TYPE_INSTRUCTOR = 2;
+    const USER_TYPE_STUDENT = 3;
+
+    public static $userTypes = array(
+        self::USER_TYPE_ADMIN   => 'admin',
+        self::STATUS_INACTIVE     => 'Instructor',
+        self::USER_TYPE_STUDENT     => 'Student'
+    );
 
     // Presenter
     use PresentableTrait;

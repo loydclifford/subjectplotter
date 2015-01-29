@@ -25,7 +25,7 @@ class UserTblist extends BaseTblist {
     protected function setQuery()
     {
         // all users
-        $this->query = User::where('id', '<>', 0);
+        $this->query = User::where('user_type', User::USER_TYPE_ADMIN);
 
         if (Input::has('user_id'))
         {

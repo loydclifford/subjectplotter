@@ -6,23 +6,20 @@
 |--------------------------------------------------------------------------
 */
 
-Route::group(array('before'=>'guest'),function() {
+Route::group(array('before'=>'guest'), function()
+{
+    Route::get('/login','AuthController@getLogin');
+    Route::post('/login','AuthController@postLogin');
 
-    Route::group(array('prefix'=>"admin"), function()
-    {
-        Route::get('/login','AuthController@getLogin');
-        Route::post('/login','AuthController@postLogin');
+    // Forgot Password
+    Route::get('/forgot','RemindersController@getRemind');
+    Route::post('/forgot','RemindersController@postRemind');
 
-        // Forgot Password
-        Route::get('/forgot','RemindersController@getRemind');
-        Route::post('/forgot','RemindersController@postRemind');
-
-        // Reset Password
-        Route::get('/reset/{token}','RemindersController@getReset');
-        Route::post('/reset','RemindersController@postReset');
-    });
-
+    // Reset Password
+    Route::get('/reset/{token}','RemindersController@getReset');
+    Route::post('/reset','RemindersController@postReset');
 });
+
 
 Route::group(array('prefix'=>'admin', 'before'=>'auth'), function()
 {

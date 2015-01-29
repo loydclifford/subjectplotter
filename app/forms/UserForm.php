@@ -1,15 +1,4 @@
-<?php namespace App\CMS\Modules\User\Form;
-
-// LARAVEL
-use Input;
-use Validator;
-use Redirect;
-use Request;
-use Carbon;
-
-// MODEL
-use AdminGroup;
-use User;
+<?php
 
 class UserForm {
 
@@ -47,7 +36,6 @@ class UserForm {
             'last_name'                 => '',
             'password'			        => 'password|required',
             'password_confirmation' 	=> 'same:password|required',
-            'username'                  => 'required|username',
             'email'                     => 'required|email|unique:users,email',
             'user_type'                  => 'required',
         );
@@ -102,11 +90,10 @@ class UserForm {
         // Do a security check  // Do save
         $this->user->first_name           = array_get($input, 'first_name');
         $this->user->last_name            = array_get($input, 'last_name');
-        $this->user->username             = array_get($input, 'username');
         $this->user->email                = array_get($input, 'email');
 
         $this->user->user_type                = array_get($input, 'user_type');
-
+        $this->user->status                = array_get($input, 'status');
 
         // if edit
         if ( ! empty($this->user->id) && $this->user->id > 0)

@@ -21,6 +21,7 @@ ClassLoader::addDirectories(array(
 	app_path().'/libraries/Presenters',
 	app_path().'/presenters',
 	app_path().'/tblists',
+	app_path().'/forms',
 
 ));
 

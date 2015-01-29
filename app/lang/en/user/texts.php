@@ -44,6 +44,9 @@ return array(
     'legend_organization' => 'Company Information',
     'legend_address' => 'Address Information',
 
+    'sign_in' => 'Sign In',
+    'forgot_password' => 'Forgot Password',
+
     // Tblist Search
     'email' => 'Email Address',
     'email_placeholder' => 'Enter User email',

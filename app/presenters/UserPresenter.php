@@ -120,16 +120,13 @@ class UserPresenter extends Presenter{
     public function actionButtons()
     {
         ob_start(); ?>
-        <div class="btn-admin_group" id="">
-            <?php echo $this->viewButton() ?>
+        <div class="btn-group" id="">
+            <?php echo $this->editButton() ?>
             <button data-toggle="dropdown" type="button" class="btn btn-info dropdown-toggle">
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu pull-right text-left">
                 <li>
-                    <a href="<?php echo $this->editUrl() ?>">
-                        <?php echo lang('user/texts.edit') ?>
-                    </a>
                     <a class="confirm_action" data-message="<?php echo lang('user/texts.delete_confirmation') ?>" href="<?php echo $this->deleteUrl() ?>">
                         <?php echo lang('user/texts.delete') ?>
                     </a>
