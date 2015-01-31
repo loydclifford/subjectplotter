@@ -8,6 +8,7 @@ class CoursePresenter extends Presenter{
     {
         return Str::limit($this->description, 49);
     }
+
     public function actionButtons()
     {
         ob_start(); ?>

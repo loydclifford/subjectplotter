@@ -21,6 +21,8 @@
 @section('main-content')
 
 @include('admin._partials._messages')
+<a class="btn btn-default" href="{{ admin_url("/course-years/create/?course_code={$course->course_code}") }}">Add new Course Levels </a>
+
 <div id="dd-nestable" class="dd">
     <ol class="dd-list">
         @foreach ($course->courseYear() as $course_year)

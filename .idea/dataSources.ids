@@ -8,14 +8,13 @@
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
     <schema name="" catalog="loyd_subject_plotter"/>
     <table name="course_years" schema="" catalog="loyd_subject_plotter" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="course_year_code" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>
       <column name="course_code" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>
       <column name="course_year_order" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
-      <primary-key name="PRIMARY" columns="course_year_code"/>
+      <primary-key name="PRIMARY" columns="id"/>
       <index name="course_years_course_year_code_unique" unique="true" columns="course_year_code"/>
-      <index name="course_years_course_code_index" unique="false" columns="course_code"/>
-      <index name="course_years_course_year_order_index" unique="false" columns="course_year_order"/>
     </table>
     <table name="courses" schema="" catalog="loyd_subject_plotter" type="TABLE">
       <column name="course_code" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>

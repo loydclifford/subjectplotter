@@ -1,24 +1,6 @@
 <?php
 
-class CourseController extends BaseController {
-
-    public function getIndex()
-    {
-        // Lists
-        $list = new CourseTblist();
-        $list->prepareList();
-
-        if (Request::ajax())
-        {
-            return $list->toJson();
-        }
-
-        $this->data['meta']->title  = lang('course/texts.meta_title');
-        $this->data['list']         = $list;
-        $this->data['list_action']         = '#';
-
-        return View::make('admin.course.index', $this->data);
-    }
+class CourseYearController extends BaseController {
 
     public function getCreate()
     {
@@ -38,7 +20,7 @@ class CourseController extends BaseController {
     public function postCreate()
     {
         // Check for taxonomy slugs
-        $course_repo = new CourseForm(new Course());
+        $course_repo = new CourseYearForm(new Course());
         if ($has_error = $course_repo->validateInput())
         {
             return $has_error;
@@ -70,7 +52,7 @@ class CourseController extends BaseController {
     public function postEdit(Course $course)
     {
         // Check for taxonomy slugs
-        $course_repo = new CourseForm($course);
+        $course_repo = new CourseYearForm($course);
         if ($has_error = $course_repo->validateInput())
         {
             return $has_error;
