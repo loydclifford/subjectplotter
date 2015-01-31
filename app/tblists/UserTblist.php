@@ -51,7 +51,10 @@ class UserTblist extends BaseTblist {
 
         // Debug query
         // $this->query->toSql();
-        $this->columnOrders = array();
+        $this->columnOrders = array(
+            'first_name' => 'asc',
+            'email' => 'desc'
+        );
 
         $this->columnsToSelect = array(
             'users.*',
