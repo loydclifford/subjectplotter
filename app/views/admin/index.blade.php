@@ -10,12 +10,16 @@
         <div class="nav-tabs-custom">
             <!-- Tabs within a box -->
             <ul class="nav nav-tabs pull-right">
-                <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
+                <li class="pull-left header"><i class="fa fa-inbox"></i> My Account </li>
             </ul>
             <div class="tab-content no-padding">
-                <!-- Morris chart - Sales -->
-                <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 320px;"></div>
+                <!-- big buttons holder-->
+                <div class="chart tab-pane active" id="revenue-chart" style="position: relative; display: inline;">
+                    <ul class="nav" style="position: relative; border: solid 2px #696969; height: 100px; width: 150px; padding: 10px;">
+                        <i class="fa fa-book fa-3x" style="position: relative; border: solid 1px transparent;"></i>
+                        <li class="header" style="position: relative; float: right; top: 12px;"> Total Courses </li>
+                    </ul>
+                </div>
             </div>
         </div><!-- /.nav-tabs-custom -->
     </section><!-- /.Left col -->

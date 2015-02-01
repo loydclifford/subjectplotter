@@ -20,7 +20,7 @@
 
             {{-- DASHBORD --}}
             <li>
-                <a href="{{ admin_url('/') }}" data-url='["^/admin$","^/admin/dashboard$"]'>
+                <a href="{{ admin_url('/dashboard') }}" data-url='["^/admin$","^/admin/dashboard$"]'>
                     <i class="fa fa-dashboard"></i> <span>{{ lang('texts.dashboard') }}</span>
                 </a>
                 <li class="treeview">
