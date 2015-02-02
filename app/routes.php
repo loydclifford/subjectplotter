@@ -3,12 +3,14 @@
 
 Route::model('user','User');
 Route::model('room','Room');
+Route::model('subject','Subject');
 Route::model('course','Course');
 Route::model('course_year','CourseYear');
 
 include(__DIR__.'/routes/admin_routes.php');
 include(__DIR__.'/routes/users_routes.php');
 include(__DIR__.'/routes/rooms_routes.php');
+include(__DIR__.'/routes/subjects_routes.php');
 include(__DIR__.'/routes/courses_routes.php');
 
 

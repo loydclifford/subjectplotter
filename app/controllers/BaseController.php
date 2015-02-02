@@ -40,7 +40,7 @@ class BaseController extends Controller {
 	}
 
 	/**
-	 * Set meta object fromdata
+	 * Set meta object from data
 	 *
 	 * @return void
 	 */
@@ -52,9 +52,9 @@ class BaseController extends Controller {
 		$meta->title_prefix  = "";
 		$meta->title_suffix  = "";
 		$meta->description   = "";
-		$meta->keywords     = "";
+		$meta->keywords      = "";
 
-		$this->data['meta']     = $meta;
+		$this->data['meta']  = $meta;
 	}
 
 	/**
