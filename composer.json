@@ -8,7 +8,8 @@
 		"laravel/framework": "4.2.*",
 	  	"barryvdh/laravel-ide-helper": "1.11.*@dev",
 	  	"nerweb/laravel-tblist": "1.2.x",
-	  	"anahkiasen/former": "3.4.x"
+	  	"anahkiasen/former": "3.4.x",
+	  	"fzaninotto/faker": "1.5.*@dev"
 	},
 	"autoload": {
 		"classmap": [

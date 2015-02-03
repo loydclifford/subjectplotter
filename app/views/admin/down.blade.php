@@ -19,7 +19,7 @@
 <div class="text-center">
     <a href="index.html" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
-        Carsnow Admin Panel
+        Subject Plotter Admin Panel
     </a>
     <h3>Temporarily Down for maintenance</h3>
     <p>We should be back shortly.</p>

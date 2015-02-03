@@ -29,8 +29,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface{
 
     public static $userTypes = array(
         self::USER_TYPE_ADMIN   => 'admin',
-        self::STATUS_INACTIVE     => 'Instructor',
-        self::USER_TYPE_STUDENT     => 'Student'
+        self::STATUS_INACTIVE   => 'Instructor',
+        self::USER_TYPE_STUDENT => 'Student'
     );
 
     // Presenter
@@ -133,9 +133,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface{
     {
         // @todo only frontend user in here
         return $query->where(function($query) use ($year, $month, $day) {
-            $query->where(DB::raw('YEAR(registration_date)'), $year);
-            $query->where(DB::raw('MONTH(registration_date)'), $month);
-            $query->where(DB::raw('DAY(registration_date)'), $day);
+               $query->where(DB::raw('YEAR(registration_date)'), $year);
+               $query->where(DB::raw('MONTH(registration_date)'), $month);
+               $query->where(DB::raw('DAY(registration_date)'), $day);
         });
     }
 
@@ -143,8 +143,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface{
     {
         // @todo only frontend user in here
         return $query->where(function($query) use ($year, $month) {
-            $query->where(DB::raw('YEAR(registration_date)'), $year);
-            $query->where(DB::raw('MONTH(registration_date)'), $month);
+               $query->where(DB::raw('YEAR(registration_date)'), $year);
+               $query->where(DB::raw('MONTH(registration_date)'), $month);
         });
     }
 
@@ -152,7 +152,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface{
     {
         // @todo only frontend user in here
         return $query->where(function($query) use ($year) {
-            $query->where(DB::raw('YEAR(registration_date)'), $year);
+               $query->where(DB::raw('YEAR(registration_date)'), $year);
         });
     }
 

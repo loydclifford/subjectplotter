@@ -12,13 +12,13 @@ class AuthController extends BaseController {
     public function postLogin()
     {
         $simple_auth = new SimpleAuth(array(
-            'email'          => Input::get('email'),
-            'password'          => Input::get('password'),
-            'remember'          => Input::get('remember', 0),
-            'confirmed_only'    => 0,
-            'throttle_limit'       => 20,
-            'throttle_time_period' => 20,
-            'signup_cache'         => (20 * 4),
+            'email'                 => Input::get('email'),
+            'password'              => Input::get('password'),
+            'remember'              => Input::get('remember', 0),
+            'confirmed_only'        => 0,
+            'throttle_limit'        => 20,
+            'throttle_time_period'  => 20,
+            'signup_cache'          => (20 * 4),
         ), new User);
 
         if ($simple_auth->success())
@@ -51,7 +51,7 @@ class AuthController extends BaseController {
     {
         if (Input::get('_token') != Session::get('_token'))
         {
-            $this->data['title'] = "Failure notifice";
+            $this->data['title'] = "Failure notice.";
 
             return View::make('admin.attempt_logout',$this->data);
         }

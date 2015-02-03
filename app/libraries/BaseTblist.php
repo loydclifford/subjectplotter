@@ -20,10 +20,10 @@ abstract class BaseTblist extends NerwebBaseTblist {
         // set per page drop down selection (default '1,5,10,25,50,100,250')
         // accepts string separated by comma of item
         // you can insert 'all' string without quotes to select all item.
-        $this->perPageSelection    = '1,5,10,25,50,100,250';
+        $this->perPageSelection    = '1,2,5,10,25,50,100,250';
 
         // set per page, the number of item we need to show in each page (default 25)
-        $this->perPage             = 25;
+        $this->perPage             = 5;
 
         // pagination will jump into from current page.
         $this->pageJump            = 10;

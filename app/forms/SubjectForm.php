@@ -1,0 +1,88 @@
+<?php
+
+class SubjectForm {
+
+    /**
+     * User class instance
+     *
+     * @var User
+     */
+    protected $model;
+
+    /**
+     * Create instance of UserRepo
+     *
+     * @param Subject $subject
+     */
+    public function __construct(Subject $subject)
+    {
+        $this->model = $subject;
+    }
+
+    /**
+     * Validate Submitted form
+     *
+     * @param null $input
+     * @return bool|\Illuminate\Http\RedirectResponse
+     */
+    public function validateInput($input = null)
+    {
+        // do validation
+        $input = ! empty($input) ? $input : Input::all();
+        $return_url = array_get($input, '_return_url');
+
+        // Default rules
+        $rules = array(
+            'subject_id'             => 'required|unique:subjects,subject_id',
+            'subject_name'           => 'required',
+            'description'            => '',
+            'subject_category_code'  => 'required|unique',
+        );
+
+        // If Edit
+        if ( ! empty($this->model->subject_id))
+        {
+            // We don't want to
+            if ($this->model->subject_id == array_get($input, 'subject_id'))
+            {
+                unset($rules['subject_id']);
+            }
+        }
+
+        $validator = Validator::make($input,$rules);
+
+        if($validator->fails())
+        {
+            return Redirect::to($return_url)
+                ->withErrors($validator)
+                ->withInput()
+                ->with(ERROR_MESSAGE,"Please correct the error below.");
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
+     * Assume that validate method is already called.
+     * Save submitted form
+     *
+     * @param null $input
+     * @return Subject|User
+     */
+    public function saveInput($input = null)
+    {
+        $input = ! empty($input) ? $input : Input::all();
+
+        // Do a security check  // Do save
+        $this->model->subject_id           = array_get($input, 'subject_id');
+        $this->model->description          = array_get($input, 'description');
+        $this->model->subject_capacity     = array_get($input, 'subject_capacity');
+
+        // if edit
+
+        $this->model->save();
+        return $this->model;
+    }
+}
