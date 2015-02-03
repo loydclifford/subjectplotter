@@ -229,4 +229,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface{
 
         return $token;
     }
+
+    public function getCreatedAt()
+    {
+        return date('Y-m-d g:i a', strtotime($this->created_at));
+    }
 }

@@ -2,6 +2,16 @@
 
 class UserPresenter extends Presenter{
 
+    public function getStatus()
+    {
+        return ($this->status == 1) ? 'Yes' : 'No';
+    }
+
+    public function getCreatedAt()
+    {
+        return date('Y-m-d g:i a', strtotime($this->created_at));
+    }
+
     // Presenter
     /**
      * Present full name
