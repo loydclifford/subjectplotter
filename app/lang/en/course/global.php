@@ -1,6 +1,6 @@
 <?php
 return array(
-    'name' => 'cusomters',
+    'name' => 'customers',
     'courses' => 'course|courses',
     'New' => 'New course',
     'Edit' => 'Edit course',

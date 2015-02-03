@@ -8,7 +8,7 @@
             </div>
             <div class="form-group">
                 <label class="sr-only" for="input_description">{{ lang('subject/attributes.labels.description') }}</label>
-                <input type="text" name="description" class="form-control" id="input_description" placeholder="{{ lang('subject/attributes.placeholders.description') }}" value="{{ Input::get('description') }}">
+                <input type="text" name="description" class="form-control" id="input_description" placeholder="{{ lang('subject/attributes.placeholders.description') }}" value="{{ Input::get('') }}">
             </div>
         </div>
         <div class="col-sm-3">

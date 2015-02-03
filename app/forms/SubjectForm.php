@@ -22,6 +22,7 @@ class SubjectForm {
     /**
      * Validate Submitted form
      *
+     * @param null $input
      * @return bool|\Illuminate\Http\RedirectResponse
      */
     public function validateInput($input = null)
@@ -32,9 +33,10 @@ class SubjectForm {
 
         // Default rules
         $rules = array(
-            'subject_id'                => 'required|unique:subjects,subject_id',
+            'subject_id'             => 'required|unique:subjects,subject_id',
+            'subject_name'           => 'required',
             'description'            => '',
-            'subject_capacity'			 => 'integer',
+            'subject_category_code'  => 'required|unique',
         );
 
         // If Edit
@@ -66,7 +68,8 @@ class SubjectForm {
      * Assume that validate method is already called.
      * Save submitted form
      *
-     * @return
+     * @param null $input
+     * @return Subject|User
      */
     public function saveInput($input = null)
     {
@@ -74,8 +77,8 @@ class SubjectForm {
 
         // Do a security check  // Do save
         $this->model->subject_id           = array_get($input, 'subject_id');
-        $this->model->description            = array_get($input, 'description');
-        $this->model->subject_capacity                = array_get($input, 'subject_capacity');
+        $this->model->description          = array_get($input, 'description');
+        $this->model->subject_capacity     = array_get($input, 'subject_capacity');
 
         // if edit
 

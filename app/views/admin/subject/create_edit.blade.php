@@ -41,8 +41,8 @@
         {{ Former::textarea('description', lang('subject/attributes.labels.description') . ' <span class="required">*</span> ')
             ->placeholder(lang('subject/attributes.placeholders.description')) }}
 
-        {{ Former::text('subject_capacity', lang('subject/attributes.labels.subject_capacity') . ' <span class="required">*</span> ')
-            ->placeholder(lang('subject/attributes.placeholders.subject_capacity')) }}
+        {{ Former::text('subject_capacity', lang('subject/attributes.labels.subject_category_code') . ' <span class="required">*</span> ')
+            ->placeholder(lang('subject/attributes.placeholders.subject_category_code')) }}
     </div>
 
 </div>
