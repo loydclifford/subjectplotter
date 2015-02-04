@@ -33,19 +33,19 @@ class SubjectForm {
 
         // Default rules
         $rules = array(
-            'subject_id'             => 'required|unique:subjects,subject_id',
+            'subject_code'           => 'required|unique:subjects,subject_code',
             'subject_name'           => 'required',
             'description'            => '',
             'subject_category_code'  => 'required|unique',
         );
 
         // If Edit
-        if ( ! empty($this->model->subject_id))
+        if ( ! empty($this->model->subject_code))
         {
             // We don't want to
-            if ($this->model->subject_id == array_get($input, 'subject_id'))
+            if ($this->model->subject_code == array_get($input, 'subject_code'))
             {
-                unset($rules['subject_id']);
+                unset($rules['subject_code']);
             }
         }
 
@@ -76,7 +76,7 @@ class SubjectForm {
         $input = ! empty($input) ? $input : Input::all();
 
         // Do a security check  // Do save
-        $this->model->subject_id           = array_get($input, 'subject_id');
+        $this->model->subject_code           = array_get($input, 'subject_code');
         $this->model->description          = array_get($input, 'description');
         $this->model->subject_capacity     = array_get($input, 'subject_capacity');
 

@@ -1,18 +1,18 @@
 <?php
 
-class Subject extends Eloquent {
+class Student extends Eloquent {
 
     // Presenter
     use PresentableTrait;
-    protected $presenter = 'SubjectPresenter';
+    protected $presenter = 'StudentPresenter';
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'subjects';
-    protected $primaryKey = 'subject_code';
+    protected $table = 'students';
+    protected $primaryKey = 'student_no';
 
     public $timestamps = false;
 }

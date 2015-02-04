@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableTeachers extends Migration {
+class CreateCourseSubjectsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,12 +13,6 @@ class CreateTableTeachers extends Migration {
 	public function up()
 	{
 		//
-		Schema::create('instructors', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->string('course_year_code', 40);
-
-		});
 	}
 
 	/**
@@ -29,7 +23,6 @@ class CreateTableTeachers extends Migration {
 	public function down()
 	{
 		//
-		Schema::dropIfExists('instructors');
 	}
 
 }
