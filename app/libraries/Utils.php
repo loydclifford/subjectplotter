@@ -503,7 +503,13 @@ Class Utils
                 // if found, then update sort index
                 if ($Order) {
                     $Order->{$sortOrder} = $index;
-                    $Order->{$parentColumn} = $parent;
+
+                    // parent is optional
+                    if (!empty($parentColumn))
+                    {
+                        $Order->{$parentColumn} = $parent;
+                    }
+
                     $Order->save();
                 }
 

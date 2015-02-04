@@ -58,14 +58,14 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="{{ admin_url('/teachers') }}" data-url="^/admin/teachers/[0-9]+">
+                    <a href="{{ admin_url('/instructors') }}" data-url="^/admin/instructors/[0-9]+">
                         <i class="fa  fa-group"></i>
-                        <span>Teachers</span>
+                        <span>Instructors</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a data-url="^/admin/teachers" href="{{ admin_url('/teachers') }}"><i class="fa fa-angle-double-right"></i> All </a></li>
-                        <li><a data-url="^/admin/teachers/create$" href="{{ admin_url('/teachers/create') }}"><i class="fa fa-angle-double-right"></i>Create</a></li>
+                        <li><a data-url="^/admin/instructors" href="{{ admin_url('/instructors') }}"><i class="fa fa-angle-double-right"></i> All </a></li>
+                        <li><a data-url="^/admin/instructors/create$" href="{{ admin_url('/instructors/create') }}"><i class="fa fa-angle-double-right"></i>Create</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

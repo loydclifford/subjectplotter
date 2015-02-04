@@ -12,6 +12,8 @@ include(__DIR__.'/routes/users_routes.php');
 include(__DIR__.'/routes/rooms_routes.php');
 include(__DIR__.'/routes/subjects_routes.php');
 include(__DIR__.'/routes/courses_routes.php');
+include(__DIR__.'/routes/course_years_routes.php');
+include(__DIR__.'/routes/instructors_routes.php');
 
 
 define('ENV_DEVELOPMENT', 'local');

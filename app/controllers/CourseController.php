@@ -92,13 +92,39 @@ class CourseController extends BaseController {
 
     public function getView(Course $course)
     {
+        $base_course_year_uri = "/courses/{$course->course_code}/view";
+
         $this->data['meta']->title  = lang('course/texts.view_meta_title');
 
         $this->data['enable_breadcrumb']    = false;
         $this->data['course']               = $course;
         $this->data['base_items_uris']      = admin_url("/course/{$course->course_code}/view");
 
+        $this->data['base_course_year_uri']      = $base_course_year_uri;
 
+        // Form Create URL
+        $this->data['form_url']  = admin_url('/course-years/create');
+
+        // Set flag as not an update
+        $this->data['is_update']  = FALSE;
+
+        // Identify if has selected course year
+        if (Input::has('course_year_code'))
+        {
+            $course_year = CourseYear::where('course_year_code', Input::get('course_year_code'))
+                                    ->where('course_code', $course->course_code)->first();
+            if ($course_year)
+            {
+                $this->data['is_update']  = TRUE;
+                $this->data['course_year'] = $course_year;
+                $this->data['form_url']  = admin_url('/course-years/update');
+            }
+            else
+            {
+                $redirect_to = admin_url($base_course_year_uri.'?'.http_build_query(Request::except('course_year_code')));
+                return Redirect::to($redirect_to);
+            }
+        }
 
         return View::make('admin.course.view')->with($this->data);
     }

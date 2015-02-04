@@ -2,182 +2,84 @@
 
 class CourseYearController extends BaseController {
 
-    public function getCreate()
-    {
-        // Meta Data
-        $this->data['meta']->title  = lang('course/texts.create_meta_title');
-        $this->data['page_title']   = lang('course/texts.create_page_title');
-
-        // Form data
-        $this->data['url']           = URL::current();
-        $this->data['method']        = 'POST';
-        $this->data['return_url']    = admin_url('/courses/create');
-        $this->data['success_url']   = admin_url('/courses');
-
-        return View::make('admin.course.create_edit')->with($this->data);
-    }
-
     public function postCreate()
     {
         // Check for taxonomy slugs
-        $course_repo = new CourseYearForm(new Course());
-        if ($has_error = $course_repo->validateInput())
+        $course_code = Input::get('course_code');
+        $course_year_code = Input::get('course_year_code');
+
+        // Delete previews data
+        $exists = CourseYear::where('course_code', $course_code)->where('course_year_code', $course_year_code)->first();
+
+        if (!$exists)
         {
-            return $has_error;
+            // create new data
+            $model = new CourseYear();
+            $model->course_code = $course_code;
+            $model->course_year_code = $course_year_code;
+            $model->course_year_order = $this->getNewOrder($course_code);
+            $model->save();
+
+            Session::flash(SUCCESS_MESSAGE, 'Successfully created course level.');
+
+            return Response::json(array(
+                'status' => RESULT_SUCCESS,
+            ));
         }
 
-        $course = $course_repo->saveInput();
-        Event::fire('course.add', $course);
-
-        return Redirect::to(Input::get('_success_url'))
-            ->with(SUCCESS_MESSAGE,lang('course/texts.create_success'));
+        return Response::json(array(
+            'status' => RESULT_FAILURE,
+            'message' => 'Already created course level.',
+        ));
     }
 
-    public function getEdit(Course $course)
-    {
-        $this->data['meta']->title  = lang('course/texts.update_meta_title');
-        $this->data['page_title']   = lang('course/texts.update_page_title');
-
-        $this->data['url']          = URL::current();
-        $this->data['method']       = 'POST';
-        $this->data['return_url']   = admin_url("/courses/{$course->course_code}/edit");
-        $this->data['success_url']  = admin_url("/courses/{$course->course_code}/edit");
-
-        $this->data['enable_breadcrumb']   = false;
-        $this->data['course']         = $course;
-
-        return View::make('admin.course.create_edit')->with($this->data);
-    }
-
-    public function postEdit(Course $course)
+    public function postUpdate()
     {
         // Check for taxonomy slugs
-        $course_repo = new CourseYearForm($course);
-        if ($has_error = $course_repo->validateInput())
-        {
-            return $has_error;
-        }
+        $course_code = Input::get('course_code');
+        $course_year_code_old = Input::get('course_year_code_old');
 
-        $course = $course_repo->saveInput();
-        Event::fire('course.update', $course);
+        $course_year_code = Input::get('course_year_code');
 
-        return Redirect::to(admin_url("/courses/{$course->course_code}/edit"))
-            ->with(SUCCESS_MESSAGE,lang('course/texts.update_success'));
+        // Delete previews data
+        CourseYear::where('course_code', $course_code)->where('course_year_code', $course_year_code_old)->update(array(
+            'course_year_code' => $course_year_code
+        ));
+
+        return Response::json(array(
+            'status' => RESULT_SUCCESS,
+            'message' => 'Successfully updated course year.',
+        ));
     }
 
-    public function getView(Course $course)
+    public function postReorder()
     {
-        $this->data['meta']->title  = lang('course/texts.view_meta_title');
+        $raw_reorder = Input::get('reorder');
+        $reorder = json_decode($raw_reorder, true);
 
-        $this->data['enable_breadcrumb']    = false;
-        $this->data['course']               = $course;
-        $this->data['base_items_uris']      = admin_url("/course/{$course->course_code}/view");
+        Utils::updateNestable('CourseYear', $reorder, 0, 'course_year_order', false);
 
-
-
-        return View::make('admin.course.view')->with($this->data);
+        return Response::json(array(
+            'status' => RESULT_SUCCESS
+        ));
     }
 
     public function getDelete()
     {
-        Utils::validateBulkArray('courses_id');
-        // The course id56665`
-        $courses_ids = Input::get('courses_id', array());
-        $courses = Course::whereIn('course_code', $courses_ids);
-        // Delete Courses
-        Event::fire('course.delete', $courses);
-        $courses->delete();
+        CourseYear::find(Input::get('course_year_id'))->delete();
 
-        if (Input::has('_success_url'))
-        {
-            return \Redirect::to(Input::get('_success_url'))
-                ->with(SUCCESS_MESSAGE, lang('course/texts.delete_success'));
-        }
-        else
-        {
-            return Redirect::back()
-                ->with(SUCCESS_MESSAGE, lang('course/texts.delete_success'));
-        }
+        return Redirect::back();
     }
 
-    // Import
-
-    public function getExport()
+    /**
+     * Count all levels to selected course code
+     *
+     * @param $course_code
+     * @return int
+     */
+    private function getNewOrder($course_code)
     {
-        Utils::validateBulkArray('courses_id');
-
-        $array = Course::whereIn('id',Input::get('courses_id'))->get()->toArray();
-
-        // Start export if not empty
-        if ( ! empty($array))
-        {
-            $headers = array_keys($array[0]);
-            Utils::csvDownload('courses_data_csv', $array, $headers);
-        }
-    }
-
-    // Select 2 Search Course
-    public function getSearchSelect()
-    {
-        if (Input::has('method') && Input::get('method') == "init-selection"){
-            $course = Course::frontEndGroups()->find(Input::get('id'));
-
-            if($course)
-            {
-                $ret['id']          = $course->course_code;
-                $ret['first_name']  = $course->first_name;
-                $ret['last_name']   = $course->last_name;
-                $ret['email']       = $course->email;
-
-                return Response::json($ret);
-            }
-
-            return Response::json(array());
-        }
-
-        $per_page   = Input::get('per_page');
-        $page       = Input::get('page');
-        $offset     = ($page - 1 ) * $per_page;
-        $queue      = trim(Input::get('q'));
-
-        // generate the query
-        if (is_numeric($queue))
-        {
-            // If numeric, then it is id that the course is
-            // intended to search
-            $courses = Course::where('id', $queue);
-        }
-        else
-        {
-            // If string, then it is a name that the course is
-            // intended to search
-            $courses = Course::frontEndGroups()->where(function($query) use ($queue) {
-                $query->where('first_name', 'LIKE', $queue . '%');
-                $query->orWhere('last_name', 'LIKE', $queue . '%');
-            });
-        }
-
-        $results = $courses->skip($offset)
-            ->take($per_page)
-            ->get();
-
-        $ret = array(
-            'total' => $courses->count()
-        );
-
-        $course_assoc = array();
-        foreach($results as $course) {
-            $course_assoc[] = array(
-                'id'            => $course->course_code,
-                'first_name'     => $course->first_name,
-                'last_name'      =>$course->last_name,
-                'email'         => $course->email
-            );
-        }
-
-        $ret['courses'] = $course_assoc;
-
-        return Response::json($ret);
+        return CourseYear::where('course_code', $course_code)->count();
     }
 
 

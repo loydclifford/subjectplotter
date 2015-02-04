@@ -12,7 +12,7 @@ class CourseYear extends Eloquent {
      * @var string
      */
     protected $table = 'course_years';
-    protected $primaryKey = 'course_year_code';
+    protected $primaryKey = 'id';
 
     public $timestamps = false;
 }

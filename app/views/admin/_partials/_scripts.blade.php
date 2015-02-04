@@ -23,6 +23,7 @@
     utils.serverRequestUri = '{{ isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : NULL }}';
 
     utils.curUrl          = "{{ URL::current() }}";
+    utils.currentUrl          = "{{ URL::current() }}";
     utils.lang            = {{ json_encode(lang('js')) }};
     utils.isGuest         = {{ torf(user_guest()) }};
     utils.isLoggedIn      = {{ torf(user_check()) }};
