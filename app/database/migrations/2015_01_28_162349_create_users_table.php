@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration {
 		//
 		Schema::create('users', function(Blueprint $table)
 		{
-			$table->bigInteger('id', true)->unsigned();
+			$table->bigIncrements('id')->unsigned();
 			$table->string('user_type', 40)->index();
 			$table->string('first_name');
 			$table->string('last_name')->nullable()->index();
