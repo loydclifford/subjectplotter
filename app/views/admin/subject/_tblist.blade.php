@@ -3,8 +3,8 @@
     <div class="row form-inline tblist-form-toolbar" >
         <div class="col-sm-9">
             <div class="form-group">
-                <label class="sr-only" for="input_subject_id">{{ lang('subject/attributes.labels.subject_id') }}</label>
-                <input type="text" name="subject_id" class="form-control" placeholder="{{ lang('subject/attributes.placeholders.subject_id') }}" value="{{ Input::get('subject_id') }}" style="width:180px">
+                <label class="sr-only" for="input_subject_code">{{ lang('subject/attributes.labels.subject_code') }}</label>
+                <input type="text" name="subject_code" class="form-control" placeholder="{{ lang('subject/attributes.placeholders.subject_code') }}" value="{{ Input::get('subject_code') }}" style="width:180px">
             </div>
             <div class="form-group">
                 <label class="sr-only" for="input_description">{{ lang('subject/attributes.labels.description') }}</label>

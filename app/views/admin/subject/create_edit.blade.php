@@ -24,7 +24,7 @@
 ->setAttribute('autocomplete','off')
 ->setAttribute('id','subjects_update_form')
 ->rules(array(
-    'subject_id' => 'required',
+    'subject_code' => 'required',
     'subject_capacity' => 'required|integer',
 ))
 }}
@@ -35,8 +35,8 @@
 
 <div class="row">
     <div class="col-md-6">
-        {{ Former::text('subject_id', lang('subject/attributes.labels.subject_id') . ' <span class="required">*</span> ' )
-            ->placeholder(lang('subject/attributes.placeholders.subject_id')) }}
+        {{ Former::text('subject_code', lang('subject/attributes.labels.subject_code') . ' <span class="required">*</span> ' )
+            ->placeholder(lang('subject/attributes.placeholders.subject_code')) }}
 
         {{ Former::textarea('description', lang('subject/attributes.labels.description') . ' <span class="required">*</span> ')
             ->placeholder(lang('subject/attributes.placeholders.description')) }}

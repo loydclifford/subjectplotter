@@ -76,7 +76,7 @@ class SubjectForm {
         $input = ! empty($input) ? $input : Input::all();
 
         // Do a security check  // Do save
-        $this->model->subject_code           = array_get($input, 'subject_code');
+        $this->model->subject_code         = array_get($input, 'subject_code');
         $this->model->description          = array_get($input, 'description');
         $this->model->subject_capacity     = array_get($input, 'subject_capacity');
 
