@@ -26,6 +26,7 @@ Route::group(array('prefix'=>'admin', 'before'=>'auth'), function()
     // [url]/admin
     Route::group(array('prefix'=>'users'), function()
     {
+        Route::get('/test','UserController@getTest');
         Route::get('/','UserController@getIndex');
 
         Route::get('/create','UserController@getCreate');

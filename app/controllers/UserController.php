@@ -2,6 +2,14 @@
 
 class UserController extends BaseController {
     
+    public function getTest()
+    {
+        $user = User::find(502);
+        echo $user->first_name; echo "<br />";
+        echo $user->present()->getCreatedAt(); echo "<br />";
+        echo $user->present()->getStatus(); echo "<br />";
+        var_dump($user); 
+    }
 
     public function getIndex()
     {

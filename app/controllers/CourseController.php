@@ -2,6 +2,13 @@
 
 class CourseController extends BaseController {
 
+    protected $langPrefix = 'course/';
+
+    public function lang($langLine)
+    {
+        return lang($this->langPrefix.$langLine);
+    }
+
     public function getIndex()
     {
         // Lists
@@ -13,12 +20,12 @@ class CourseController extends BaseController {
             return $list->toJson();
         }
 
-        $this->data['meta']->title  = lang('course/texts.meta_title');
+        $this->data['meta']->title  = $this->lang('texts.page_title');
         $this->data['list']         = $list;
         $this->data['list_action']         = '#';
 
         return View::make('admin.course.index', $this->data);
-    }
+    }   
 
     public function getCreate()
     {

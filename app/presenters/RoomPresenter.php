@@ -5,6 +5,11 @@ class RoomPresenter extends Presenter{
 
     // Actions Buttons and URLS Presenters
 
+    public function getCreatedAt()
+    {
+        return date('Y-m-d g:i a', strtotime($this->created_at));
+    }
+
     public function actionButtons()
     {
         ob_start(); ?>
