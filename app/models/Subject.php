@@ -11,8 +11,10 @@ class Subject extends Eloquent {
      *
      * @var string
      */
-    protected $table = 'subjects';
+
+    protected $table      = 'subjects';
     protected $primaryKey = 'subject_code';
 
-    public $timestamps = false;
+    public $timestamps    = false;
+
 }

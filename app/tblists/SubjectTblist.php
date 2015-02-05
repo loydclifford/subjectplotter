@@ -3,7 +3,7 @@
 class SubjectTblist extends BaseTblist {
 
     public $table = "subjects";
-    public $tableId = "subject_id";
+    public $tableId = "subject_code";
 
     public $cbName = "subjects_id";
 
@@ -25,11 +25,11 @@ class SubjectTblist extends BaseTblist {
     protected function setQuery()
     {
         // all subjects
-        $this->query = Subject::where('subject_id', '<>', '0');
+        $this->query = Subject::where('subject_code', '<>', '0');
 
-        if (Input::has('subject_id'))
+        if (Input::has('subject_code'))
         {
-            $this->query->where('subjects.subject_id',trim(Input::get('subject_id')));
+            $this->query->where('subjects.subject_code',trim(Input::get('subject_code')));
         }
 
         if (Input::has('description'))
@@ -49,11 +49,11 @@ class SubjectTblist extends BaseTblist {
     {
         $this->addCheckableColumn();
 
-        $this->columns['subject_id'] = array(
+        $this->columns['subject_code'] = array(
             'label'           => 'Subject ID',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'subjects.subject_id',
+            'table_column'    => 'subjects.subject_code',
             'thead_attr'      => ' style="width:40px" ',
         );
 

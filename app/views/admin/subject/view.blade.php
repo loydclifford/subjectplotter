@@ -3,7 +3,7 @@
 @section('main-content-header')
 <h1>
     {{ $subject->present()->getDisplayName() }}
-        - #{{ $subject->subject_id }}
+        - #{{ $subject->subject_code }}
     <small>
         {{ $subject->subject_type }}
     </small>

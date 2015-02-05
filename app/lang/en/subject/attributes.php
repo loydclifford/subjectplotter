@@ -2,19 +2,25 @@
 
 return array(
     'labels' => array(
-        // Input
-        'id' => 'ID',
-        'subject_id' => 'Subject ID',
-        'description' => 'Description',
-        'subject_category_code' => 'Subject Category',
+        // Input Label
+        'id'                => 'ID',
+        'subject_code'      => 'Subject Code',
+        'subject_name'      => 'Subject Name',
+        'units'             => 'Units',
+        'description'       => 'Description',
+        'prerequisite'      => 'Prerequisite(s)',
+        'subject_category'  => 'Subject Category',
     ),
 
     'placeholders' => array(
 
-        // Input
-        'id' => 'ID',
-        'subject_id' => 'Enter Subject ID',
-        'description' => 'Enter Description',
-        'subject_category_code' => 'Enter Subject Category',
+        // Input placeholder
+        'id'                => 'ID',
+        'subject_code'      => 'Enter Subject Code',
+        'subject_name'      => 'Enter Subject Name',
+        'units'             => 'Units',
+        'description'       => 'Enter Description',
+        'prerequisite'      => 'Select Subject',
+        'subject_category'  => 'Select Subject Category',
     ),
 );
