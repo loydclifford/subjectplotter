@@ -13,12 +13,12 @@ class CreateStudentSubjectsTable extends Migration {
 	public function up()
 	{
 		//
-		Schema::create('StudentSubjects', function(Blueprint $table)
+		Schema::create('student_subjects', function(Blueprint $table)
 		{
 			$table->bigInteger('id', true);
-			$table->bigInteger('student_no')->unique();
-			$table->string('course_subject_id', 20)->unique();
-			$table->string('course_subject_schedule_id', 20)->unique();
+			$table->bigInteger('student_no');
+			$table->bigIncrements('course_subject_id');
+			$table->bigInteger('course_subject_schedule_id');
 			$table->float('average');
 			$table->timestamp('created_at');
 			$table->timestamp('updated_at');

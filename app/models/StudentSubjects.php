@@ -12,7 +12,7 @@ class StudentSubjects extends Eloquent {
      * @var string
      */
     protected $table = 'student_subjects';
-    protected $primaryKey = 'student_no';
+    protected $primaryKey = 'id';
 
     public $timestamps = false;
 }

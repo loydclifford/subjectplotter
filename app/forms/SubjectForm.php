@@ -33,7 +33,7 @@ class SubjectForm {
 
         // Default rules
         $rules = array(
-            'subject_code'             => 'required|unique:subjects,subject_code',
+            'subject_code'           => 'required|unique:subjects,subject_code',
             'subject_name'           => 'required',
             'description'            => '',
             'subject_category_code'  => 'required|unique',
