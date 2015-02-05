@@ -21,14 +21,14 @@
 
 <?php
     $form_rules = array(
-        'salutations' => 'required',
-        'first_name'  => 'required',
-        'user_type'   => 'required',
-        'status'   => 'required',
-        'address1'   => 'required',
-        'country_id'   => 'required',
-        'email'   => 'required',
-        'password'   => 'required',
+        'salutations'             => 'required',
+        'first_name'              => 'required',
+        'user_type'               => 'required',
+        'status'                  => 'required',
+        'address1'                => 'required',
+        'country_id'              => 'required',
+        'email'                   => 'required',
+        'password'                => 'required',
         'password_confirmation'   => 'required',
     );
 
