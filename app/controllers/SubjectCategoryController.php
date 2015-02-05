@@ -38,7 +38,7 @@ class SubjectController extends BaseController {
     public function postCreate()
     {
         // Check for taxonomy slugs
-        $subject_repo  = new SubjectForm(new Subject());
+        $subject_repo = new SubjectForm(new Subject());
         if ($has_error = $subject_repo->validateInput())
         {
             return $has_error;
@@ -125,14 +125,13 @@ class SubjectController extends BaseController {
     public function getSearchSelect()
     {
         if (Input::has('method') && Input::get('method') == "init-selection"){
-            $subject = Subject::frontEndGroups()->find(Input::get('subject_code'));
+            $subject = Subject::frontEndGroups()->find(Input::get('id'));
 
             if($subject)
             {
-                $ret['subject_code']          = $subject->subject_code;
-                $ret['subject_name']          = $subject->subject_name;
-                $ret['prerequisite']          = $subject->prerequisite;
-                $ret['subject_category_code'] = $subject->subject_category_code;
+                $ret['id']                      = $subject->subject_code;
+                $ret['subject_name']            = $subject->subject_name;
+                $ret['subject_category_code']   = $subject->subject_category_code;
 
                 return Response::json($ret);
             }
@@ -157,8 +156,8 @@ class SubjectController extends BaseController {
             // If string, then it is a name that the subject is
             // intended to search
             $subjects = Subject::frontEndGroups()->where(function($query) use ($queue) {
-                $query->where('subject_code', 'LIKE', $queue . '%');
-                $query->orWhere('subject_name', 'LIKE', $queue . '%');
+                $query->where('first_name', 'LIKE', $queue . '%');
+                $query->orWhere('last_name', 'LIKE', $queue . '%');
             });
         }
 
@@ -173,11 +172,8 @@ class SubjectController extends BaseController {
         $subject_assoc = array();
         foreach($results as $subject) {
             $subject_assoc[] = array(
-                'subject_code'          => $subject->subject_code,
+                'id'                    => $subject->subject_code,
                 'subject_name'          => $subject->subject_name,
-                'units'                 => $subject->units,
-                'description'           => $subject->description,
-                'prerequisite'          => $subject->prerequisite,
                 'subject_category_code' =>$subject->subject_category_code
             );
         }
