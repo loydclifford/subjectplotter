@@ -15,10 +15,12 @@ class CreateTableSubjects extends Migration {
 		//
 		Schema::create('subject_categories', function(Blueprint $table)
 		{
-			$table->string('subject_category_code', 20)->primary();
+			$table->string('subject_category_code', 20);
 			$table->string('subject_category_name', 255);
 			$table->dateTime('created_at');
 			$table->dateTime('updated_at');
+
+			$table->primary('subject_category_code');
 		});
 
 		Schema::create('subjects', function(Blueprint $table)

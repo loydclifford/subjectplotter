@@ -15,10 +15,10 @@ class CreateStudentSubjectsTable extends Migration {
 		//
 		Schema::create('student_subjects', function(Blueprint $table)
 		{
-			$table->bigInteger('id', true);
-			$table->bigInteger('student_no');
-			$table->bigIncrements('course_subject_id');
-			$table->bigInteger('course_subject_schedule_id');
+			$table->bigIncrements('id');
+			$table->bigInteger('student_no')->index();
+			$table->bigInteger('course_subject_id')->index();
+			$table->bigInteger('course_subject_schedule_id')->index();
 			$table->float('average');
 			$table->timestamp('created_at');
 			$table->timestamp('updated_at');
@@ -33,7 +33,7 @@ class CreateStudentSubjectsTable extends Migration {
 	public function down()
 	{
 		//
-		Schema::dropIfExists('StudentSubjects');
+		Schema::dropIfExists('student_subjects');
 	}
 
 }

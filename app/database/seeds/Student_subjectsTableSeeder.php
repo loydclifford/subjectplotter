@@ -25,9 +25,8 @@ class Student_subjectsTableSeeder extends Seeder {
             $model->id = $i+1;
             $model->student_no = $faker->numberBetween($min = 1, $max = 20);
             $model->course_subject_id = $faker->company();
-            $model->course_subject_schedule_id = $faker->numberBetween($min = 100, $max = 200
-            $model->user_id = $faker->numberBetween($min = 1, $max = 20);
-            $model->first_name = $faker->latitude();
+            $model->course_subject_schedule_id = $faker->numberBetween($min = 100, $max = 200);
+            $model->average = $faker->latitude();
             $model->created_at = $faker->dateTime->format('Y-m-d');
             $model->updated_at = $faker->dateTime->format('Y-m-d');
 

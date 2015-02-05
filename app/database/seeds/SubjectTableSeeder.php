@@ -18,12 +18,14 @@ class SubjectTableSeeder extends Seeder {
         // use the factory to create a Faker\Generator instance
         $faker = Faker\Factory::create();
 
+        DB::table('subjects')->delete();
+
         for ($i = 0; $i < 20; $i++)
         {
             $model = new Subject();
-            $model->subject_code = $faker->primary()->numberBetween($min = 0123456, $max = 9999999);
-            $model->subject_name = $faker->lastName;
-            $model->units = $faker->numberBetween($min = 1, $max = 4);
+            $model->subject_code = 'SUB-'.$faker->unique()->numberBetween($min = 99, $max = 999);
+            $model->subject_name = $faker->word;
+            $model->units = $faker->numberBetween($min = 2, $max = 4);
             $model->description = $faker->realText($maxNbChars = 20, $indexSize = 1);
             $model->prerequisite = $faker->safeColorName();
             $model->subject_category_code = $faker->userName();
