@@ -4,11 +4,11 @@ return array(
     'labels' => array(
         // Input
         'id' => 'ID',
-        'user_id' => 'User ID',
+        'instructor_id' => 'Instructor ID',
         'salutations'=> 'Salutations',
         'first_name'=> 'First Name',
         'last_name'=> 'Last Name',
-        'user_type'=> 'User Type',
+        'instructor_type'=> 'Instructor Type',
         'status'=> 'Status',
         'last_login'=> 'Last Login',
         'registration_date'=> 'Registration Date',
@@ -22,12 +22,12 @@ return array(
         'website'=> 'Website',
         'work_phone'=> 'Company Phone',
         'email'=> 'Email',
-        'username'=> 'Username',
+        'instructorname'=> 'Instructorname',
         'password'=> 'Password',
         'password_confirmation'=> 'Password Confirmation',
 
         // Other
-        'user_name' => 'User Name',
+        'instructor_name' => 'Instructor Name',
         'new_password' => 'New Password',
         'new_password_confirmation' => 'Confirm New Password',
         'terms_and_condition' => 'Terms And Condition',
@@ -37,11 +37,11 @@ return array(
 
         // Input
         'id' => 'ID',
-        'user_id' => 'Enter User ID',
+        'instructor_id' => 'Enter Instructor ID',
         'salutations'=> '-- Salutations --',
         'first_name'=> 'Enter First Name',
         'last_name'=> 'Enter Last Name',
-        'user_type'=> '-- User Type --',
+        'instructor_type'=> '-- Instructor Type --',
         'status'=> '-- Status --',
         'last_login'=> 'Select Last Login',
         'registration_date'=> 'Select Registration Date',
@@ -55,13 +55,13 @@ return array(
         'website'=> 'Enter Website',
         'work_phone'=> 'Enter Company Phone',
         'email'=> 'Enter Email',
-        'username'=> 'Enter Username',
+        'instructorname'=> 'Enter Instructorname',
         'password'=> 'Password',
         'password_confirmation'=> 'Password Confirmation',
 
         // Other
-        'user_name' => 'Enter User Name',
-        'search_name_id' => 'Search User Name or ID',
+        'instructor_name' => 'Enter Instructor Name',
+        'search_name_id' => 'Search Instructor Name or ID',
         'new_password' => 'New Password',
         'new_password_confirmation' => 'Confirm New Password',
     ),

@@ -59,9 +59,8 @@
         {{ Former::text('last_name', lang('instructor/attributes.labels.last_name') . ' <span class="required">*</span> ')
             ->placeholder(lang('instructor/attributes.placeholders.last_name')) }}
     </div>
-
 </div>
-
+<br />
 <div class="row">
     <div class="col-md-6">
         {{ Former::legend(lang('instructor/texts.legend_login_credentials')) }}
@@ -89,16 +88,15 @@
         @endif
     </div>
 </div>
-
+<br />
 <div class="row">
-    <div class="col-md-6">
-        {{ Former::legend(lang('instructor/texts.legend_login_credentials')) }}
-
-        <div class="row instructor-subject-categories">
+    <div class="col-md-12">
+        <legend> Instructor Subjects Category</legend>
+        <div class="row instructor-subject-categories form-group">
             @foreach(SubjectCategory::all() as $subject_category)
-                <div class="instructor-subject-category__item col-sm-4">
+                <div class="instructor-subject-category__item col-sm-3">
                     <label>
-                        {{ Form::checkbox('subject_category_[]', $subject_category->id, in_array($subject_category->id, $selected_subject_categories), array(
+                        {{ Form::checkbox('subject_category_code[]', $subject_category->id, in_array($subject_category->id, $selected_subject_categories), array(
                             'data-parsley-mincheck' => 1,
                         )) }}
 

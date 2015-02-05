@@ -21,7 +21,7 @@ class Student_subjectsTableSeeder extends Seeder {
 
         for ($i = 0; $i < 20; $i++)
         {
-            $model = new StudentSubjects();
+            $model = new StudentSubject();
             $model->id = $i+1;
             $model->student_no = $faker->numberBetween($min = 1, $max = 20);
             $model->course_subject_id = $faker->company();

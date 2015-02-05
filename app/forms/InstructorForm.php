@@ -87,7 +87,7 @@ class InstructorForm {
         $user->last_name            = array_get($input, 'last_name');
         $user->email                = array_get($input, 'email');
 
-        $user->user_type                = array_get($input, 'user_type');
+        $user->user_type                = User::USER_TYPE_INSTRUCTOR;
         $user->status                = array_get($input, 'status');
 
         // if edit

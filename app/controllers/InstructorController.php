@@ -32,6 +32,8 @@ class InstructorController extends BaseController {
         $this->data['return_url']    = admin_url('/instructors/create');
         $this->data['success_url']   = admin_url('/instructors');
 
+        $this->data['selected_subject_categories']   = array();
+
         return View::make('admin.instructor.create_edit')->with($this->data);
     }
 
@@ -63,6 +65,8 @@ class InstructorController extends BaseController {
 
         $this->data['enable_breadcrumb']   = false;
         $this->data['instructor']         = $instructor;
+
+        $this->data['selected_subject_categories']   = $instructor->instructorSubjectCategories->lists('subject_category_name', 'subject_category_code');
 
         return View::make('admin.instructor.create_edit')->with($this->data);
     }

@@ -1,6 +1,6 @@
 <?php
 
-class SubjectCategories extends Eloquent {
+class SubjectCategory extends Eloquent {
 
     // Presenter
     use PresentableTrait;

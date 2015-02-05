@@ -1,37 +1,37 @@
 <?php
 
 return array(
-    'meta_title' => 'Users',
-    'page_title' => 'Users',
+    'meta_title' => 'Instructors',
+    'page_title' => 'Instructors',
 
-    'create'        => 'New User',
-    'contacts' => 'User Contacts',
-    'details' => 'User Details',
+    'create'        => 'New Instructor',
+    'contacts' => 'Instructor Contacts',
+    'details' => 'Instructor Details',
 
-    'no_result_found' => 'No users found',
+    'no_result_found' => 'No instructors found',
 
     // Sidebar Title
-    'sidebar_main_title' => 'Users',
+    'sidebar_main_title' => 'Instructors',
     'sidebar_all' => 'All',
     'sidebar_new' => 'New',
 
     // Create
-    'create_meta_title' => 'Create User',
-    'create_page_title' => 'New User',
-    'create_success' => 'Successfully created user.',
+    'create_meta_title' => 'Create Instructor',
+    'create_page_title' => 'New Instructor',
+    'create_success' => 'Successfully created instructor.',
 
     // Update
-    'update_meta_title' => 'Update User',
-    'update_page_title' => 'Update User',
-    'update_success' => 'Successfully updated user',
+    'update_meta_title' => 'Update Instructor',
+    'update_page_title' => 'Update Instructor',
+    'update_success' => 'Successfully updated instructor',
 
     'view_meta_title' => 'View Client',
 
     // Delete
-    'delete_confirmation' => 'Are you sure you want to delete this user?',
-    'delete_confirmation_many' => 'Are you sure you want to delete all selected user(s)?',
-    'delete_failed' => 'User deletion failed.',
-    'delete_success' => 'Successfully deleted user(s)',
+    'delete_confirmation' => 'Are you sure you want to delete this instructor?',
+    'delete_confirmation_many' => 'Are you sure you want to delete all selected instructor(s)?',
+    'delete_failed' => 'Instructor deletion failed.',
+    'delete_success' => 'Successfully deleted instructor(s)',
 
     // Tblist Action
     'edit' => 'Edit',
@@ -49,16 +49,16 @@ return array(
 
     // Tblist Search
     'email' => 'Email Address',
-    'email_placeholder' => 'Enter User email',
+    'email_placeholder' => 'Enter Instructor email',
 
     'activities' => array(
         'register' => ':link has successfully registered',
         'created' => 'New :link is created',
-        'updated' => 'User :link is updated',
-        'deleted' => 'User :name is deleted',
-        'confirmed' => 'User :link is confirmed',
-        'forgot' => 'User :link request new password',
-        'reset' => 'User :link has successfully changed password'
+        'updated' => 'Instructor :link is updated',
+        'deleted' => 'Instructor :name is deleted',
+        'confirmed' => 'Instructor :link is confirmed',
+        'forgot' => 'Instructor :link request new password',
+        'reset' => 'Instructor :link has successfully changed password'
     ),
 
     // Help Texts
