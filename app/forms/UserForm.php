@@ -33,7 +33,7 @@ class UserForm {
         // Default rules
         $rules = array(
             'first_name'                => 'required',
-            'last_name'                 => '',
+            'last_name'                 => 'required',
             'password'			        => 'password|required',
             'password_confirmation' 	=> 'same:password|required',
             'email'                     => 'required|email|unique:users,email',
@@ -88,12 +88,12 @@ class UserForm {
         $input = ! empty($input) ? $input : Input::all();
 
         // Do a security check  // Do save
-        $this->user->first_name           = array_get($input, 'first_name');
-        $this->user->last_name            = array_get($input, 'last_name');
-        $this->user->email                = array_get($input, 'email');
+        $this->user->first_name = array_get($input, 'first_name');
+        $this->user->last_name  = array_get($input, 'last_name');
+        $this->user->email      = array_get($input, 'email');
 
-        $this->user->user_type                = array_get($input, 'user_type');
-        $this->user->status                = array_get($input, 'status');
+        $this->user->user_type  = array_get($input, 'user_type');
+        $this->user->status     = array_get($input, 'status');
 
         // if edit
         if ( ! empty($this->user->id) && $this->user->id > 0)

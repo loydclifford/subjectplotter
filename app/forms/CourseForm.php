@@ -32,8 +32,8 @@ class CourseForm {
 
         // Default rules
         $rules = array(
-            'course_code'                => 'required|unique:courses,course_code',
-            'description'            => '',
+            'course_code'  => 'required|unique:courses,course_code',
+            'description'  => '',
         );
 
         // If Edit
@@ -72,8 +72,8 @@ class CourseForm {
         $input = ! empty($input) ? $input : Input::all();
 
         // Do a security check  // Do save
-        $this->model->course_code           = array_get($input, 'course_code');
-        $this->model->description            = array_get($input, 'description');
+        $this->model->course_code  = array_get($input, 'course_code');
+        $this->model->description  = array_get($input, 'description');
 
         // if edit
 

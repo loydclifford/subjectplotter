@@ -36,6 +36,8 @@
     <link rel="stylesheet" href="{{ asset_url('/admin/css/flowplayer-5.4.6/minimalist.css') }}">
     <!-- Carsnow Main Style  -->
     <link rel="stylesheet" href="{{ asset_url('/admin/css/carsnow.css') }}">
+    <!-- ROMEO Style  -->
+    <link rel="stylesheet" href="{{ asset_url('/admin/css/romeo.css') }}">
 
     <!-- jQuery 2.0.2 -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
