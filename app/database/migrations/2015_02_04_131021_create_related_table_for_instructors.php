@@ -35,7 +35,7 @@ class CreateRelatedTableForInstructors extends Migration {
 	public function down()
 	{
 		//
-		Schema::dropIfExists('course_years');
+		Schema::dropIfExists('instructors');
 		Schema::dropIfExists('instructor_subject_categories');
 	}
 
