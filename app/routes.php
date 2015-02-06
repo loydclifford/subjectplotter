@@ -6,6 +6,7 @@ Route::model('room','Room');
 Route::model('subject','Subject');
 Route::model('course','Course');
 Route::model('course_year','CourseYear');
+Route::model('instructor','Instructor');
 
 include(__DIR__.'/routes/admin_routes.php');
 include(__DIR__.'/routes/users_routes.php');

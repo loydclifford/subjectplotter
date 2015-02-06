@@ -69,7 +69,7 @@ class InstructorPresenter extends Presenter{
     public function deleteUrl()
     {
         $param = array(
-            'instructors_id[]' => $this->instructor_id,
+            'instructors_id[]' => $this->id,
             '_token' => csrf_token(),
             '_success_url' => admin_url('/instructors'),
         );
@@ -80,7 +80,7 @@ class InstructorPresenter extends Presenter{
     public function exportUrl()
     {
         $param = array(
-            'instructors_id[]' => $this->instructor_id,
+            'instructors_id[]' => $this->id,
             '_token' => csrf_token(),
         );
 
@@ -89,22 +89,22 @@ class InstructorPresenter extends Presenter{
 
     public function editUrl()
     {
-        return admin_url("/instructors/{$this->instructor_id}/edit");
+        return admin_url("/instructors/{$this->id}/edit");
     }
 
     public function viewUrl()
     {
-        return admin_url("/instructors/{$this->instructor_id}/view");
+        return admin_url("/instructors/{$this->id}/view");
     }
 
     public function idLink()
     {
-        return HTML::link(admin_url("/instructors/{$this->instructor_id}/edit"), $this->instructor_id);
+        return HTML::link(admin_url("/instructors/{$this->id}/edit"), $this->id);
     }
 
     public function displayNameLink()
     {
-        return HTML::link(admin_url("/instructors/{$this->instructor_id}/edit"), $this->getDisplayName());
+        return HTML::link(admin_url("/instructors/{$this->id}/edit"), $this->getDisplayName());
     }
 
 

@@ -129,7 +129,6 @@ function is_checked($value1,$value2,$old_input = false)
 
     if ( ! is_array($value1))
     {
-
         // We need to be string here. We need to convert all the types (except object and array)
         // to string, so we can make sure that we are doing a real condition.
         $value1 = (string) $value1;

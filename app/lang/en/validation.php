@@ -72,19 +72,29 @@ return array(
 	"unique"               => "The :attribute has already been taken.",
 	"url"                  => "The :attribute format is invalid.",
 	"timezone"             => "The :attribute must be a valid zone.",
-
 	/*
-	|--------------------------------------------------------------------------
-	| Custom Validation Language Lines
-	|--------------------------------------------------------------------------
-	|
-	| Here you may specify custom validation messages for attributes using the
-	| convention "attribute.rule" to name the lines. This makes it quick to
-	| specify a specific custom language line for a given attribute rule.
-	|
-	*/
+        |--------------------------------------------------------------------------
+        | Custom Validation Language Lines
+        |--------------------------------------------------------------------------
+        |
+        | Here you may specify custom validation messages for attributes using the
+        | convention "attribute.rule" to name the lines. This makes it quick to
+        | specify a specific custom language line for a given attribute rule.
+        |
+        */
+
+	'username' => 'The :attribute is invalid.',
+	'password'                      => 'Password must contain 8-16, a combination of letters or numbers with at least one letter and one number',
 
 	'custom' => array(
+
+		//Login
+		'login_accnt_not_active' 				=> 'Account is not yet active',
+		'login_invalid_email_or_password' 	=> 'Wrong Email and password combination.',
+
+		//registration
+		'signup_invalid_code' 			=> 'Activation code is invalid!',
+
 		'attribute-name' => array(
 			'rule-name' => 'custom-message',
 		),
@@ -102,5 +112,6 @@ return array(
 	*/
 
 	'attributes' => array(),
+
 
 );

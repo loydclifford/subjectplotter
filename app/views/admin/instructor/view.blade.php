@@ -27,12 +27,12 @@
 
     <div class="row">
         <div class="col-md-4">
-            <h3>{{ trans('instructor::texts.details') }}</h3>
+            <h3>{{ trans('instructor/texts.details') }}</h3>
             <p>{{ $instructor->instructorDetail->getAddress() }}</p>
             <p>{{ $instructor->instructorDetail->getPhone() }}</p>
         </div>
         <div class="col-md-5">
-            <h3>{{ trans('instructor::texts.contacts') }}</h3>
+            <h3>{{ trans('instructor/texts.contacts') }}</h3>
             {{ $instructor->present()->getContactDetails() }}
         </div>
     </div>

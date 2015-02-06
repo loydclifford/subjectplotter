@@ -23,6 +23,7 @@
     $form_rules = array(
         'salutations' => 'required',
         'first_name'  => 'required',
+        'last_name'  => 'required',
         'instructor_type'   => 'required',
         'status'   => 'required',
         'address1'   => 'required',
@@ -48,11 +49,18 @@
 }}
 
 @if (isset($instructor))
-{{ Former::populate($instructor->toArray()) }}
+{{ Former::populate(array_merge($instructor->toArray(), !empty($instructor_user) ? $instructor_user->toArray() : array())) }}
 @endif
 
 <div class="row">
     <div class="col-md-6">
+        {{ Former::text('instructor_id', lang('instructor/attributes.labels.instructor_id') . ' <span class="required">*</span> ' )
+            ->placeholder(lang('instructor/attributes.placeholders.instructor_id'))
+            ->forceValue(isset($instructor) ? $instructor->id : $generated_instructor_id)
+            ->setAttributes(isset($instructor) ? array(
+                  'readonly' => 'readonly'
+            ) : array()) }}
+
         {{ Former::text('first_name', lang('instructor/attributes.labels.first_name') . ' <span class="required">*</span> ' )
             ->placeholder(lang('instructor/attributes.placeholders.first_name')) }}
 
@@ -96,8 +104,9 @@
             @foreach(SubjectCategory::all() as $subject_category)
                 <div class="instructor-subject-category__item col-sm-3">
                     <label>
-                        {{ Form::checkbox('subject_category_code[]', $subject_category->id, in_array($subject_category->id, $selected_subject_categories), array(
+                        {{ Form::checkbox('subject_category_code[]', $subject_category->subject_category_code, in_array($subject_category->subject_category_code, Input::old('subject_category_code', $selected_subject_categories)), array(
                             'data-parsley-mincheck' => 1,
+                            'required' => 'required',
                         )) }}
 
                         {{ $subject_category->subject_category_name }}

@@ -3,7 +3,7 @@
 class InstructorTblist extends BaseTblist {
 
     public $table = "instructors";
-    public $tableId = "instructor_id";
+    public $tableId = "id";
 
     public $cbName = "instructors_id";
 
@@ -45,25 +45,35 @@ class InstructorTblist extends BaseTblist {
 
         $this->columnsToSelect = array(
             'instructors.*',
-            'users.first_name as users_first_name',
-            'users.last_name as users_last_name',
-            'users.email as users_email',
-            'users.status as users_status',
-            'users.last_login as users_last_login',
-            'users.registration_date as users_registration_date',
+            'users.id as user_id',
+            'users.first_name as user_first_name',
+            'users.last_name as user_last_name',
+            'users.email as user_email',
+            'users.status as user_status',
+            'users.last_login as user_last_login',
+            'users.registration_date as user_registration_date',
         );
+
     }
 
     protected function setColumns()
     {
         $this->addCheckableColumn();
 
-        $this->columns['instructor_id'] = array(
+        $this->columns['id'] = array(
             'label'           => 'Instructor ID',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'instructors.id',
             'thead_attr'      => ' style="width:40px" ',
+        );
+
+        $this->columns['user_id'] = array(
+            'label'           => 'First Name',
+            'sortable'        => true,
+            'classes'         => 'hidden-xs hidden-sm',
+            'table_column'    => 'users.user_id',
+            'thead_attr'      => ' style="width:120px" ',
         );
 
         $this->columns['user_first_name'] = array(
@@ -74,7 +84,7 @@ class InstructorTblist extends BaseTblist {
             'thead_attr'      => ' style="width:120px" ',
         );
 
-        $this->columns['users_last_name'] = array(
+        $this->columns['user_last_name'] = array(
             'label'           => 'Last Name',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
@@ -82,7 +92,7 @@ class InstructorTblist extends BaseTblist {
             'thead_attr'      => ' style="width:120px" ',
         );
 
-        $this->columns['users_email'] = array(
+        $this->columns['user_email'] = array(
             'label'           => 'Email',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
@@ -90,7 +100,7 @@ class InstructorTblist extends BaseTblist {
             'thead_attr'      => ' style="width:120px" ',
         );
 
-        $this->columns['users_status'] = array(
+        $this->columns['user_status'] = array(
             'label'           => 'Status',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
@@ -98,19 +108,11 @@ class InstructorTblist extends BaseTblist {
             'thead_attr'      => '',
         );
 
-        $this->columns['users_last_login'] = array(
-            'label'           => 'Status',
+        $this->columns['user_last_login'] = array(
+            'label'           => 'Last login',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.last_login',
-            'thead_attr'      => '',
-        );
-
-        $this->columns['users_registration_date'] = array(
-            'label'           => 'Status',
-            'sortable'        => true,
-            'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'users.registration_date',
             'thead_attr'      => '',
         );
 
@@ -126,6 +128,11 @@ class InstructorTblist extends BaseTblist {
     protected function colSetId($row)
     {
         echo $row->present()->idLink();
+    }
+
+    protected function colSetUserId($row)
+    {
+        echo Html::link(admin_url("/users/{$row->user_id}/edit"), 'User - ' . $row->user_id);
     }
 
     protected function colSetGroupDisplayName($row)

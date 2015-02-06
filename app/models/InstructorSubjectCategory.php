@@ -9,4 +9,5 @@ class InstructorSubjectCategory extends Eloquent {
      */
     protected $table = 'instructor_subject_categories';
     public $timestamps = false;
+
 }

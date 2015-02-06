@@ -1,6 +1,7 @@
 <?php
 
-class Instructor extends Eloquent {
+class Instructor extends Eloquent
+{
 
     // Presenter
     use PresentableTrait;
@@ -12,7 +13,7 @@ class Instructor extends Eloquent {
      * @var string
      */
     protected $table = 'instructors';
-    protected $primaryKey = 'instructor_id';
+    protected $primaryKey = 'id';
 
     public $timestamps = false;
 
@@ -21,8 +22,24 @@ class Instructor extends Eloquent {
         return $this->hasOne('User', 'id', 'user_id');
     }
 
-    public function instructorSubjectCategories()
+    public function subjects()
     {
-        return $this->hasMany('InstructorSubjectCategory', 'instructor_id', 'id');
+        return $this->belongsToMany('SubjectCategory', 'instructor_subject_categories', 'instructor_id', 'subject_category_code');
+    }
+
+    // Static Helpers
+    public static function generateNewId()
+    {
+        $newId = NULL;
+
+        while ($newId == NULL)
+        {
+            $newIdVal = 'INS-'.rand(99999,999999);
+            $hasExists = Instructor::where('id', $newIdVal)->count();
+            if ($hasExists) $newId = NULL;
+            else $newId = $newIdVal;
+        }
+
+        return $newId;
     }
 }

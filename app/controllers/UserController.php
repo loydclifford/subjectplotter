@@ -135,10 +135,9 @@ class UserController extends BaseController {
 
         // The user id56665`
         $users_ids = Input::get('users_id', array());
-        $users = User::whereIn('id', $users_ids)->get();
+        $users = User::whereIn('id', $users_ids)->delete();
         // Delete Users
         Event::fire('user.delete', $users);
-        $users->delete();
 
         if (Input::has('_success_url'))
         {

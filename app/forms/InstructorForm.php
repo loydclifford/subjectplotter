@@ -32,13 +32,12 @@ class InstructorForm {
 
         // Default rules
         $rules = array(
-            'user_id'                => 'required|unique:users,id',
-
+            'instructor_id'                => 'required|unique:instructors,id',
+            'email'                     => 'required|email|unique:users,email',
             'first_name'                => 'required',
-            'last_name'                 => '',
+            'last_name'                 => 'required',
             'password'			        => 'password|required',
             'password_confirmation' 	=> 'same:password|required',
-            'email'                     => 'required|email|unique:users,email',
             'status'                     => 'required',
         );
 
@@ -46,7 +45,32 @@ class InstructorForm {
         if ( ! empty($this->model->id))
         {
             // We don't want to
+            if ($this->model->user)
+            {
+                if ($this->model->user->email == array_get($input, 'email'))
+                {
+                    unset($rules['email']);
+                }
+            }
+
+            // Another condition if edit
+            $rules['instructor_id'] = 'required|exists:instructors,id';
+
+            // Check if password is set, then set new password
+            if (Input::has('password') && trim(array_get($input, 'password')) != "")
+            {
+                $rules['password'] = 'password';
+                $rules['password_confirmation'] = 'same:password|required';
+            }
+            else
+            {
+                unset($rules['password']);
+                unset($rules['password_confirmation']);
+            }
         }
+
+
+
 
         $validator = Validator::make($input,$rules);
 
@@ -64,17 +88,14 @@ class InstructorForm {
     }
 
     /**
-     * Assume that validate method is already called.
-     * Save submitted form
+     * Save validated inputs
      *
-     * @return
+     * @param null $input
+     * @return Instructor|User
      */
     public function saveInput($input = null)
     {
         $input = ! empty($input) ? $input : Input::all();
-
-        // Do a security check  // Do save
-        $this->model->user_id           = array_get($input, 'user_id');
 
         $user = $this->model->user;
 
@@ -103,11 +124,25 @@ class InstructorForm {
             $user->password = \Hash::make(array_get($input, 'password'));
         }
 
+        // save instructor and his associated user account
         $user->save();
+        // Do a security check  // Do save
 
-        // if edit
-
+        $this->model->id   = array_get($input, 'instructor_id');
+        $this->model->user_id   = $user->id;
         $this->model->save();
+
+        // Save instructor subject category
+        // delete old data
+        InstructorSubjectCategory::where('instructor_id', $this->model->id)->delete();
+        foreach (Input::get('subject_category_code', array()) as $subject_code)
+        {
+            InstructorSubjectCategory::insert(array(
+                'subject_category_code' => $subject_code,
+                'instructor_id' => $this->model->id,
+            ));
+        }
+
         return $this->model;
     }
 

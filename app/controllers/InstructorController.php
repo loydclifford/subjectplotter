@@ -32,6 +32,8 @@ class InstructorController extends BaseController {
         $this->data['return_url']    = admin_url('/instructors/create');
         $this->data['success_url']   = admin_url('/instructors');
 
+        $this->data['generated_instructor_id'] = Instructor::generateNewId();
+
         $this->data['selected_subject_categories']   = array();
 
         return View::make('admin.instructor.create_edit')->with($this->data);
@@ -60,13 +62,14 @@ class InstructorController extends BaseController {
 
         $this->data['url']          = URL::current();
         $this->data['method']       = 'POST';
-        $this->data['return_url']   = admin_url("/instructors/{$instructor->instructor_id}/edit");
-        $this->data['success_url']  = admin_url("/instructors/{$instructor->instructor_id}/edit");
+        $this->data['return_url']   = admin_url("/instructors/{$instructor->id}/edit");
+        $this->data['success_url']  = admin_url("/instructors/{$instructor->id}/edit");
 
         $this->data['enable_breadcrumb']   = false;
         $this->data['instructor']         = $instructor;
+        $this->data['instructor_user']         = $instructor->user;
 
-        $this->data['selected_subject_categories']   = $instructor->instructorSubjectCategories->lists('subject_category_name', 'subject_category_code');
+        $this->data['selected_subject_categories']   = $instructor->subjects->lists('subject_category_code');
 
         return View::make('admin.instructor.create_edit')->with($this->data);
     }
@@ -83,7 +86,7 @@ class InstructorController extends BaseController {
         $instructor = $instructor_repo->saveInput();
         Event::fire('instructor.update', $instructor);
 
-        return Redirect::to(admin_url("instructors/{$instructor->instructor_id}/edit"))
+        return Redirect::to(admin_url("/instructors/{$instructor->id}/edit"))
             ->with(SUCCESS_MESSAGE,lang('instructor/texts.update_success'));
     }
 
@@ -92,7 +95,8 @@ class InstructorController extends BaseController {
         Utils::validateBulkArray('instructors_id');
         // The instructor id56665`
         $instructors_ids = Input::get('instructors_id', array());
-        $instructors = Instructor::whereIn('instructor_id', $instructors_ids);
+
+        $instructors = Instructor::whereIn('id', $instructors_ids);
         // Delete Instructors
         Event::fire('instructor.delete', $instructors);
         $instructors->delete();

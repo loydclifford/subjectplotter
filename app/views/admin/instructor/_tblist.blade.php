@@ -82,7 +82,7 @@
                 switch (actionData.action)
                 {
                     case 'delete':
-                        bootbox.confirm('{{ lang("instructor::texts.delete_confirmation_many") }}', function(result) {
+                        bootbox.confirm('{{ lang("instructor/texts.delete_confirmation_many") }}', function(result) {
                             if (result === true)
                             {
                                 utils.redirect(utils.adminUrl('/instructors/delete'+actionData.param));

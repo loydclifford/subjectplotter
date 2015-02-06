@@ -12,7 +12,7 @@ class SubjectCategory extends Eloquent {
      * @var string
      */
     protected $table = 'subject_categories';
-    protected $primaryKey = 'subject_categories_code';
+    protected $primaryKey = 'subject_category_code';
 
     public $timestamps = false;
 }

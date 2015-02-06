@@ -189,7 +189,7 @@ class UserPresenter extends Presenter{
         $param = array(
             'users_id[]' => $this->id,
             '_token' => csrf_token(),
-            '_success_url' => admin_url('/media'),
+            '_success_url' => admin_url('/users'),
         );
 
         return admin_url("/users/delete/?".http_build_query($param));
