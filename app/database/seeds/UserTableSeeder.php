@@ -22,6 +22,16 @@ class UserTableSeeder extends Seeder {
         $user->save();
 
 
+        $user = new User();
+        $user->first_name = "Loyd";
+        $user->last_name = "Ford";
+        $user->email = "loydfordfarrow@yahoo.com";
+        $user->password = Hash::make('password');
+        $user->status = 1;
+        $user->confirmed = 1;
+        $user->user_type = User::USER_TYPE_ADMIN;
+        $user->save();
+
 
         // require the Faker autoloader
         require_once base_path('/vendor/fzaninotto/faker/src/autoload.php');
