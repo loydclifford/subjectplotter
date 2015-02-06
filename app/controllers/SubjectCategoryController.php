@@ -1,6 +1,6 @@
 <?php
 
-class SubjectController extends BaseController {
+class SubjectCategoryController extends BaseController {
 
     public function getIndex()
     {
