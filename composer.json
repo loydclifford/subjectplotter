@@ -9,7 +9,8 @@
 	  	"barryvdh/laravel-ide-helper": "1.11.*@dev",
 	  	"nerweb/laravel-tblist": "1.2.x",
 	  	"anahkiasen/former": "3.4.x",
-	  	"fzaninotto/faker": "1.5.*@dev"
+	  	"fzaninotto/faker": "1.5.*@dev",
+		"barryvdh/laravel-debugbar": "~1.8"
 	},
 	"autoload": {
 		"classmap": [
@@ -29,7 +30,8 @@
 		  "app/libraries/helpers/date_helpers.php",
 		  "app/libraries/helpers/pagination_helpers.php",
 		  "app/libraries/helpers/media_helpers.php",
-		  "app/libraries/helpers/html_helpers.php"
+		  "app/libraries/helpers/html_helpers.php",
+		  "app/libraries/helpers/subject_plotter_helper.php"
 		]
 	},
 	"scripts": {

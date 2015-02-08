@@ -11,46 +11,26 @@ class SubjectTableSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-        // require the Faker autoloader
-        require_once base_path('/vendor/fzaninotto/faker/src/autoload.php');
-        // alternatively, use another PSR-0 compliant autoloader (like the Symfony2 ClassLoader for instance)
+        DB::table('subjects')->truncate();
 
-        // use the factory to create a Faker\Generator instance
-        $faker = Faker\Factory::create();
-
-        //DB::table('subjects')->delete();
-
-        for ($i = 0; $i < 20; $i++)
+        $i1 = 0;
+        foreach (SubjectCategory::all() as $subject_category)
         {
-            $model = new Subject();
-            $model->subject_code = 'SUB-'.$faker->numberBetween($min = 99, $max = 999);
-            $model->subject_name = $faker->randomElement(array(
-                'ENGLISH',
-                'FILIPINO',
-                'PSYCHOLOGY',
-                'SOCIAL SCIENCE',
-                'PHILOSOPHY',
-                'NATIONAL SCIENCE',
-                'MATH',
-                'ACCOUNTING',
-                'IT',
-                'HRM',
-                'TM',
-                'PE',
-                'CHINESE',
-                'SPANISH',
-                'CEBUANO',
-                'LITERATURE',
-                'EDUC'
-            ));
-            $model->units = $faker->numberBetween($min = 2, $max = 4);
-            $model->description = $faker->realText($maxNbChars = 10, $indexSize = 1);
-            $model->prerequisite = $faker->safeColorName();
-            $model->subject_category_code = $faker->word();
-            $model->created_at = $faker->dateTime->format('Y-m-d');
-            $model->updated_at = $faker->dateTime->format('Y-m-d');
-            
-            $model->save();
+            for ($i=1;$i<5;$i++)
+            {
+                $model = new Subject();
+                $model->subject_category_code = $subject_category->subject_category_code;
+                $model->subject_code = 'SUB-20'.$i.$i1;
+                $model->subject_name = $subject_category->subject_category_name . ' ' . $i;
+                $model->units = 3;
+                $model->description = $model->subject_name;
+                $model->prerequisite = $subject_category->subject_category_code;
+                $model->created_at = date('Y-m-d', time());
+                $model->updated_at = date('Y-m-d', time());
+                $model->save();
+            }
+
+            $i1++;
         }
 	}
 }

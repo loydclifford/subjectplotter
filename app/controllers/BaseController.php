@@ -49,8 +49,8 @@ class BaseController extends Controller {
 		$meta = new stdClass();
 
 		$meta->title         = "";
-		$meta->title_prefix  = "";
-		$meta->title_suffix  = "";
+		$meta->title_prefix  = Setting::getSetting('site_title_prefix');
+		$meta->title_suffix  = Setting::getSetting('site_title_suffix');
 		$meta->description   = "";
 		$meta->keywords      = "";
 

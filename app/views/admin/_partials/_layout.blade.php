@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset_url('/admin/css/jvectormap/jquery-jvectormap-1.2.2.css') }}">
     <!-- fullCalendar -->
     <link rel="stylesheet" href="{{ asset_url('/admin/css/fullcalendar/fullcalendar.css') }}">
+    <!-- Time picker -->
+    <link rel="stylesheet" href="{{ asset_url('/admin/css/timepicker/bootstrap-timepicker.min.css') }}">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{ asset_url('/admin/css/datepicker/datepicker3.css') }}">
     <link rel="stylesheet" href="{{ asset_url('/admin/css/daterangepicker/daterangepicker-bs3.css') }}">

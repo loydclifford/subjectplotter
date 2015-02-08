@@ -86,9 +86,9 @@
                     </a>
                 </li>
                 <li >
-                    <a href="{{ admin_url('/subject-schedule') }}" data-url="^/admin/subject-schedule/[0-9]+">
+                    <a href="{{ admin_url('/subject-schedules') }}" data-url="^/admin/subject-schedules/[0-9]+">
                         <i class="fa  fa-group"></i>
-                        <span>Subject Schedule</span>
+                        <span>Subject Schedules</span>
                     </a>
                 </li>
             </li>

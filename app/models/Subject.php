@@ -17,4 +17,19 @@ class Subject extends Eloquent {
 
     public $timestamps    = false;
 
+    // Static Helpers
+    public static function generateNewId()
+    {
+        $newId = NULL;
+
+        while ($newId == NULL)
+        {
+            $newIdVal = 'SUB-'.rand(99999,999999);
+            $hasExists = Subject::where('id', $newIdVal)->count();
+            if ($hasExists) $newId = NULL;
+            else $newId = $newIdVal;
+        }
+
+        return $newId;
+    }
 }

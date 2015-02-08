@@ -33,6 +33,8 @@
 <script src="{{ asset_url('/admin/js/plugins/bootbox/bootbox.js') }}"></script>
 <!-- Plupload Uploader -->
 <script src="{{ asset_url('/admin/js/plugins/plupload-2.1.2/js/plupload.full.min.js') }}"></script>
+<!-- Time Picker -->
+<script src="{{ asset_url('/admin/js/plugins/timepicker/bootstrap-timepicker.js') }}"></script>
 <!-- Datepicker -->
 <script src="{{ asset_url('/admin/js/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 <!-- Video Flowplayer -->

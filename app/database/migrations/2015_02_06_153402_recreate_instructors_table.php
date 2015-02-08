@@ -16,9 +16,18 @@ class RecreateInstructorsTable extends Migration {
 		Schema::dropIfExists('instructors');
 		Schema::create('instructors', function(Blueprint $table)
 		{
-			$table->string('id')->index();
+			$table->string('id',40);
 			$table->integer('user_id')->index();
 			$table->timestamps();
+
+			$table->primary('id');
+		});
+
+		Schema::dropIfExists('instructor_subject_categories');
+		Schema::create('instructor_subject_categories', function(Blueprint $table)
+		{
+			$table->string('instructor_id',40)->index();
+			$table->string('subject_category_code',40)->index();
 		});
 	}
 

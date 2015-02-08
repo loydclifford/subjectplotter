@@ -20,3 +20,34 @@ function seconds2Weeks($seconds) {
     return $words;
 
 }
+
+
+function getMonths()
+{
+    return array(
+        1 => 'January',
+        2 => 'February',
+        3 => 'March',
+        4 => 'April',
+        5 => 'May',
+        6 => 'June',
+        7 => 'July',
+        8 => 'August',
+        9 => 'September',
+        10 => 'October',
+        11 => 'November',
+        12 => 'December',
+    );
+}
+
+function getDays()
+{
+    $ret = array();
+
+    for ($i=1;$i<=31;$i++)
+    {
+        $ret[$i] = $i;
+    }
+
+    return $ret;
+}

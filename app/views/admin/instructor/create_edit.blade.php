@@ -54,6 +54,7 @@
 
 <div class="row">
     <div class="col-md-6">
+
         {{ Former::text('instructor_id', lang('instructor/attributes.labels.instructor_id') . ' <span class="required">*</span> ' )
             ->placeholder(lang('instructor/attributes.placeholders.instructor_id'))
             ->forceValue(isset($instructor) ? $instructor->id : $generated_instructor_id)

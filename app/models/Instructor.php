@@ -22,7 +22,7 @@ class Instructor extends Eloquent
         return $this->hasOne('User', 'id', 'user_id');
     }
 
-    public function subjects()
+    public function subjectCategory()
     {
         return $this->belongsToMany('SubjectCategory', 'instructor_subject_categories', 'instructor_id', 'subject_category_code');
     }
@@ -41,5 +41,14 @@ class Instructor extends Eloquent
         }
 
         return $newId;
+    }
+
+    public static function getInstructorBySubjectCategory($subject_category_code)
+    {
+        return Instructor::leftJoin('instructor_subject_categories', 'instructor_subject_categories.instructor_id','=','instructors.id')
+            ->leftJoin('users', 'users.id','=','instructors.user_id')
+            ->where('instructor_subject_categories.subject_category_code', $subject_category_code)
+            ->select('instructor_subject_categories.*', DB::raw('concat(users.first_name, " ", users.last_name) as full_name'))
+            ->get();
     }
 }

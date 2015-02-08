@@ -69,7 +69,7 @@ class InstructorController extends BaseController {
         $this->data['instructor']         = $instructor;
         $this->data['instructor_user']         = $instructor->user;
 
-        $this->data['selected_subject_categories']   = $instructor->subjects->lists('subject_category_code');
+        $this->data['selected_subject_categories']   = $instructor->subjectCategory->lists('subject_category_code');
 
         return View::make('admin.instructor.create_edit')->with($this->data);
     }

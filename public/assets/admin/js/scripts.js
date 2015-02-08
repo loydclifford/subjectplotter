@@ -339,6 +339,13 @@ $(function () {
     // do show tab on load from form if it has error
     showTabWrapperForFieldError();
 
+    $('.timepicker1').timepicker({
+        defaultTime: '07:00 AM',
+        minuteStep: '30',
+        showSeconds: false,
+        showMeridian: true,
+        template: 'dropdown'
+    });
 
 
 });
