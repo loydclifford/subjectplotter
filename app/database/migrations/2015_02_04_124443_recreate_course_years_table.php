@@ -13,7 +13,6 @@ class RecreateCourseYearsTable extends Migration {
 	public function up()
 	{
 		//
-		Schema::dropIfExists('course_years');
 		Schema::create('course_years', function(Blueprint $table)
 		{
 			$table->increments('id');
@@ -32,6 +31,7 @@ class RecreateCourseYearsTable extends Migration {
 	public function down()
 	{
 		//
+		Schema::dropIfExists('course_years');
 	}
 
 }
