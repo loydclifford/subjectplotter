@@ -18,6 +18,6 @@ class Course extends Eloquent {
 
     public function courseYear()
     {
-        return $this->hasMany('CourseYear', 'course_code', 'course_code')->orderBy('course_year_order', 'asc');
+        return $this->hasMany('CourseYear', 'course_code')->orderBy('course_year_order', 'asc');
     }
 }

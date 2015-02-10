@@ -136,12 +136,13 @@ class UserController extends BaseController {
         // The user id56665`
         $users_ids = Input::get('users_id', array());
         $users = User::whereIn('id', $users_ids)->delete();
+
         // Delete Users
         Event::fire('user.delete', $users);
 
         if (Input::has('_success_url'))
         {
-            return \Redirect::to(Input::get('_success_url'))
+            return Redirect::to(Input::get('_success_url'))
                 ->with(SUCCESS_MESSAGE, lang('user/texts.delete_success'));
         }
         else
@@ -152,7 +153,6 @@ class UserController extends BaseController {
     }
 
     // Import
-
     public function getExport()
     {
         Utils::validateBulkArray('users_id');

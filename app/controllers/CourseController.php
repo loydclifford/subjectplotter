@@ -68,8 +68,8 @@ class CourseController extends BaseController {
         $this->data['return_url']   = admin_url("/courses/{$course->course_code}/edit");
         $this->data['success_url']  = admin_url("/courses/{$course->course_code}/edit");
 
-        $this->data['enable_breadcrumb']   = false;
-        $this->data['course']         = $course;
+        $this->data['enable_breadcrumb'] = false;
+        $this->data['course']            = $course;
 
         return View::make('admin.course.create_edit')->with($this->data);
     }
@@ -100,13 +100,13 @@ class CourseController extends BaseController {
         $this->data['course']               = $course;
         $this->data['base_items_uris']      = admin_url("/course/{$course->course_code}/view");
 
-        $this->data['base_course_year_uri']      = $base_course_year_uri;
+        $this->data['base_course_year_uri'] = $base_course_year_uri;
 
         // Form Create URL
         $this->data['form_url']  = admin_url('/course-years/create');
 
         // Set flag as not an update
-        $this->data['is_update']  = FALSE;
+        $this->data['is_update'] = FALSE;
 
         // Identify if has selected course year
         if (Input::has('course_year_code'))
@@ -115,9 +115,9 @@ class CourseController extends BaseController {
                                     ->where('course_code', $course->course_code)->first();
             if ($course_year)
             {
-                $this->data['is_update']  = TRUE;
+                $this->data['is_update']   = TRUE;
                 $this->data['course_year'] = $course_year;
-                $this->data['form_url']  = admin_url('/course-years/update');
+                $this->data['form_url']    = admin_url('/course-years/update');
             }
             else
             {
@@ -131,13 +131,14 @@ class CourseController extends BaseController {
 
     public function getDelete()
     {
-        Utils::validateBulkArray('courses_id');
+        Utils::validateBulkArray('course_code');
+
         // The course id56665`
-        $courses_ids = Input::get('courses_id', array());
-        $courses = Course::whereIn('course_code', $courses_ids);
+        $course_codes = Input::get('course_code', array());
+        $courses = Course::whereIn('id', $course_codes)->delete();
+
         // Delete Courses
         Event::fire('course.delete', $courses);
-        $courses->delete();
 
         if (Input::has('_success_url'))
         {
@@ -152,7 +153,6 @@ class CourseController extends BaseController {
     }
 
     // Import
-
     public function getExport()
     {
         Utils::validateBulkArray('courses_id');

@@ -187,8 +187,8 @@ class UserPresenter extends Presenter{
     public function deleteUrl()
     {
         $param = array(
-            'users_id[]' => $this->id,
-            '_token' => csrf_token(),
+            'users_id[]'   => $this->id,
+            '_token'       => csrf_token(),
             '_success_url' => admin_url('/users'),
         );
 

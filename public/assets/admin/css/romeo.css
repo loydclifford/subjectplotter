@@ -1,3 +1,89 @@
 ﻿.romeo_head{
-	
+	position: relative;
+	padding-top: 30px;
+	height: 1000px;
 }
+
+.meo_year{
+	position: relative;
+	top: 25px;
+	left: 50px;
+	width: 10px;
+	height: 5px;
+}
+
+#sy{
+	position: relative; 
+	left: 200px;
+	top: -35px;
+	width: 170px; 
+	height: 30px; 
+	font-size: 17px;
+}
+
+#sem{
+	position: relative; 
+	left: 250px;
+	top: -35px;
+	width: 170px; 
+	height: 30px; 
+	font-size: 17px;
+}
+
+.meo_btn{
+	position: relative; 
+	left: 350px;
+	top: -40px;
+	width: 170px; 
+	height: 30px; 
+	font-size: 17px;
+}
+.meo_semester{
+	position: relative;
+	left: 3px;
+	width: 10px;
+	height: 5px;
+}
+
+.meo_body{
+	
+	top: -30px;
+
+}
+
+.meo_courses{
+	position: absolute; 
+	border: solid 2px #696969; 
+	height: 100px; 
+	width: 150px; 
+	padding: 10px;
+	left: 50px;
+}
+
+.meo_teachers{
+	position: absolute; 
+	border: solid 2px #696969; 
+	height: 100px; 
+	width: 150px; 
+	padding: 10px;
+	left: 250px;
+
+}
+.meo_students{
+	position: absolute; 
+	border: solid 2px #696969; 
+	height: 100px; 
+	width: 150px; 
+	padding: 10px;
+	left: 450px;
+}
+
+.meo_subjects{
+	position: absolute; 
+	border: solid 2px #696969;
+	height: 100px;
+	width: 160px;
+	padding: 10px;
+	left: 650px;
+}
+

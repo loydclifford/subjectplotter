@@ -1,6 +1,6 @@
 <?php
 
-class CourseForm {
+class SubjectCategoryForm {
 
     /**
      * User class instance
@@ -12,16 +12,17 @@ class CourseForm {
     /**
      * Create instance of UserRepo
      *
-     * @param Course $course
+     * @param SubjectCategory $subject_categories
      */
-    public function __construct(Course $course)
+    public function __construct(SubjectCategory $subject_categories)
     {
-        $this->model = $course;
+        $this->model = $subject_categories;
     }
 
     /**
      * Validate Submitted form
      *
+     * @param null $input
      * @return bool|\Illuminate\Http\RedirectResponse
      */
     public function validateInput($input = null)
@@ -32,17 +33,17 @@ class CourseForm {
 
         // Default rules
         $rules = array(
-            'course_code'  => 'required|unique:courses,course_code',
-            'description'  => '',
+            'subject_category_code' => 'required|unique:subjects,subject_code',
+            'subject_category_name' => 'required',
         );
 
         // If Edit
-        if ( ! empty($this->model->course_code))
+        if ( ! empty($this->model->subject_category_code))
         {
             // We don't want to
-            if ($this->model->course_code == array_get($input, 'course_code'))
+            if ($this->model->subject_category_code == array_get($input, 'subject_category_code'))
             {
-                unset($rules['course_code']);
+                unset($rules['subject_category_code']);
             }
         }
 
@@ -65,20 +66,20 @@ class CourseForm {
      * Assume that validate method is already called.
      * Save submitted form
      *
-     * @return
+     * @param null $input
+     * @return Subject|User
      */
     public function saveInput($input = null)
     {
         $input = ! empty($input) ? $input : Input::all();
 
         // Do a security check  // Do save
-        $this->model->course_code  = array_get($input, 'course_code');
-        $this->model->description  = array_get($input, 'description');
+        $this->model->subject_category_code         = array_get($input, 'subject_category_code');
+        $this->model->subject_category_name          = array_get($input, 'subject_category_name');
 
         // if edit
 
         $this->model->save();
         return $this->model;
     }
-
 }
