@@ -46,7 +46,6 @@ class InstructorTableSeeder extends Seeder {
                     $instructor_subject_category->instructor_id = $instructor_id;
 
                     $instructor_subject_category->save();
-
                 }
             }
         }
