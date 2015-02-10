@@ -18,6 +18,7 @@ include(__DIR__.'/routes/instructors_routes.php');
 include(__DIR__.'/routes/settings_routes.php');
 include(__DIR__.'/routes/subjectschedules_routes.php');
 include(__DIR__.'/routes/subjectschedulesetschedules_routes.php');
+include(__DIR__.'/routes/subjectcategories_routes.php');
 
 
 define('ENV_DEVELOPMENT', 'local');

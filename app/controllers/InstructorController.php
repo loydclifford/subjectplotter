@@ -15,7 +15,7 @@ class InstructorController extends BaseController {
 
         $this->data['meta']->title  = lang('instructor/texts.meta_title');
         $this->data['list']         = $list;
-        $this->data['list_action']         = '#';
+        $this->data['list_action']  = '#';
 
         return View::make('admin.instructor.index', $this->data);
     }

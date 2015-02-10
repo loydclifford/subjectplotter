@@ -5,7 +5,7 @@ class SubjectCategoryController extends BaseController {
     public function getIndex()
     {
         // Lists
-        $list = new SubjectTblist();
+        $list = new SubjectCategoryTblist();
         $list->prepareList();
 
         if (Request::ajax())
@@ -20,32 +20,17 @@ class SubjectCategoryController extends BaseController {
         return View::make('admin.subjectcategory.index', $this->data);
     }
 
-    public function getCreate()
-    {
-        // Meta Data
-        $this->data['meta']->title  = lang('subjectcategory/texts.create_meta_title');
-        $this->data['page_title']   = lang('subjectcategory/texts.create_page_title');
-
-        // Form data
-        $this->data['url']           = URL::current();
-        $this->data['method']        = 'POST';
-        $this->data['return_url']    = admin_url('/subjectcategories/create');
-        $this->data['success_url']   = admin_url('/subjectcategories');
-
-        return View::make('admin.subjectcategory.create_edit')->with($this->data);
-    }
-
     public function postCreate()
     {
         // Check for taxonomy slugs
-        $subjectcategory_repo = new SubjectCategoryForm(new SubjectCategory());
-        if ($has_error = $subjectcategory_repo->validateInput())
+        $subject_repo  = new SubjectForm(new Subject());
+        if ($has_error = $subject_repo->validateInput())
         {
             return $has_error;
         }
 
-        $subjectcategory = $subjectcategory_repo->saveInput();
-        Event::fire('subjectcategory.add', $subjectcategory);
+        $subject = $subject_repo->saveInput();
+        Event::fire('subject.add', $subject);
 
         return Redirect::to(Input::get('_success_url'))
             ->with(SUCCESS_MESSAGE,lang('subject/texts.create_success'));
@@ -58,13 +43,13 @@ class SubjectCategoryController extends BaseController {
 
         $this->data['url']          = URL::current();
         $this->data['method']       = 'POST';
-        $this->data['return_url']   = admin_url("/subjectcategories/{$subjectcategory->subject_code}/edit");
-        $this->data['success_url']  = admin_url("/subjectcategories/{$subjectcategory->subject_code}/edit");
+        $this->data['return_url']   = admin_url("/subjects/{$subject->subject_code}/edit");
+        $this->data['success_url']  = admin_url("/subjects/{$subject->subject_code}/edit");
 
-        $this->data['enable_breadcrumb'] = false;
-        $this->data['subjectcategory']   = $subjectcategory;
+        $this->data['enable_breadcrumb']    = false;
+        $this->data['subject']              = $subject;
 
-        return View::make('admin.subjectcategory.create_edit')->with($this->data);
+        return View::make('admin.subject.create_edit')->with($this->data);
     }
 
     public function postEdit(Subject $subject)
@@ -77,18 +62,18 @@ class SubjectCategoryController extends BaseController {
         }
 
         $subject = $subject_repo->saveInput();
-        Event::fire('subjectcategory.update', $subject);
+        Event::fire('subject.update', $subject);
 
-        return Redirect::to(admin_url("subjectcategories/{$subject->subject_code}/edit"))
-            ->with(SUCCESS_MESSAGE,lang('subjectcategory/texts.update_success'));
+        return Redirect::to(admin_url("subjects/{$subject->subject_code}/edit"))
+            ->with(SUCCESS_MESSAGE,lang('subject/texts.update_success'));
     }
 
     public function getDelete()
     {
-        Utils::validateBulkArray('subject_category_code');
+        Utils::validateBulkArray('subject_code');
         // The subject id56665`
-        $subjects_codes = Input::get('subjsubject_category_codeect_code', array());
-        $subjects = Subject::whereIn('subject_category_code', $subjects_codes);
+        $subjects_codes = Input::get('subject_code', array());
+        $subjects = Subject::whereIn('subject_code', $subjects_codes);
         // Delete Subjects
         Event::fire('subject.delete', $subjects);
         $subjects->delete();
@@ -106,7 +91,6 @@ class SubjectCategoryController extends BaseController {
     }
 
     // Import
-
     public function getExport()
     {
         Utils::validateBulkArray('subjects_code');
@@ -125,13 +109,14 @@ class SubjectCategoryController extends BaseController {
     public function getSearchSelect()
     {
         if (Input::has('method') && Input::get('method') == "init-selection"){
-            $subject = Subject::frontEndGroups()->find(Input::get('id'));
+            $subject = Subject::frontEndGroups()->find(Input::get('subject_code'));
 
             if($subject)
             {
-                $ret['id']                      = $subject->subject_code;
-                $ret['subject_name']            = $subject->subject_name;
-                $ret['subject_category_code']   = $subject->subject_category_code;
+                $ret['subject_code']          = $subject->subject_code;
+                $ret['subject_name']          = $subject->subject_name;
+                $ret['prerequisite']          = $subject->prerequisite;
+                $ret['subject_category_code'] = $subject->subject_category_code;
 
                 return Response::json($ret);
             }
@@ -156,8 +141,8 @@ class SubjectCategoryController extends BaseController {
             // If string, then it is a name that the subject is
             // intended to search
             $subjects = Subject::frontEndGroups()->where(function($query) use ($queue) {
-                $query->where('first_name', 'LIKE', $queue . '%');
-                $query->orWhere('last_name', 'LIKE', $queue . '%');
+                $query->where('subject_code', 'LIKE', $queue . '%');
+                $query->orWhere('subject_name', 'LIKE', $queue . '%');
             });
         }
 
@@ -172,8 +157,11 @@ class SubjectCategoryController extends BaseController {
         $subject_assoc = array();
         foreach($results as $subject) {
             $subject_assoc[] = array(
-                'id'                    => $subject->subject_code,
+                'subject_code'          => $subject->subject_code,
                 'subject_name'          => $subject->subject_name,
+                'units'                 => $subject->units,
+                'description'           => $subject->description,
+                'prerequisite'          => $subject->prerequisite,
                 'subject_category_code' =>$subject->subject_category_code
             );
         }

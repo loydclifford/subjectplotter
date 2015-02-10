@@ -11,5 +11,5 @@
 
     @include('admin._partials._messages')
 
-    @include('admin.subject._tblist')
+    @include('admin.subjectcategory._tblist')
 @stop

@@ -1,7 +1,7 @@
 <?php
 return array(
     'name' => 'customers',
-    'subjectcategories' => 'subjectcategory|subjectcategories',
+    'subjectcategory' => 'subjectcategory|subjectcategories',
     'New' => 'New subjectcategory',
     'Edit' => 'Edit subjectcategory',
     'Back' => 'Back to subjectcategories',
