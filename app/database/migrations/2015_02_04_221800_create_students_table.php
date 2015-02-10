@@ -13,28 +13,28 @@ class CreateStudentsTable extends Migration {
 	public function up()
 	{
 		//
-		Schema::create('students', function(Blueprint $table)
-		{
-			$table->bigIncrements('student_no');
-			$table->string('course_code', 20);
-			$table->string('course_level_code', 20);
-			$table->bigInteger('user_id');
-			$table->string('first_name', 255)->index();
-			$table->string('last_name', 255)->index();
-			$table->timestamp('created_at');
-			$table->timestamp('updated_at');
-		});
-	}
+Schema::create('students', function(Blueprint $table)
+{
+	$table->bigIncrements('student_no');
+	$table->string('course_code', 20);
+	$table->string('course_level_code', 20);
+	$table->bigInteger('user_id');
+	$table->string('first_name', 255)->index();
+	$table->string('last_name', 255)->index();
+	$table->timestamp('created_at');
+	$table->timestamp('updated_at');
+});
+}
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		//
-		Schema::dropIfExists('students');
-	}
+/**
+ * Reverse the migrations.
+ *
+ * @return void
+ */
+public function down()
+{
+	//
+	Schema::dropIfExists('students');
+}
 
 }
