@@ -13,39 +13,39 @@ class SubjectCategoryController extends BaseController {
             return $list->toJson();
         }
 
-        $this->data['meta']->title  = lang('subject/texts.meta_title');
+        $this->data['meta']->title  = lang('subjectcategory/texts.meta_title');
         $this->data['list']         = $list;
         $this->data['list_action']  = '#';
 
-        return View::make('admin.subject.index', $this->data);
+        return View::make('admin.subjectcategory.index', $this->data);
     }
 
     public function getCreate()
     {
         // Meta Data
-        $this->data['meta']->title  = lang('subject/texts.create_meta_title');
-        $this->data['page_title']   = lang('subject/texts.create_page_title');
+        $this->data['meta']->title  = lang('subjectcategory/texts.create_meta_title');
+        $this->data['page_title']   = lang('subjectcategory/texts.create_page_title');
 
         // Form data
         $this->data['url']           = URL::current();
         $this->data['method']        = 'POST';
-        $this->data['return_url']    = admin_url('/subjects/create');
-        $this->data['success_url']   = admin_url('/subjects');
+        $this->data['return_url']    = admin_url('/subjectcategories/create');
+        $this->data['success_url']   = admin_url('/subjectcategories');
 
-        return View::make('admin.subject.create_edit')->with($this->data);
+        return View::make('admin.subjectcategory.create_edit')->with($this->data);
     }
 
     public function postCreate()
     {
         // Check for taxonomy slugs
-        $subject_repo = new SubjectForm(new Subject());
-        if ($has_error = $subject_repo->validateInput())
+        $subjectcategory_repo = new SubjectCategoryForm(new SubjectCategory());
+        if ($has_error = $subjectcategory_repo->validateInput())
         {
             return $has_error;
         }
 
-        $subject = $subject_repo->saveInput();
-        Event::fire('subject.add', $subject);
+        $subjectcategory = $subjectcategory_repo->saveInput();
+        Event::fire('subjectcategory.add', $subjectcategory);
 
         return Redirect::to(Input::get('_success_url'))
             ->with(SUCCESS_MESSAGE,lang('subject/texts.create_success'));
@@ -58,13 +58,13 @@ class SubjectCategoryController extends BaseController {
 
         $this->data['url']          = URL::current();
         $this->data['method']       = 'POST';
-        $this->data['return_url']   = admin_url("/subjects/{$subject->subject_code}/edit");
-        $this->data['success_url']  = admin_url("/subjects/{$subject->subject_code}/edit");
+        $this->data['return_url']   = admin_url("/subjectcategories/{$subjectcategory->subject_code}/edit");
+        $this->data['success_url']  = admin_url("/subjectcategories/{$subjectcategory->subject_code}/edit");
 
-        $this->data['enable_breadcrumb']    = false;
-        $this->data['subject']              = $subject;
+        $this->data['enable_breadcrumb'] = false;
+        $this->data['subjectcategory']   = $subjectcategory;
 
-        return View::make('admin.subject.create_edit')->with($this->data);
+        return View::make('admin.subjectcategory.create_edit')->with($this->data);
     }
 
     public function postEdit(Subject $subject)
@@ -77,18 +77,18 @@ class SubjectCategoryController extends BaseController {
         }
 
         $subject = $subject_repo->saveInput();
-        Event::fire('subject.update', $subject);
+        Event::fire('subjectcategory.update', $subject);
 
-        return Redirect::to(admin_url("subjects/{$subject->subject_code}/edit"))
-            ->with(SUCCESS_MESSAGE,lang('subject/texts.update_success'));
+        return Redirect::to(admin_url("subjectcategories/{$subject->subject_code}/edit"))
+            ->with(SUCCESS_MESSAGE,lang('subjectcategory/texts.update_success'));
     }
 
     public function getDelete()
     {
-        Utils::validateBulkArray('subject_code');
+        Utils::validateBulkArray('subject_category_code');
         // The subject id56665`
-        $subjects_codes = Input::get('subject_code', array());
-        $subjects = Subject::whereIn('subject_code', $subjects_codes);
+        $subjects_codes = Input::get('subjsubject_category_codeect_code', array());
+        $subjects = Subject::whereIn('subject_category_code', $subjects_codes);
         // Delete Subjects
         Event::fire('subject.delete', $subjects);
         $subjects->delete();

@@ -23,10 +23,10 @@ class SubjectTableSeeder extends Seeder {
                 $model->subject_code = 'SUB-20'.$i.$i1;
                 $model->subject_name = $subject_category->subject_category_name . ' ' . $i;
                 $model->units = 3;
-                $model->description = $model->subject_name;
+                $model->description  = $model->subject_name;
                 $model->prerequisite = $subject_category->subject_category_code;
-                $model->created_at = date('Y-m-d', time());
-                $model->updated_at = date('Y-m-d', time());
+                $model->created_at   = date('Y-m-d', time());
+                $model->updated_at   = date('Y-m-d', time());
                 $model->save();
             }
 

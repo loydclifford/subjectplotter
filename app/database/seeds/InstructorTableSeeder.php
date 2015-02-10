@@ -22,12 +22,12 @@ class InstructorTableSeeder extends Seeder {
         {
             $user = new User();
             $user->first_name = $faker->firstName;
-            $user->last_name = $faker->lastName;
-            $user->email = $faker->unique()->email();
-            $user->password = Hash::make($faker->dateTime->format('Y-m-d'));
-            $user->status = User::STATUS_ACTIVE;
-            $user->confirmed = 1;
-            $user->user_type = User::USER_TYPE_INSTRUCTOR;
+            $user->last_name  = $faker->lastName;
+            $user->email      = $faker->unique()->email();
+            $user->password   = Hash::make($faker->dateTime->format('Y-m-d'));
+            $user->status     = User::STATUS_ACTIVE;
+            $user->confirmed  = 1;
+            $user->user_type  = User::USER_TYPE_INSTRUCTOR;
             $user->save();
 
             $instructor = new Instructor();
@@ -44,6 +44,7 @@ class InstructorTableSeeder extends Seeder {
 
                     $instructor_subject_category->subject_category_code = $subject_category->subject_category_code;
                     $instructor_subject_category->instructor_id = $instructor_id;
+
                     $instructor_subject_category->save();
 
                 }

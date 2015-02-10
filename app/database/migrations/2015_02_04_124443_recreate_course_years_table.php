@@ -10,7 +10,7 @@ class RecreateCourseYearsTable extends Migration {
      *
      * @return void
      */
-    public function up()gi
+    public function up()
     {
         //
         Schema::create('course_years', function(Blueprint $table)

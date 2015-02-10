@@ -14,7 +14,7 @@ class Subject_categoriesTableSeeder extends Seeder {
         DB::table('subject_categories')->truncate();
 
         $subject_categories = array(
-            'MATH' => 'Math',
+            'MATH'    => 'Math',
             'SPANISH' => 'Spanish',
             'CHINESE' => 'Chinese',
             'ENGLISH' => 'English',

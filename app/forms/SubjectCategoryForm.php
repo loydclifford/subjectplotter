@@ -33,8 +33,8 @@ class SubjectCategoryForm {
 
         // Default rules
         $rules = array(
-            'subject_category_code' => 'required|unique:subjects,subject_code',
-            'subject_category_name' => 'required',
+            'subject_category_code' => 'required|unique:subject_category,subject_category_code',
+            'subject_category_name' => 'required|unique:subject_category,subject_category_name',
         );
 
         // If Edit
