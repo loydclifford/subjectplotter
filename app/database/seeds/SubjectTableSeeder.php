@@ -23,7 +23,7 @@ class SubjectTableSeeder extends Seeder {
         for ($i = 0; $i < 20; $i++)
         {
             $model = new Subject();
-            $model->subject_code = 'SUB-'.$faker->numberBetween($min = 99, $max = 999);
+            $model->subject_code = 'SUB-'.$faker->unique()->numberBetween($min = 99, $max = 999);
             $model->subject_name = $faker->randomElement(array(
                 'ENGLISH',
                 'FILIPINO',
