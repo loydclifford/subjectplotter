@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'meta_title' => 'Subject Categories',
-    'page_title' => 'Subject Categories',
+    'meta_title' => 'Subjects',
+    'page_title' => 'Subjects',
 
-    'create'     => 'New Subject category',
-    'contacts'   => 'Subject Category Contacts',
-    'details'    => 'Subject Category Details',
+    'create'     => 'New Subject',
+    'contacts'   => 'Subject Contacts',
+    'details'    => 'Subject Details',
 
     'no_result_found'    => 'No subject categories found',
 
@@ -16,22 +16,22 @@ return array(
     'sidebar_new'        => 'New',
 
     // Create
-    'create_meta_title'  => 'Create Subject Category',
-    'create_page_title'  => 'New Subject Category',
-    'create_success'     => 'Successfully created subject category.',
+    'create_meta_title'  => 'Create Subject',
+    'create_page_title'  => 'Create New Subject',
+    'create_success'     => 'Successfully created subject.',
 
     // Update
-    'update_meta_title'  => 'Update Subject Category',
-    'update_page_title'  => 'Update Subject Category',
-    'update_success'     => 'Successfully updated subject category',
+    'update_meta_title'  => 'Update Subject',
+    'update_page_title'  => 'Update Subject',
+    'update_success'     => 'Successfully updated subject',
 
     'view_meta_title'    => 'View Client',
 
     // Delete
-    'delete_confirmation'      => 'Are you sure you want to delete this subject category?',
-    'delete_confirmation_many' => 'Are you sure you want to delete all selected subject categories?',
+    'delete_confirmation'      => 'Are you sure you want to delete this subject?',
+    'delete_confirmation_many' => 'Are you sure you want to delete all selected subject?',
     'delete_failed'            => 'Subject category deletion failed.',
-    'delete_success'           => 'Successfully deleted subject categories',
+    'delete_success'           => 'Successfully deleted subjects',
 
     // Tblist Action
     'edit'   => 'Edit',

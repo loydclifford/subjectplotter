@@ -1,4 +1,5 @@
 
+
 <!-- Main Content -->
 <form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="instructors_tblist_form">
     <div class="row form-inline tblist-form-toolbar" >
@@ -49,7 +50,7 @@
                         <option value="export">{{ lang('texts.export_action') }}</option>
                     </select>
                 </div><!-- /.bulk_actions (Buck Actions) -->
-                <button type="button" class="btn btn-default buck_action_btn">
+                <button type="button" class="btn btn-primary buck_action_btn">
                     <span>{{ lang('texts.apply_button') }}</span>
                 </button>
             </div>

@@ -35,8 +35,8 @@
                 <br />
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="buttons">
-                            <button type="submit"class="btn btn-info">Select</button>
+                        <div class="buttons" style="position:absolute; top:-65px; left: 300px;">
+                            <button type="submit"class="btn btn-primary">Proceed</button>
                         </div>
                     </div>
                 </div>

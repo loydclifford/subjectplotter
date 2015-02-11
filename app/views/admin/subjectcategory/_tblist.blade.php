@@ -1,14 +1,14 @@
 <!-- Main Content -->
-<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="subjects_tblist_form">
+<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="subjectcategories_tblist_form">
     <div class="row form-inline tblist-form-toolbar" >
         <div class="col-sm-9">
             <div class="form-group">
-                <label class="sr-only" for="input_subject_code">{{ lang('subject/attributes.labels.subject_code') }}</label>
-                <input type="text" name="subject_code" class="form-control" placeholder="{{ lang('subject/attributes.placeholders.subject_code') }}" value="{{ Input::get('subject_code') }}" style="width:180px">
+                <label class="sr-only" for="input_subject_code">{{ lang('subjectcategory/attributes.labels.subject_category_code') }}</label>
+                <input type="text" name="subject_code" class="form-control" placeholder="{{ lang('subjectcategory/attributes.placeholders.subject_category_code') }}" value="{{ Input::get('subject_category_code') }}" style="width:180px">
             </div>
             <div class="form-group">
-                <label class="sr-only" for="input_description">{{ lang('subject/attributes.labels.description') }}</label>
-                <input type="text" name="description" class="form-control" id="input_description" placeholder="{{ lang('subject/attributes.placeholders.description') }}" value="{{ Input::get('') }}">
+                <label class="sr-only" for="input_subject_code">{{ lang('subjectcategory/attributes.labels.subject_category_name') }}</label>
+                <input type="text" name="subject_code" class="form-control" placeholder="{{ lang('subjectcategory/attributes.placeholders.subject_category_name') }}" value="{{ Input::get('subject_category_name') }}" style="width:180px">
             </div>
         </div>
         <div class="col-sm-3">
@@ -34,7 +34,7 @@
                         <option value="export">{{ lang('texts.export_action') }}</option>
                     </select>
                 </div><!-- /.bulk_actions (Buck Actions) -->
-                <button type="button" class="btn btn-default buck_action_btn">
+                <button type="button" class="btn btn-primary buck_action_btn">
                     <span>{{ lang('texts.apply_button') }}</span>
                 </button>
             </div>
@@ -57,7 +57,7 @@
 </form>
 <script>
     $(function(){
-        var $tblist = $('#subjects_tblist_form');
+        var $tblist = $('#subjectcategories_tblist_form');
 
         var $backAction = new utils.buckAction();
         $backAction.init($tblist,function(actionData)
@@ -67,15 +67,15 @@
                 switch (actionData.action)
                 {
                     case 'delete':
-                        bootbox.confirm('{{ lang("subject::texts.delete_confirmation_many") }}', function(result) {
+                        bootbox.confirm('{{ lang("subjectcategory::texts.delete_confirmation_many") }}', function(result) {
                             if (result === true)
                             {
-                                utils.redirect(utils.adminUrl('/subjects/delete'+actionData.param));
+                                utils.redirect(utils.adminUrl('/subjectcategories/delete'+actionData.param));
                             }
                         });
                         break;
                     case 'export':
-                        utils.newTab(utils.adminUrl('/subjects/export'+actionData.param));
+                        utils.newTab(utils.adminUrl('/subjectcategories/export'+actionData.param));
                         break;
                 }
             }

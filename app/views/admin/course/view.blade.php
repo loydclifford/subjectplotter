@@ -96,7 +96,7 @@
                 </div>
             @else
                 {{-- if an not an update --}}
-                <button type="submit" class="btn btn-default" >Add Course Level</button>
+                <button type="submit" class="btn btn-primary" >Add Course Level</button>
             @endif
 
             {{-- if this is an edit --}}

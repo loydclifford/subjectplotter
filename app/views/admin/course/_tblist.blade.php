@@ -35,7 +35,7 @@
                         <option value="export">{{ lang('texts.export_action') }}</option>
                     </select>
                 </div><!-- /.bulk_actions (Buck Actions) -->
-                <button type="button" class="btn btn-default buck_action_btn">
+                <button type="button" class="btn btn-primary buck_action_btn">
                     <span>{{ lang('texts.apply_button') }}</span>
                 </button>
             </div>
