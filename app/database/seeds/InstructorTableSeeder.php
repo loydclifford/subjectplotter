@@ -32,8 +32,10 @@ class InstructorTableSeeder extends Seeder {
 
             $instructor = new Instructor();
             $instructor->user_id = $user->id;
-            $instructor->id      = Instructor::generateNewId();
+            $instructor_id = Instructor::generateNewId();
+            $instructor->id = $instructor_id;
             $instructor->save();
+
             foreach (SubjectCategory::all() as $subject_category)
             {
                 if ($faker->boolean())
@@ -41,8 +43,10 @@ class InstructorTableSeeder extends Seeder {
                     $instructor_subject_category = new InstructorSubjectCategory();
 
                     $instructor_subject_category->subject_category_code = $subject_category->subject_category_code;
-                    $instructor_subject_category->instructor_id         = $instructor->id;
+                    $instructor_subject_category->instructor_id = $instructor_id;
+
                     $instructor_subject_category->save();
+
                 }
             }
         }
