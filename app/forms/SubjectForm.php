@@ -33,10 +33,12 @@ class SubjectForm {
 
         // Default rules
         $rules = array(
-            'subject_code'           => 'required|unique:subjects,subject_code',
-            'subject_name'           => 'required',
-            'description'            => '',
-            'subject_category_code'  => 'required|unique',
+            'subject_code'          => 'required|unique:subjects,subject_code',
+            'subject_name'          => 'required',
+            'units'                 => 'required',
+            'description'           => '',
+            'prerequisite'          => 'required',
+            'subject_category_code' => 'required|unique',
         );
 
         // If Edit
@@ -76,12 +78,14 @@ class SubjectForm {
         $input = ! empty($input) ? $input : Input::all();
 
         // Do a security check  // Do save
-        $this->model->subject_code         = array_get($input, 'subject_code');
+        $this->model->subject_code          = array_get($input, 'subject_code');
         $this->model->subject_name          = array_get($input, 'subject_name');
-        $this->model->subject_category_code     = array_get($input, 'subject_category_code');
+        $this->model->units                 = array_get($input, 'units');
+        $this->model->description           = array_get($input, 'description');
+        $this->model->prerequisite          = array_get($input, 'prerequisite');
+        $this->model->subject_category_code = array_get($input, 'subject_category_code');
 
         // if edit
-
         $this->model->save();
         return $this->model;
     }
