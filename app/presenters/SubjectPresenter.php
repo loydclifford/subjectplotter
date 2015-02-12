@@ -65,8 +65,8 @@ class SubjectPresenter extends Presenter{
     {
         $param = array(
             'subjects_code[]' => $this->subject_code,
-            '_token' => csrf_token(),
-            '_success_url' => admin_url('/subjects'),
+            '_token'          => csrf_token(),
+            '_success_url'    => admin_url('/subjects'),
         );
 
         return admin_url("/subjects/delete/?".http_build_query($param));
@@ -76,7 +76,7 @@ class SubjectPresenter extends Presenter{
     {
         $param = array(
             'subjects_code[]' => $this->subject_code,
-            '_token' => csrf_token(),
+            '_token'          => csrf_token(),
         );
 
         return admin_url("/subjects/export/?".http_build_query($param));

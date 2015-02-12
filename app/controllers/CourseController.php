@@ -20,9 +20,9 @@ class CourseController extends BaseController {
             return $list->toJson();
         }
 
-        $this->data['meta']->title  = $this->lang('texts.page_title');
-        $this->data['list']         = $list;
-        $this->data['list_action']         = '#';
+        $this->data['meta']->title = $this->lang('texts.page_title');
+        $this->data['list']        = $list;
+        $this->data['list_action'] = '#';
 
         return View::make('admin.course.index', $this->data);
     }   
@@ -30,14 +30,14 @@ class CourseController extends BaseController {
     public function getCreate()
     {
         // Meta Data
-        $this->data['meta']->title  = lang('course/texts.create_meta_title');
-        $this->data['page_title']   = lang('course/texts.create_page_title');
+        $this->data['meta']->title = lang('course/texts.create_meta_title');
+        $this->data['page_title']  = lang('course/texts.create_page_title');
 
         // Form data
-        $this->data['url']           = URL::current();
-        $this->data['method']        = 'POST';
-        $this->data['return_url']    = admin_url('/courses/create');
-        $this->data['success_url']   = admin_url('/courses');
+        $this->data['url']         = URL::current();
+        $this->data['method']      = 'POST';
+        $this->data['return_url']  = admin_url('/courses/create');
+        $this->data['success_url'] = admin_url('/courses');
 
         return View::make('admin.course.create_edit')->with($this->data);
     }
@@ -60,13 +60,13 @@ class CourseController extends BaseController {
 
     public function getEdit(Course $course)
     {
-        $this->data['meta']->title  = lang('course/texts.update_meta_title');
-        $this->data['page_title']   = lang('course/texts.update_page_title');
+        $this->data['meta']->title = lang('course/texts.update_meta_title');
+        $this->data['page_title']  = lang('course/texts.update_page_title');
 
-        $this->data['url']          = URL::current();
-        $this->data['method']       = 'POST';
-        $this->data['return_url']   = admin_url("/courses/{$course->course_code}/edit");
-        $this->data['success_url']  = admin_url("/courses/{$course->course_code}/edit");
+        $this->data['url']         = URL::current();
+        $this->data['method']      = 'POST';
+        $this->data['return_url']  = admin_url("/courses/{$course->course_code}/edit");
+        $this->data['success_url'] = admin_url("/courses/{$course->course_code}/edit");
 
         $this->data['enable_breadcrumb'] = false;
         $this->data['course']            = $course;
@@ -77,7 +77,7 @@ class CourseController extends BaseController {
     public function postEdit(Course $course)
     {
         // Check for taxonomy slugs
-        $course_repo = new CourseForm($course);
+        $course_repo   = new CourseForm($course);
         if ($has_error = $course_repo->validateInput())
         {
             return $has_error;
@@ -94,7 +94,7 @@ class CourseController extends BaseController {
     {
         $base_course_year_uri = "/courses/{$course->course_code}/view";
 
-        $this->data['meta']->title  = lang('course/texts.view_meta_title');
+        $this->data['meta']->title = lang('course/texts.view_meta_title');
 
         $this->data['enable_breadcrumb']    = false;
         $this->data['course']               = $course;
@@ -131,18 +131,18 @@ class CourseController extends BaseController {
 
     public function getDelete()
     {
-        Utils::validateBulkArray('course_code');
+        Utils::validateBulkArray('course_codes');
 
         // The course id56665`
-        $course_codes = Input::get('course_code', array());
-        $courses = Course::whereIn('id', $course_codes)->delete();
+        $course_codes = Input::get('course_codes', array());
+        $courses = Course::whereIn('course_code', $course_codes)->delete();
 
         // Delete Courses
         Event::fire('course.delete', $courses);
 
         if (Input::has('_success_url'))
         {
-            return \Redirect::to(Input::get('_success_url'))
+            return Redirect::to(Input::get('_success_url'))
                 ->with(SUCCESS_MESSAGE, lang('course/texts.delete_success'));
         }
         else
@@ -175,10 +175,10 @@ class CourseController extends BaseController {
 
             if($course)
             {
-                $ret['id']          = $course->course_code;
-                $ret['first_name']  = $course->first_name;
-                $ret['last_name']   = $course->last_name;
-                $ret['email']       = $course->email;
+                $ret['id']         = $course->course_code;
+                $ret['first_name'] = $course->first_name;
+                $ret['last_name']  = $course->last_name;
+                $ret['email']      = $course->email;
 
                 return Response::json($ret);
             }
@@ -186,10 +186,10 @@ class CourseController extends BaseController {
             return Response::json(array());
         }
 
-        $per_page   = Input::get('per_page');
-        $page       = Input::get('page');
-        $offset     = ($page - 1 ) * $per_page;
-        $queue      = trim(Input::get('q'));
+        $per_page = Input::get('per_page');
+        $page     = Input::get('page');
+        $offset   = ($page - 1 ) * $per_page;
+        $queue    = trim(Input::get('q'));
 
         // generate the query
         if (is_numeric($queue))
@@ -230,6 +230,4 @@ class CourseController extends BaseController {
 
         return Response::json($ret);
     }
-
-
 }
