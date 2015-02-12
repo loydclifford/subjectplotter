@@ -2,10 +2,10 @@
 
 class SubjectTblist extends BaseTblist {
 
-    public $table = "subjects";
+    public $table   = "subjects";
     public $tableId = "subject_code";
 
-    public $cbName = "subjects_id";
+    public $cbName  = "subjects_id";
 
     function __construct()
     {
@@ -34,7 +34,12 @@ class SubjectTblist extends BaseTblist {
 
         if (Input::has('subject_name'))
         {
-            $this->query->where('subject_name','like','%'.Input::get('subject_name').'%');
+            $this->query->where('subjects.subject_name','like','%'.Input::get('subject_name').'%');
+        }
+
+        if (Input::has('subject_category_code'))
+        {
+            $this->query->where('subjects.subject_category_code','like','%'.Input::get('subject_category_code').'%');
         }
 
         // Debug query

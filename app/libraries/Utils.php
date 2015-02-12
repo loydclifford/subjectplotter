@@ -422,8 +422,7 @@ Class Utils
             || count(Input::get($input_name)) <= 0
         ) {
             if ($destroy) {
-                return Redirect::back()
-                    ->with(ERROR_MESSAGE, lang('texts.internal_error'));
+                App::abort('500');
             }
 
             return FALSE;

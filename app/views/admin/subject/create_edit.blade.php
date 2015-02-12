@@ -43,18 +43,18 @@
 
         {{ Former::select('units', lang('subject/attributes.labels.units') . ' <span class="required">*</span> ' )
             ->placeholder(lang('subject/attributes.placeholders.units'))
-            ->options(User::$statuses) }}
+            ->options(Subject::$units) }}
 
         {{ Former::textarea('description', lang('subject/attributes.labels.description') . ' <span class="required">*</span> ')
             ->placeholder(lang('subject/attributes.placeholders.description')) }}
 
         {{ Former::select('prerequisite', lang('subject/attributes.labels.prerequisite') . ' <span class="required">*</span> ' )
             ->placeholder(lang('subject/attributes.placeholders.prerequisite'))
-            ->options(User::$statuses) }}
+            ->options(Subject::getSubjects(isset($subject) ? array($subject->subject_code) : array())) }}
 
-        {{ Former::select('subject_category', lang('subject/attributes.labels.subject_category') . ' <span class="required">*</span> ' )
-            ->placeholder(lang('subject/attributes.placeholders.subject_category'))
-            ->options(User::$statuses) }}
+        {{ Former::select('subject_category_code', lang('subject/attributes.labels.subject_category_code') . ' <span class="required">*</span> ' )
+            ->placeholder(lang('subject/attributes.placeholders.subject_category_code'))
+             ->options(SubjectCategory::all()->lists('subject_category_name', 'subject_category_code')) }}
     </div>
 
 </div>

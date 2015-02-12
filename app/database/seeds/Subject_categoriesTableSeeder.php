@@ -14,10 +14,24 @@ class Subject_categoriesTableSeeder extends Seeder {
         DB::table('subject_categories')->truncate();
 
         $subject_categories = array(
-            'MATH'    => 'Math',
-            'SPANISH' => 'Spanish',
-            'CHINESE' => 'Chinese',
-            'ENGLISH' => 'English',
+            'IT'              => 'IT',
+            'ENGLISH'         => 'English',
+            'FILIPINO'        => 'Filipino',
+            'MATH'            => 'Math',
+            'HISTORY'         => 'History',
+            'NATURAL SCIENCE' => 'Natural Sciences',
+            'SOCIAL SCIENCE'  => 'Social Science',
+            'PE'              => 'PE',
+            'NSTP'            => 'NSTP',
+            'ACCOUNTING'      => 'Accounting ',
+            'PHYSICS'         => 'Physics',
+            'SPANISH'         => 'Spanish',
+            'LITRATURE'       => 'Litrature',
+            'VALUES'          => 'Values',
+            'HUMANITIES'      => 'Humanities',
+            'IT ELECTIVE'     => 'IT Elective',
+            'FREE ELECTIVE'   => 'Free Elective',
+            'RIZAL'           => 'Rizal',
         );
 
         foreach ($subject_categories as $key=>$value)

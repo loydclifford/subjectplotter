@@ -64,7 +64,7 @@ class SubjectPresenter extends Presenter{
     public function deleteUrl()
     {
         $param = array(
-            'subjects_id[]' => $this->subject_id,
+            'subjects_code[]' => $this->subject_code,
             '_token' => csrf_token(),
             '_success_url' => admin_url('/subjects'),
         );
@@ -75,7 +75,7 @@ class SubjectPresenter extends Presenter{
     public function exportUrl()
     {
         $param = array(
-            'subjects_id[]' => $this->subject_id,
+            'subjects_code[]' => $this->subject_code,
             '_token' => csrf_token(),
         );
 
@@ -84,21 +84,21 @@ class SubjectPresenter extends Presenter{
 
     public function editUrl()
     {
-        return admin_url("/subjects/{$this->subject_id}/edit");
+        return admin_url("/subjects/{$this->subject_code}/edit");
     }
 
     public function viewUrl()
     {
-        return admin_url("/subjects/{$this->subject_id}/view");
+        return admin_url("/subjects/{$this->subject_code}/view");
     }
 
     public function idLink()
     {
-        return HTML::link(admin_url("/subjects/{$this->subject_id}/edit"), $this->subject_id);
+        return HTML::link(admin_url("/subjects/{$this->subject_code}/edit"), $this->subject_code);
     }
 
     public function displayNameLink()
     {
-        return HTML::link(admin_url("/subjects/{$this->subject_id}/edit"), $this->getDisplayName());
+        return HTML::link(admin_url("/subjects/{$this->subject_code}/edit"), $this->getDisplayName());
     }
 }

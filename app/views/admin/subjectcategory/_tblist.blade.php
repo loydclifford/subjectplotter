@@ -3,12 +3,10 @@
     <div class="row form-inline tblist-form-toolbar" >
         <div class="col-sm-9">
             <div class="form-group">
-                <label class="sr-only" for="input_subject_code">{{ lang('subjectcategory/attributes.labels.subject_category_code') }}</label>
-                <input type="text" name="subject_code" class="form-control" placeholder="{{ lang('subjectcategory/attributes.placeholders.subject_category_code') }}" value="{{ Input::get('subject_category_code') }}" style="width:180px">
+                <input type="text" name="subject_category_code" class="form-control" placeholder="{{ lang('subjectcategory/attributes.placeholders.subject_category_code') }}" value="{{ Input::get('subject_category_code') }}" style="width:180px">
             </div>
             <div class="form-group">
-                <label class="sr-only" for="input_subject_code">{{ lang('subjectcategory/attributes.labels.subject_category_name') }}</label>
-                <input type="text" name="subject_code" class="form-control" placeholder="{{ lang('subjectcategory/attributes.placeholders.subject_category_name') }}" value="{{ Input::get('subject_category_name') }}" style="width:180px">
+                <input type="text" name="subject_category_name" class="form-control" placeholder="{{ lang('subjectcategory/attributes.placeholders.subject_category_name') }}" value="{{ Input::get('subject_category_name') }}" style="width:180px">
             </div>
         </div>
         <div class="col-sm-3">

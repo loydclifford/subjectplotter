@@ -9,7 +9,7 @@
                 <input type="text" name="subject_name" class="form-control" placeholder="{{ lang('subject/attributes.placeholders.subject_name') }}" value="{{ Input::get('subject_name') }}" style="width:180px">
             </div>
             <div class="form-group">
-                <input type="text" name="description" class="form-control" id="input_description" placeholder="{{ lang('subject/attributes.placeholders.description') }}" value="{{ Input::get('') }}">
+                <input type="text" name="subject_category_code" class="form-control" placeholder="{{ lang('subject/attributes.placeholders.subject_category_code') }}" value="{{ Input::get('subject_category_code') }}" style="width:200px">
             </div>
         </div>
         <div class="col-sm-3">

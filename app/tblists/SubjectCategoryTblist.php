@@ -2,10 +2,10 @@
 
 class SubjectCategoryTblist extends BaseTblist {
 
-    public $table = "subject_categories";
+    public $table   = "subject_categories";
     public $tableId = "subject_category_code";
 
-    public $cbName = "subject_category_code";
+    public $cbName  = "subject_category_code";
 
     function __construct()
     {
@@ -25,7 +25,7 @@ class SubjectCategoryTblist extends BaseTblist {
     protected function setQuery()
     {
         // all subjects
-        $this->query = Subject::where('subject_category_code', '<>', '0');
+        $this->query = SubjectCategory::where('subject_category_code', '<>', '0');
 
         if (Input::has('subject_category_code'))
         {
@@ -41,7 +41,7 @@ class SubjectCategoryTblist extends BaseTblist {
         $this->columnOrders = array();
 
         $this->columnsToSelect = array(
-            'subjects.*',
+            'subject_categories.*',
         );
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class SubjectForm {
+class SubjectCategoryForm {
 
     /**
      * User class instance
@@ -12,11 +12,11 @@ class SubjectForm {
     /**
      * Create instance of UserRepo
      *
-     * @param Subject $subject
+     * @param SubjectCategory $subjectcategory
      */
-    public function __construct(Subject $subject)
+    public function __construct(SubjectCategory $subjectcategory)
     {
-        $this->model = $subject;
+        $this->model = $subjectcategory;
     }
 
     /**
@@ -33,19 +33,17 @@ class SubjectForm {
 
         // Default rules
         $rules = array(
-            'subject_code'           => 'required|unique:subjects,subject_code',
-            'subject_name'           => 'required',
-            'description'            => '',
-            'subject_category_code'  => 'required|unique',
+            'subject_category_code' => 'required|unique:subjects,subject_code',
+            'subject_category_name' => 'required',
         );
 
         // If Edit
-        if ( ! empty($this->model->subject_code))
+        if ( ! empty($this->model->subject_category_code))
         {
             // We don't want to
-            if ($this->model->subject_code == array_get($input, 'subject_code'))
+            if ($this->model->subject_category_code == array_get($input, 'subject_category_code'))
             {
-                unset($rules['subject_code']);
+                unset($rules['subject_category_code']);
             }
         }
 
@@ -76,9 +74,8 @@ class SubjectForm {
         $input = ! empty($input) ? $input : Input::all();
 
         // Do a security check  // Do save
-        $this->model->subject_code         = array_get($input, 'subject_code');
-        $this->model->subject_name          = array_get($input, 'subject_name');
-        $this->model->subject_category_code     = array_get($input, 'subject_category_code');
+        $this->model->subject_category_code = array_get($input, 'subject_category_code');
+        $this->model->subject_category_name = array_get($input, 'subject_category_name');
 
         // if edit
 

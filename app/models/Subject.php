@@ -17,6 +17,13 @@ class Subject extends Eloquent {
 
     public $timestamps    = false;
 
+    public static $units = array(
+        1 => 1,
+        2 => 2,
+        3 => 3,
+        4 => 4,
+    );
+
     // Static Helpers
     public static function generateNewId()
     {
@@ -31,5 +38,19 @@ class Subject extends Eloquent {
         }
 
         return $newId;
+    }
+
+    public static function getSubjects(array $exclude = array())
+    {
+        if (empty($exclude))
+        {
+            $query = self::all();
+        }
+        else
+        {
+            $query = self::whereNotIn('subject_code', $exclude);
+        }
+
+        return $query->lists('subject_name', 'subject_code');
     }
 }

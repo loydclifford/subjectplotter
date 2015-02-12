@@ -23,151 +23,85 @@ class SubjectCategoryController extends BaseController {
     public function postCreate()
     {
         // Check for taxonomy slugs
-        $subject_repo  = new SubjectForm(new Subject());
-        if ($has_error = $subject_repo->validateInput())
+        $subjectcategory_repo  = new SubjectCategoryForm(new SubjectCategory());
+        if ($has_error = $subjectcategory_repo->validateInput())
         {
             return $has_error;
         }
 
-        $subject = $subject_repo->saveInput();
-        Event::fire('subject.add', $subject);
+        $subjectcategory = $subjectcategory_repo->saveInput();
+        Event::fire('subjectcategory.add', $subjectcategory);
 
         return Redirect::to(Input::get('_success_url'))
-            ->with(SUCCESS_MESSAGE,lang('subject/texts.create_success'));
+            ->with(SUCCESS_MESSAGE,lang('subjectcategory/texts.create_success'));
     }
 
-    public function getEdit(Subject $subject)
+    public function getEdit(SubjectCategory $subjectcategory)
     {
-        $this->data['meta']->title  = lang('subject/texts.update_meta_title');
-        $this->data['page_title']   = lang('subject/texts.update_page_title');
-
+        $this->data['meta']->title  = lang('subjectcategory/texts.update_meta_title');
+        $this->data['page_title']   = lang('subjectcategory/texts.update_page_title');
         $this->data['url']          = URL::current();
         $this->data['method']       = 'POST';
-        $this->data['return_url']   = admin_url("/subjects/{$subject->subject_code}/edit");
-        $this->data['success_url']  = admin_url("/subjects/{$subject->subject_code}/edit");
+        $this->data['return_url']   = admin_url("/subjects/categories{$subjectcategory->subject_category_code}/edit");
+        $this->data['success_url']  = admin_url("/subjects/categories{$subjectcategory->subject_category_code}/edit");
 
-        $this->data['enable_breadcrumb']    = false;
-        $this->data['subject']              = $subject;
+        $this->data['enable_breadcrumb'] = false;
+        $this->data['subjectcategory']   = $subjectcategory;
 
-        return View::make('admin.subject.create_edit')->with($this->data);
+        return View::make('admin.subjectcategory.create_edit')->with($this->data);
     }
 
-    public function postEdit(Subject $subject)
+    public function postEdit(SubjectCategory $subjectcategory)
     {
         // Check for taxonomy slugs
-        $subject_repo   = new SubjectForm($subject);
-        if ($has_error  = $subject_repo->validateInput())
+        $subjectcategory_repo  = new SubjectCategoryForm($subjectcategory);
+        if ($has_error = $subjectcategory_repo->validateInput())
         {
             return $has_error;
         }
 
-        $subject = $subject_repo->saveInput();
-        Event::fire('subject.update', $subject);
+        $subjectcategory = $subjectcategory_repo->saveInput();
+        Event::fire('subjectcategory.update', $subjectcategory);
 
-        return Redirect::to(admin_url("subjects/{$subject->subject_code}/edit"))
-            ->with(SUCCESS_MESSAGE,lang('subject/texts.update_success'));
+        return Redirect::to(admin_url("subjects/categories/{$subjectcategory->subject_category_code}/edit"))
+            ->with(SUCCESS_MESSAGE,lang('subjects/categories/texts.update_success'));
     }
 
     public function getDelete()
     {
-        Utils::validateBulkArray('subject_code');
+        Utils::validateBulkArray('subject_category_codes');
+
         // The subject id56665`
-        $subjects_codes = Input::get('subject_code', array());
-        $subjects = Subject::whereIn('subject_code', $subjects_codes);
+        $subject_category_codes = Input::get('subject_category_codes', array());
+        $subjectcategories = SubjectCategory::whereIn('subject_category_code', $subject_category_codes)->delete();
+
         // Delete Subjects
-        Event::fire('subject.delete', $subjects);
-        $subjects->delete();
+        Event::fire('subjectcategory.delete', $subjectcategories);
 
         if (Input::has('_success_url'))
         {
-            return \Redirect::to(Input::get('_success_url'))
-                ->with(SUCCESS_MESSAGE, lang('subject/texts.delete_success'));
+            return Redirect::to(Input::get('_success_url'))
+                ->with(SUCCESS_MESSAGE, lang('subjectcategory/texts.delete_success'));
         }
         else
         {
             return Redirect::back()
-                ->with(SUCCESS_MESSAGE, lang('subject/texts.delete_success'));
+                ->with(SUCCESS_MESSAGE, lang('subjectcategory/texts.delete_success'));
         }
     }
 
     // Import
     public function getExport()
     {
-        Utils::validateBulkArray('subjects_code');
+        Utils::validateBulkArray('subject_category_code');
 
-        $array = Subject::whereIn('id',Input::get('subjects_id'))->get()->toArray();
+        $array = SubjectCategory::whereIn('subject_category_code',Input::get('subject_category_codes'))->get()->toArray();
 
         // Start export if not empty
         if ( ! empty($array))
         {
             $headers = array_keys($array[0]);
-            Utils::csvDownload('subjects_data_csv', $array, $headers);
+            Utils::csvDownload('subjectcategories_data_csv', $array, $headers);
         }
-    }
-
-    // Select 2 Search Subjects
-    public function getSearchSelect()
-    {
-        if (Input::has('method') && Input::get('method') == "init-selection"){
-            $subject = Subject::frontEndGroups()->find(Input::get('subject_code'));
-
-            if($subject)
-            {
-                $ret['subject_code']          = $subject->subject_code;
-                $ret['subject_name']          = $subject->subject_name;
-                $ret['prerequisite']          = $subject->prerequisite;
-                $ret['subject_category_code'] = $subject->subject_category_code;
-
-                return Response::json($ret);
-            }
-
-            return Response::json(array());
-        }
-
-        $per_page   = Input::get('per_page');
-        $page       = Input::get('page');
-        $offset     = ($page - 1 ) * $per_page;
-        $queue      = trim(Input::get('q'));
-
-        // generate the query
-        if (is_numeric($queue))
-        {
-            // If numeric, then it is id that the subject is
-            // intended to search
-            $subjects = Subject::where('id', $queue);
-        }
-        else
-        {
-            // If string, then it is a name that the subject is
-            // intended to search
-            $subjects = Subject::frontEndGroups()->where(function($query) use ($queue) {
-                $query->where('subject_code', 'LIKE', $queue . '%');
-                $query->orWhere('subject_name', 'LIKE', $queue . '%');
-            });
-        }
-
-        $results = $subjects->skip($offset)
-            ->take($per_page)
-            ->get();
-
-        $ret = array(
-            'total' => $subjects->count()
-        );
-
-        $subject_assoc = array();
-        foreach($results as $subject) {
-            $subject_assoc[] = array(
-                'subject_code'          => $subject->subject_code,
-                'subject_name'          => $subject->subject_name,
-                'units'                 => $subject->units,
-                'description'           => $subject->description,
-                'prerequisite'          => $subject->prerequisite,
-                'subject_category_code' =>$subject->subject_category_code
-            );
-        }
-
-        $ret['subjects'] = $subject_assoc;
-
-        return Response::json($ret);
     }
 }
