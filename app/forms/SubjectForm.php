@@ -38,7 +38,7 @@ class SubjectForm {
             'units'                 => 'required',
             'description'           => '',
             'prerequisite'          => 'required',
-            'subject_category_code' => 'required|unique',
+            'subject_category_code' => 'required',
         );
 
         // If Edit
