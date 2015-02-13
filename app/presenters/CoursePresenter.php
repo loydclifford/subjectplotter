@@ -72,7 +72,7 @@ class CoursePresenter extends Presenter{
     public function deleteUrl()
     {
         $param = array(
-            'course_code[]'=> $this->course_code,
+            'course_codes[]'=> $this->course_code,
             '_token'       => csrf_token(),
             '_success_url' => admin_url('/courses'),
         );
@@ -83,7 +83,7 @@ class CoursePresenter extends Presenter{
     public function exportUrl()
     {
         $param = array(
-            'course_code[]' => $this->course_code,
+            'course_codes[]' => $this->course_code,
             '_token' => csrf_token(),
         );
 

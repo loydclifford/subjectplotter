@@ -37,8 +37,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="buttons">
-                            <button type="submit"class="btn btn-info">Select</button>
-                            <a class="btn btn-default" href="{{ admin_url('/subject-schedules') }}">Back</a>
+                            <button type="submit"class="btn btn-primary">Select</button>
+                            <a class="btn btn-primary" href="{{ admin_url('/subject-schedules') }}">Back</a>
                         </div>
                     </div>
                 </div>

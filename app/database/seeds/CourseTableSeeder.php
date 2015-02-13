@@ -19,13 +19,28 @@ class CourseTableSeeder extends Seeder {
         $user->save();
 
         $user = new Course();
-        $user->course_code = "HRM";
-        $user->description = "Hotel and Restaurant Management";
+        $user->course_code = "BSHRM";
+        $user->description = "Bachelor of science in Hotel and Restaurant Management";
+        $user->save();
+
+        $user = new Course();
+        $user->course_code = "BSTM";
+        $user->description = "Bachelor of Science in Tourism Management";
         $user->save();
 
         $user = new Course();
         $user->course_code = "BSED";
-        $user->description = "Bachelor of science Education";
+        $user->description = "Bachelor of science in Education";
         $user->save();
-	}
+
+        $user = new Course();
+        $user->course_code = "BEED";
+        $user->description = "Bachelor of science in Elementary Education";
+        $user->save();
+
+        $user = new Course();
+        $user->course_code = "BSDEV";
+        $user->description = "Bachelor of science in Development Communication";
+        $user->save();
+    }
 }

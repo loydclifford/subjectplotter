@@ -1,41 +1,41 @@
 ﻿.navigation{
 	position: absolute;
-	top: 310px;
+	top: 350px;
 	width: 1100px;
 }
 .manage_rooms{
 	position:absolute;
-	top: 410px;
+	top: 450px;
 	left:450;
 }
 .manage_subjects{
 	position:absolute;
-	top: 410px;
+	top: 450px;
 	left:430px;
 }
 .manage_teachers{
 	position: absolute;
-	top: 410px;
+	top: 450px;
 	left: 630px;
 }
 .manage_student{
 	position: absolute;
-	top: 410px;
+	top: 450px;
 	left: 830px;
 }
 .manage_courses{
 	position: absolute;
-	top: 480px;
+	top: 510px;
 	left:330px;
 }
 .subject_schedule{
 	position: absolute;
-	top: 480px;
+	top: 510px;
 	left: 540px;
 }
 .grade_entry{
 	position: absolute;
-	top: 480px;
+	top: 510px;
 	left: 750px;
 }
 .page{

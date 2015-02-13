@@ -12,11 +12,11 @@ class SubjectCategoryForm {
     /**
      * Create instance of UserRepo
      *
-     * @param SubjectCategory $subject_categories
+     * @param SubjectCategory $subjectcategory
      */
-    public function __construct(SubjectCategory $subject_categories)
+    public function __construct(SubjectCategory $subjectcategory)
     {
-        $this->model = $subject_categories;
+        $this->model = $subjectcategory;
     }
 
     /**
@@ -33,8 +33,8 @@ class SubjectCategoryForm {
 
         // Default rules
         $rules = array(
-            'subject_category_code' => 'required|unique:subject_category,subject_category_code',
-            'subject_category_name' => 'required|unique:subject_category,subject_category_name',
+            'subject_category_code' => 'required|unique:subjects,subject_code',
+            'subject_category_name' => 'required',
         );
 
         // If Edit
@@ -74,8 +74,8 @@ class SubjectCategoryForm {
         $input = ! empty($input) ? $input : Input::all();
 
         // Do a security check  // Do save
-        $this->model->subject_category_code         = array_get($input, 'subject_category_code');
-        $this->model->subject_category_name          = array_get($input, 'subject_category_name');
+        $this->model->subject_category_code = array_get($input, 'subject_category_code');
+        $this->model->subject_category_name = array_get($input, 'subject_category_name');
 
         // if edit
 

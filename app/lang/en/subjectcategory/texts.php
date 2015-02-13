@@ -1,10 +1,10 @@
 <?php
 
 return array(
-    'meta_title' => 'Subjects',
-    'page_title' => 'Subjects',
+    'meta_title' => 'Subject Categories',
+    'page_title' => 'Subject Categories',
 
-    'create'     => 'New Subject',
+    'create'     => 'New Subject Category',
     'contacts'   => 'Subject Contacts',
     'details'    => 'Subject Details',
 

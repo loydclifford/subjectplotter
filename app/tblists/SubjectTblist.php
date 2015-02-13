@@ -2,10 +2,10 @@
 
 class SubjectTblist extends BaseTblist {
 
-    public $table = "subjects";
+    public $table   = "subjects";
     public $tableId = "subject_code";
 
-    public $cbName = "subjects_id";
+    public $cbName  = "subjects_id";
 
     function __construct()
     {
@@ -34,7 +34,12 @@ class SubjectTblist extends BaseTblist {
 
         if (Input::has('subject_name'))
         {
-            $this->query->where('subject_name','like','%'.Input::get('subject_name').'%');
+            $this->query->where('subjects.subject_name','like','%'.Input::get('subject_name').'%');
+        }
+
+        if (Input::has('subject_category_code'))
+        {
+            $this->query->where('subjects.subject_category_code','like','%'.Input::get('subject_category_code').'%');
         }
 
         // Debug query
@@ -54,7 +59,7 @@ class SubjectTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'subjects.subject_code',
-            'thead_attr'      => ' style="width:30px" ',
+            'thead_attr'      => ' style="width:120px" ',
         );
 
         $this->columns['subject_name'] = array(
@@ -62,7 +67,7 @@ class SubjectTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'subjects.subject_name',
-            'thead_attr'      => ' style="width:40px" ',
+            'thead_attr'      => ' style="width:150px" ',
         );
 
         $this->columns['units'] = array(
@@ -70,7 +75,7 @@ class SubjectTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'subjects.units',
-            'thead_attr'      => ' style="width:1px" ',
+            'thead_attr'      => ' style="width:10px" ',
         );
 
         $this->columns['description'] = array(
@@ -78,7 +83,7 @@ class SubjectTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'subjects.description',
-            'thead_attr'      => ' style="width:80px" ',
+            'thead_attr'      => ' style="width:160px" ',
         );
 
         $this->columns['prerequisite'] = array(
@@ -86,7 +91,7 @@ class SubjectTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'subjects.prerequisite',
-            'thead_attr'      => ' style="width:2px" ',
+            'thead_attr'      => ' style="width:140px" ',
         );
 
         $this->columns['subject_category_code'] = array(
@@ -94,7 +99,6 @@ class SubjectTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'subjects.subject_category_code',
-            'thead_attr'      => ' style="width:20px" ',
         );
 
         $this->addActionColumn();

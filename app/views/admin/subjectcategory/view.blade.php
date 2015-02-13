@@ -1,4 +1,3 @@
-
 @extends('admin._partials._layout')
 
 @section('main-content-header')

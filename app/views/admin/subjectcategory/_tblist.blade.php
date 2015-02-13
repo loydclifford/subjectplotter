@@ -1,15 +1,12 @@
 <!-- Main Content -->
-<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="subjects_tblist_form">
+<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="subjectcategories_tblist_form">
     <div class="row form-inline tblist-form-toolbar" >
         <div class="col-sm-9">
             <div class="form-group">
-                <input type="text" name="subject_code" class="form-control" placeholder="{{ lang('subject/attributes.placeholders.subject_code') }}" value="{{ Input::get('subject_code') }}" style="width:180px">
+                <input type="text" name="subject_category_code" class="form-control" placeholder="{{ lang('subjectcategory/attributes.placeholders.subject_category_code') }}" value="{{ Input::get('subject_category_code') }}" style="width:180px">
             </div>
             <div class="form-group">
-                <input type="text" name="subject_name" class="form-control" placeholder="{{ lang('subject/attributes.placeholders.subject_name') }}" value="{{ Input::get('subject_name') }}" style="width:180px">
-            </div>
-            <div class="form-group">
-                <input type="text" name="subject_category_code" class="form-control" placeholder="{{ lang('subject/attributes.placeholders.subject_category_code') }}" value="{{ Input::get('subject_category_code') }}" style="width:200px">
+                <input type="text" name="subject_category_name" class="form-control" placeholder="{{ lang('subjectcategory/attributes.placeholders.subject_category_name') }}" value="{{ Input::get('subject_category_name') }}" style="width:180px">
             </div>
         </div>
         <div class="col-sm-3">
@@ -58,7 +55,7 @@
 </form>
 <script>
     $(function(){
-        var $tblist = $('#subjects_tblist_form');
+        var $tblist = $('#subjectcategories_tblist_form');
 
         var $backAction = new utils.buckAction();
         $backAction.init($tblist,function(actionData)
@@ -68,15 +65,15 @@
                 switch (actionData.action)
                 {
                     case 'delete':
-                        bootbox.confirm('{{ lang("subject::texts.delete_confirmation_many") }}', function(result) {
+                        bootbox.confirm('{{ lang("subjectcategory::texts.delete_confirmation_many") }}', function(result) {
                             if (result === true)
                             {
-                                utils.redirect(utils.adminUrl('/subjects/delete'+actionData.param));
+                                utils.redirect(utils.adminUrl('/subjectcategories/delete'+actionData.param));
                             }
                         });
                         break;
                     case 'export':
-                        utils.newTab(utils.adminUrl('/subjects/export'+actionData.param));
+                        utils.newTab(utils.adminUrl('/subjectcategories/export'+actionData.param));
                         break;
                 }
             }

@@ -7,7 +7,7 @@ function create_back_button($default = NULL, $label = NULL)
 
     $target_link = ( ! is_null($referer) && $current_url != $referer) ? $referer : $default;
     ?>
-        <a class="btn btn-default" href="<?php echo $target_link ?>"><?php echo ( ! is_null($label)) ? $label : lang('texts.back_button') ?> </a>
+        <a class="btn btn-primary" href="<?php echo $target_link ?>"><?php echo ( ! is_null($label)) ? $label : lang('texts.back_button') ?> </a>
     <?php
 }
 
