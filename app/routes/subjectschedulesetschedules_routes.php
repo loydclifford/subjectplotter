@@ -19,8 +19,10 @@ Route::group(array('prefix'=>'admin', 'before'=>'auth'), function()
             Route::post('/add-subject','SubjectScheduleSetSchedulesController@postAddSubject');
             Route::get('/remove-subject','SubjectScheduleSetSchedulesController@getRemoveSubject');
 
-            Route::post('/add-schedule','SubjectScheduleSetSchedulesController@postAddSchedule');
+            Route::post('/add-schedule','SubjectScheduleSetSchedulesController@postAddUpdateSchedule');
+            Route::post('/update-schedule','SubjectScheduleSetSchedulesController@postAddUpdateSchedule');
             Route::get('/remove-schedule','SubjectScheduleSetSchedulesController@getRemoveSchedule');
+                Route::get('/get-form-edit-schedule','SubjectScheduleSetSchedulesController@getFormEditSchedule');
         });
     });
 

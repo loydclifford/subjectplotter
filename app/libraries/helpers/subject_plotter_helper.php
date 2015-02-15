@@ -53,7 +53,7 @@ function get_schedule_days($getKeyValue = NULL)
     return $days;
 }
 
-function has_schedule_conflict($days, $timestamp_time_start, $timestamp_time_end, $room_id, $exemption_id = NULL)
+function has_schedule_conflict($days, $timestamp_time_start, $timestamp_time_end, $room_id, \CourseSubjectSchedule $exemption = NULL)
 {
     $errors = array();
     foreach ($days as $day)
@@ -64,9 +64,10 @@ function has_schedule_conflict($days, $timestamp_time_start, $timestamp_time_end
             date('Y-m-d H:i:s', ($timestamp_time_end + 1)),
         ))->where('room_id', $room_id);
 
-        if ($exemption_id)
+        // if has exemption, the current day loop is not belong
+        if ($exemption && ($exemption->{$day} == 1))
         {
-            $model->where('id', '<>', $exemption_id);
+            $model->where('id', '<>', $exemption->id);
         }
 
         switch ($day)
@@ -81,19 +82,18 @@ function has_schedule_conflict($days, $timestamp_time_start, $timestamp_time_end
                 $model->where('day_wed', 1);
                 break;
             case 'day_thu':
-                $model->where('day_wed', 1);
+                $model->where('day_thu', 1);
                 break;
             case 'day_fri':
-                $model->where('day_wed', 1);
+                $model->where('day_fri', 1);
                 break;
             case 'day_sat':
-                $model->where('day_wed', 1);
+                $model->where('day_sat', 1);
                 break;
             case 'day_sun':
-                $model->where('day_wed', 1);
+                $model->where('day_sun', 1);
                 break;
         }
-
 
         $found_conflicts = $model->get();
 
@@ -105,19 +105,18 @@ function has_schedule_conflict($days, $timestamp_time_start, $timestamp_time_end
 
                 $course_code = $course_subject_schedule->courseSubject ? $course_subject_schedule->courseSubject->course_code : NULL;
                 $course_year_code = $course_subject_schedule->courseSubject ? $course_subject_schedule->courseSubject->course_year_code : NULL;
-                $semester = $course_subject_schedule->courseSubject ? $course_subject_schedule->courseSubject->semester : NULL;
-                $subject_code = $course_subject_schedule->courseSubject ? $course_subject_schedule->courseSubject->subject_code : NULL;
+                $subject_name = $course_subject_schedule->courseSubject ? $course_subject_schedule->courseSubject->subject->subject_name : NULL;
 
-                $errors[] = "Conflict with schedule day {$day_client_name}, room {$course_subject_schedule->room_id} and subject {$subject_code} from {$course_code}-{$course_year_code} ({$semester}).";
+                $errors[] = "Conflict schedule from {$course_code}-{$course_year_code}, room {$course_subject_schedule->room_id} and subject {$subject_name}.";
             }
         }
     }
 
     if (count($errors))
     {
-        $html_msg  = '<div class="alert alert-warning"><p>One of the selected day conflicts with room and time. See below for conflicts info:</p><p>';
-        $html_msg .= join('</p><p>', $errors);
-        $html_msg .= '</p></div>';
+        $html_msg  = '<div class="alert alert-warning"><p>Entry has schedule conflicts. See below for conflicts info: </p><br /><ul><li><p>';
+        $html_msg .= join('</li></p><li><p>', $errors);
+        $html_msg .= '</p></li></ul></div>';
 
         return $html_msg;
     }

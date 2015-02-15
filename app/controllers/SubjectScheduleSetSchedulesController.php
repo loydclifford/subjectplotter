@@ -73,18 +73,36 @@ class SubjectScheduleSetSchedulesController extends BaseController {
             ->with(SUCCESS_MESSAGE, 'Successfully deleted subject.');
     }
 
-    public function postAddSchedule()
+    public function postAddUpdateSchedule()
     {
         # CourseSubjectSchedule::where('id', not)
 
+        // if edit,
+        $course_subject_schedule = CourseSubjectSchedule::find(Input::get('course_subject_schedule_id', 0));
+
         $timestamp_time_start = strtotime('1970-01-01 '.Input::get('time_start'));
         $timestamp_time_end = strtotime('1970-01-01 '.Input::get('time_end'));
+
+        // time start and end should not equal
+        if ($timestamp_time_start == $timestamp_time_end)
+        {
+            return Response::json(array(
+                'status' => RESULT_FAILURE,
+                'message' => 'Start time and end time should not the same.',
+            ));
+        }
+
+        // if time start is greater than time end, then
+        // it is a next day time, (i.e 11:00 pm to 2:00 am)
         if ($timestamp_time_start > $timestamp_time_end)
         {
             $timestamp_time_end = strtotime('1970-01-02 '.Input::get('time_end'));
         }
 
-        $has_returned_message = has_schedule_conflict(Input::get('days', array()), $timestamp_time_start, $timestamp_time_end, Input::get('room_id'));
+        // We need to check if has conflict with has schedule conflict method.
+        // has_schedule_conflict return true then it is the html error message,
+        // else then continue
+        $has_returned_message = has_schedule_conflict(Input::get('days', array()), $timestamp_time_start, $timestamp_time_end, Input::get('room_id'), ($course_subject_schedule ? $course_subject_schedule : NULL));
         if ($has_returned_message)
         {
             return Response::json(array(
@@ -93,13 +111,15 @@ class SubjectScheduleSetSchedulesController extends BaseController {
             ));
         }
 
-        // check if has conflicts
-        $model = new CourseSubjectSchedule();
-        $model->course_subject_id = Input::get('course_subject_id');
-        $model->room_id = Input::get('room_id');
-        $model->instructor_id = Input::get('instructor_id');
-        $model->time_start = date('Y-m-d H:i:s', $timestamp_time_start);
-        $model->time_end = date('Y-m-d H:i:s', $timestamp_time_end);
+        // save data entry to database
+        $model = $course_subject_schedule ? $course_subject_schedule : new CourseSubjectSchedule();
+        $model->course_subject_id       = Input::get('course_subject_id');
+        $model->room_id                 = Input::get('room_id');
+        $model->instructor_id           = Input::get('instructor_id');
+        $model->time_start              = date('Y-m-d H:i:s', $timestamp_time_start);
+        $model->time_end                = date('Y-m-d H:i:s', $timestamp_time_end);
+
+        // we need to flipped the days, so we can use isset function easily
         $flipped = array_flip(Input::get('days', array()));
         $model->day_mon = isset($flipped['day_mon']);
         $model->day_tue = isset($flipped['day_tue']);
@@ -111,31 +131,32 @@ class SubjectScheduleSetSchedulesController extends BaseController {
         $model->save();
 
         Session::flash(SUCCESS_MESSAGE, 'Successfully added schedule.');
-//        'days' =>
-//  array (
-//      0 => 'day_tue',
-//      1 => 'day_wed',
-//      2 => 'day_sat',
-//  ),
-//  'room_id' => 'RM-01',
-//  'instructor_id' => 'INS-230708',
-//  'hour' => '07',
-//  'minute' => '00',
-//  'meridian' => 'AM',
-//  'time_start' => '07:00 AM',
-//  'time_end' => '07:00 AM',
-//  'course_subject_id' => '2',
-//        echo '<pre><dd>'.var_export(Input::all(), true).'</dd></pre>';
-//        die();
-//        $ret = array(
-//            'status' => RESULT_FAILURE,
-//            'message' => 'Time Conflicts with',
-//        );
+
         return Response::json(array(
             'status' => RESULT_SUCCESS,
         ));
     }
 
+    public function getFormEditSchedule()
+    {
+        $course_subject_schedule = CourseSubjectSchedule::find(Input::get('course_subject_schedule_id'));
+
+        if ($course_subject_schedule)
+        {
+            $this->data['course_subject_schedule'] = $course_subject_schedule;
+            $this->data['course_subject'] = $course_subject_schedule->courseSubject;
+
+            return array(
+                'status' => RESULT_SUCCESS,
+                'html' => View::make('admin.subjectschedule.setschedules._edit_schedule_form')->with($this->data)->render()
+            );
+        }
+
+        return array(
+            'status' => RESULT_FAILURE,
+            'message' => 'Schedule id not found.'
+        );
+    }
 
     public function getRemoveSchedule()
     {

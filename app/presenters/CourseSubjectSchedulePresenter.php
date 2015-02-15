@@ -10,6 +10,7 @@ class CourseSubjectSchedulePresenter extends Presenter{
         if ($this->day_tue) $str[] = 'Tue';
         if ($this->day_wed) $str[] = 'Wed';
         if ($this->day_thu) $str[] = 'Thu';
+        if ($this->day_fri) $str[] = 'Fri';
         if ($this->day_sat) $str[] = 'Sat';
         if ($this->day_sun) $str[] = 'Sun';
 
