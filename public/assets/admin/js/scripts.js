@@ -341,7 +341,7 @@ $(function () {
 
     $('.timepicker1').timepicker({
         defaultTime: '07:00 AM',
-        minuteStep: '30',
+        minuteStep: 30,
         showSeconds: false,
         showMeridian: true,
         template: 'dropdown'
