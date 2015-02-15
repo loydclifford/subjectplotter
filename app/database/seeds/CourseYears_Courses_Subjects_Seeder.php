@@ -26,6 +26,8 @@ class CourseYears_Courses_Subjects_Seeder extends Seeder {
                 list($course_code, $course_year_code, $semester) = explode('_', substr($file_name, 0, -4));
 
                 $semester = $semester == 'SECONDSEMESTER' ? 'first_semester' : 'second_semester';
+                $course_code = trim($course_code);
+                $course_year_code = trim($course_year_code);
 
                 // Add course
                 $course = Course::where('course_code', $course_code)->first();
@@ -37,7 +39,7 @@ class CourseYears_Courses_Subjects_Seeder extends Seeder {
                     $course->description = $course_code;
                     $course->save();
                 }
-                $course_year = CourseYear::where('course_code', $course)->where('course_year_code', $course_year_code)->first();
+                $course_year = CourseYear::where('course_code', $course->course_code)->where('course_year_code', $course_year_code)->first();
                 if ( ! $course_year)
                 {
                     $course_year = new CourseYear();
