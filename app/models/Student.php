@@ -11,7 +11,7 @@ class Student extends Eloquent {
      *
      * @var string
      */
-    protected $table = 'students';
+    protected $table      = 'students';
     protected $primaryKey = 'student_no';
 
     public $timestamps = false;

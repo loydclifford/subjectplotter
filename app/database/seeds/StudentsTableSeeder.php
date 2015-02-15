@@ -28,9 +28,9 @@ class StudentsTableSeeder extends Seeder {
                 'III',
                 'IV'
             ));
-            $model->user_id = $faker->numberBetween($min = 1, $max = 20);
+            $model->user_id    = $faker->numberBetween($min = 1, $max = 20);
             $model->first_name = $faker->firstName;
-            $model->last_name = $faker->lastName;
+            $model->last_name  = $faker->lastName;
             $model->created_at = $faker->dateTime->format('Y-m-d');
             $model->updated_at = $faker->dateTime->format('Y-m-d');
 

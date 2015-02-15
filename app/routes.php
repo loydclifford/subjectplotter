@@ -7,6 +7,7 @@ Route::model('subject','Subject');
 Route::model('course','Course');
 Route::model('course_year','CourseYear');
 Route::model('instructor','Instructor');
+Route::model('student','Student');
 
 include(__DIR__.'/routes/admin_routes.php');
 include(__DIR__.'/routes/users_routes.php');
@@ -19,6 +20,7 @@ include(__DIR__.'/routes/settings_routes.php');
 include(__DIR__.'/routes/subjectschedules_routes.php');
 include(__DIR__.'/routes/subjectschedulesetschedules_routes.php');
 include(__DIR__.'/routes/subjectcategories_routes.php');
+include(__DIR__.'/routes/student_routes.php');
 
 
 define('ENV_DEVELOPMENT', 'local');
