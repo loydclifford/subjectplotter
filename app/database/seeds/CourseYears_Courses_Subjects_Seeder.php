@@ -104,6 +104,7 @@ class CourseYears_Courses_Subjects_Seeder extends Seeder {
 
                 // create course subjects
                 $school_years = array(
+                    '2015-2016',
                     '2014-2015',
                     '2013-2014',
                 );
