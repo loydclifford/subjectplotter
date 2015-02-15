@@ -1,4 +1,4 @@
-Subject,Descriptive Title,Units,Lec,Lab,Pre Requisite
+Subject,descriptive_title,Units,Lec,Lab,Pre Requisite
 IT 34,Software Engineering,3,1,4,IT 32
 IT 35,Multimedia Systems,3,1,4,"IT 26, IT 27"
 IT 36,Ethics in Information Technology,3,,3,IT3

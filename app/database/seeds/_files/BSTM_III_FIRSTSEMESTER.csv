@@ -1,4 +1,4 @@
-Subject,Descriptive Title,Units,Lec,Lab,Pre Requisite
+Subject,descriptive_title,Units,Lec,Lab,Pre Requisite
 TOUR 12,Ecotourism,3,3,,TOUR 11
 TOUR 12,Transportation Management,3,3,,TOUR 11
 TOUR 14,Information Technology in Tourism,3,2,1,TOUR 11

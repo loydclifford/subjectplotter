@@ -1,4 +1,4 @@
-Subject,Descriptive Title,Units,Lec,Lab,Pre Requisite
+Subject,descriptive_title,Units,Lec,Lab,Pre Requisite
 IT 21,Object-Oriented Programming 2,3,1,4,IT 15
 IT 22,Computer Organization,3,1,4,IT 13
 IT 23,Discrete Structure,3,1,4,MATH 2
