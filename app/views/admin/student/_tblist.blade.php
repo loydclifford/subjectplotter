@@ -9,7 +9,7 @@
                 <input type="text" name="student_name" class="form-control" placeholder="{{ lang('student/attributes.placeholders.student_name') }}" value="{{ Input::get('student_name') }}" style="width:180px">
             </div>
             <div class="form-group">
-                <input type="text" name="student_category_code" class="form-control" placeholder="{{ lang('student/attributes.placeholders.student_category_code') }}" value="{{ Input::get('student_category_code') }}" style="width:200px">
+                <input type="text" name="course_code" class="form-control" placeholder="{{ lang('student/attributes.placeholders.course_code') }}" value="{{ Input::get('course_code') }}" style="width:200px">
             </div>
         </div>
         <div class="col-sm-3">

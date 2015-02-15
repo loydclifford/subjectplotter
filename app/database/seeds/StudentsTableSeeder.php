@@ -22,7 +22,7 @@ class StudentsTableSeeder extends Seeder {
         {
             $model = new Student();
             $model->course_code = $faker->company();
-            $model->course_level_code = $faker->randomElement(array(
+            $model->course_year_code = $faker->randomElement(array(
                 'I',
                 'II',
                 'III',
