@@ -22,16 +22,16 @@
 
 <?php
     $form_rules = array(
-        'salutations' => 'required',
-        'first_name'  => 'required',
-        'last_name'  => 'required',
-        'instructor_type'   => 'required',
-        'status'   => 'required',
-        'address1'   => 'required',
-        'country_id'   => 'required',
-        'email'   => 'required',
-        'password'   => 'required',
-        'password_confirmation'   => 'required',
+        'salutations'           => 'required',
+        'first_name'            => 'required',
+        'last_name'             => 'required',
+        'instructor_type'       => 'required',
+        'status'                => 'required',
+        'address1'              => 'required',
+        'country_id'            => 'required',
+        'email'                 => 'required',
+        'password'              => 'required',
+        'password_confirmation' => 'required',
     );
 
     // Unset password if edit
@@ -44,9 +44,9 @@
 
 {{ Former::vertical_open($url)->method($method)
     ->addClass('col-sm-10 form-check-ays parsley-form')
-->setAttribute('autocomplete','off')
-->setAttribute('id','instructors_update_form')
-->rules($form_rules)
+    ->setAttribute('autocomplete','off')
+    ->setAttribute('id','instructors_update_form')
+    ->rules($form_rules)
 }}
 
 @if (isset($instructor))
@@ -116,7 +116,6 @@
                 </div>
             @endforeach
         </div>
-
     </div>
 </div>
 

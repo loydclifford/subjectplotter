@@ -32,13 +32,13 @@ class InstructorForm {
 
         // Default rules
         $rules = array(
-            'instructor_id'            => 'required|unique:instructors,id',
-            'email'                    => 'required|email|unique:users,email',
-            'first_name'               => 'required',
-            'last_name'                => 'required',
-            'password'			       => 'password|required',
+            'instructor_id'         => 'required|unique:instructors,id',
+            'email'                 => 'required|email|unique:users,email',
+            'first_name'            => 'required',
+            'last_name'             => 'required',
+            'password'			    => 'password|required',
             'password_confirmation' => 'same:password|required',
-            'status'                   => 'required',
+            'status'                => 'required',
         );
 
         // If Edit
