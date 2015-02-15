@@ -14,5 +14,6 @@ class Room extends Eloquent {
     protected $table = 'rooms';
     protected $primaryKey = 'room_id';
 
+    public $incrementing = false;
     public $timestamps = false;
 }

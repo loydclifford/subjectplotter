@@ -13,7 +13,7 @@ class Course extends Eloquent {
      */
     protected $table = 'courses';
     protected $primaryKey = 'course_code';
-
+    public $incrementing = false;
     public $timestamps = false;
 
     public function courseYear()

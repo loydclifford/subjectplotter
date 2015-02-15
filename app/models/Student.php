@@ -14,7 +14,7 @@ class Student extends Eloquent {
     protected $table      = 'students';
     protected $primaryKey = 'student_no';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     public static $gender = array(
         'male' => 'Male',

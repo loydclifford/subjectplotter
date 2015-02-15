@@ -15,6 +15,7 @@ class Instructor extends Eloquent
     protected $table = 'instructors';
     protected $primaryKey = 'id';
 
+    public $incrementing = false;
     public $timestamps = false;
 
     public function user()

@@ -20,19 +20,24 @@ class StudentsTableSeeder extends Seeder {
 
         for ($i = 0; $i < 20; $i++)
         {
+            $user = new User();
+            $user->first_name = $faker->firstName;
+            $user->last_name  = $faker->lastName;
+            $user->email      = $faker->unique()->email();
+            $user->password   = Hash::make($faker->dateTime->format('Y-m-d'));
+            $user->status     = User::STATUS_ACTIVE;
+            $user->confirmed  = 1;
+            $user->user_type  = User::USER_TYPE_STUDENT;
+            $user->save();
+
             $model = new Student();
-            $model->course_code = $faker->company();
+            $model->course_code =  $faker->randomElement(Course::all()->lists('course_code'));
             $model->course_year_code = $faker->randomElement(array(
                 'I',
                 'II',
                 'III',
-                'IV'
             ));
-            $model->user_id    = $faker->numberBetween($min = 1, $max = 20);
-            $model->first_name = $faker->firstName;
-            $model->last_name  = $faker->lastName;
-            $model->created_at = $faker->dateTime->format('Y-m-d');
-            $model->updated_at = $faker->dateTime->format('Y-m-d');
+            $model->user_id    = $user->id;
 
             $model->save();
         }

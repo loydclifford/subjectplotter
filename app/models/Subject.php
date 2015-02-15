@@ -15,6 +15,7 @@ class Subject extends Eloquent {
     protected $table      = 'subjects';
     protected $primaryKey = 'subject_code';
 
+    public $incrementing = false;
     public $timestamps    = false;
 
     public static $units = array(
