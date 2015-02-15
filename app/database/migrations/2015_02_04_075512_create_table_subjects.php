@@ -27,7 +27,7 @@ class CreateTableSubjects extends Migration {
 		{
 			$table->string('subject_code', 20)->primary();
 			$table->string('subject_name', 255);
-			$table->integer('units');
+			$table->integer('units')->default(0);
 			$table->text('description');
 			$table->string('prerequisite', 20);
 			$table->string('subject_category_code', 20);

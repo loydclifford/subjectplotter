@@ -32,7 +32,7 @@ class Subject extends Eloquent {
         while ($newId == NULL)
         {
             $newIdVal = 'SUB-'.rand(99999,999999);
-            $hasExists = Subject::where('id', $newIdVal)->count();
+            $hasExists = Subject::where('subject_code', $newIdVal)->count();
             if ($hasExists) $newId = NULL;
             else $newId = $newIdVal;
         }
