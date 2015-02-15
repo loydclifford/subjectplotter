@@ -1,8 +1,8 @@
-Subject,descriptive_title,unit,pre_requisite
+Subject,descriptive_title,units,pre_requisite
 ,,,
-Dev Com 11,Photography in Development,3,Dev Com 4
-Dev Com 12,Scientific & Technical Information Processing,3,Dev Com 7
-Dev Com 13,Writing &Program Planning for Community Radio,3,Dev Com 5
+DEVCOM 11,Photography in Development,3,DEVCOM 4
+DEVCOM 12,Scientific & Technical Information Processing,3,DEVCOM 7
+DEVCOM 13,Writing &Program Planning for Community Radio,3,DEVCOM 5
 History 1,Philippine History,3,
 Sci Elec,Information and Communication Technology,3,
 Elective,Basic Chinese Language,3,
