@@ -51,6 +51,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface{
      */
     protected $hidden = array('password', 'remember_token');
 
+
+    // Relationships
+
+    public function student()
+    {
+        return $this->hasOne('Student');
+    }
+
     /**
      * Get the unique identifier for the user.
      *
@@ -234,4 +242,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface{
     {
         return date('Y-m-d g:i a', strtotime($this->created_at));
     }
+
+
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Admin_SubjectCategoryController extends Admin_BaseController {
+class Admin_SubjectCategoryController extends BaseController {
 
     public function getIndex()
     {

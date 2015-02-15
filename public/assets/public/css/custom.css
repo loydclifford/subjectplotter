@@ -1,0 +1,8 @@
+.logo {
+    font-size: 35px;
+    margin-bottom: 30px;
+}
+.logo * {
+
+    color: black!important;
+}

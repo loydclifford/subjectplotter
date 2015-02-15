@@ -85,15 +85,15 @@ class UserPresenter extends Presenter{
 
     public function getLogoutUrl()
     {
-        if (can('manage_admin'))
+        if (user_get()->user_type == User::USER_TYPE_ADMIN)
         {
             // when a backend user
-            return admin_url('/logout/?_token='.urlencode(csrf_token()));
+            return admin_url('/logout');
         }
         else
         {
             // when frontend
-            return url('/logout/?_token='.urlencode(csrf_token()));
+            return url('/logout');
         }
 
     }

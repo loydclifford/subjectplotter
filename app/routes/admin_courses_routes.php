@@ -8,7 +8,7 @@
 
 
 
-Route::group(array('prefix'=>'admin', 'before'=>'auth'), function()
+Route::group(array('prefix'=>'admin', 'before'=>'admin_auth'), function()
 {
     // [url]/admin
     Route::group(array('prefix'=>'courses'), function()
@@ -27,6 +27,7 @@ Route::group(array('prefix'=>'admin', 'before'=>'auth'), function()
 
         Route::get('/export','Admin_CourseController@getExport')->before('csrf');
         Route::get('/search-select','Admin_CourseController@getSearchSelect')->before('csrf');
+        Route::get('/get-course-years-options','Admin_CourseController@getCourseYearsOptions');
     });
 
 }); // ./end group (prefix=conf('admin::uri'))

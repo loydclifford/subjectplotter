@@ -8,10 +8,40 @@
             <div class="form-group">
                 <input type="text" name="student_name" class="form-control" placeholder="{{ lang('student/attributes.placeholders.student_name') }}" value="{{ Input::get('student_name') }}" style="width:180px">
             </div>
+        </div>
+
+        <div class="col-sm-3">
+        </div>
+    </div><!-- /.row -->
+
+    <div class="row form-inline tblist-form-toolbar" >
+        <div class="col-sm-9">
             <div class="form-group">
                 <input type="text" name="course_code" class="form-control" placeholder="{{ lang('student/attributes.placeholders.course_code') }}" value="{{ Input::get('course_code') }}" style="width:200px">
             </div>
+
+            <div class="form-group">
+                <input type="text" name="email" class="form-control" placeholder="Enter Email" value="{{ Input::get('email') }}" style="width:200px">
+            </div>
+            <div class="form-group">
+                <select name="course_code" class="form-control">
+                    <option value="">-- Select Course --</option>
+                    @foreach (Course::all() as $course)
+                        <option value="{{ $course->course_code }}" {{ is_selected($course->course_code, Input::get('course_code')) }}>{{ $course->course_code }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <select name="course_year_code" class="form-control">
+                    <option value="">-- Select Course --</option>
+                    @foreach (Student::$year as $key=>$value)
+                        <option value="{{ $key }}" {{ is_selected($key, Input::get('course_code')) }}>{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
+
         <div class="col-sm-3">
             <div class="pull-right">
                 <button type="reset" class="btn btn-info"><i class="fa fa-times"></i> {{ lang('texts.reset_button') }}</button>
@@ -19,7 +49,6 @@
             </div>
         </div>
     </div><!-- /.row -->
-
 
     {{ $list->getTableData() }}
 

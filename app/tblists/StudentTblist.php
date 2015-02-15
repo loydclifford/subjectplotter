@@ -25,21 +25,24 @@ class StudentTblist extends BaseTblist {
     protected function setQuery()
     {
         // all students
-        $this->query = Student::where('user_id', '<>', '0');
-
-        if (Input::has('user_id'))
-        {
-            $this->query->where('students.user_id',trim(Input::get('user_id')));
-        }
+        $this->query = Student::leftJoin('users', 'users.id', '=', 'students.user_id');
 
         if (Input::has('student_name'))
         {
-            $this->query->where('students.student_name',trim(Input::get('student_name')));
+            $this->query->where(function($query) {
+                $query->where('users.first_name', 'LIKE', '%'.trim(Input::get('student_name')).'%');
+                return $query->orWhere('users.last_name', 'LIKE', '%'.trim(Input::get('student_name')).'%');
+            });
         }
 
         if (Input::has('user_id'))
         {
             $this->query->where('students.user_id',trim(Input::get('user_id')));
+        }
+
+        if (Input::has('email'))
+        {
+            $this->query->where('users.email',trim(Input::get('email')));
         }
 
         // Debug query
@@ -47,6 +50,13 @@ class StudentTblist extends BaseTblist {
 
         $this->columnsToSelect = array(
             'students.*',
+            'users.id as user_id',
+            'users.first_name as user_first_name',
+            'users.last_name as user_last_name',
+            'users.email as user_email',
+            'users.status as user_status',
+            'users.last_login as user_last_login',
+            'users.registration_date as user_registration_date',
         );
     }
 
@@ -62,19 +72,19 @@ class StudentTblist extends BaseTblist {
             'thead_attr'      => ' style="width:100px" ',
         );
 
-        $this->columns['first_name'] = array(
+        $this->columns['user_first_name'] = array(
             'label'           => 'First Name',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'students.student_name',
+            'table_column'    => 'users.first_name',
             'thead_attr'      => ' style="width:200px" ',
         );
 
-        $this->columns['last_name'] = array(
+        $this->columns['user_last_name'] = array(
             'label'           => 'Last Name',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'students.units',
+            'table_column'    => 'users.last_name',
             'thead_attr'      => ' style="width:200px" ',
         );
 
@@ -82,15 +92,15 @@ class StudentTblist extends BaseTblist {
             'label'           => 'Course Code',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'students.description',
+            'table_column'    => 'students.course_code',
             'thead_attr'      => ' style="width:200px" ',
         );
 
-        $this->columns['course_level_code'] = array(
+        $this->columns['course_year_code'] = array(
             'label'           => 'Course Level Code',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'students.prerequisite',
+            'table_column'    => 'students.course_year_code',
         );
 
 

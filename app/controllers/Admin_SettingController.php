@@ -1,6 +1,6 @@
 <?php
 
-class Admin_SettingController extends Admin_BaseController {
+class Admin_SettingController extends BaseController {
 
     /**
      * General

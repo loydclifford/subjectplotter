@@ -33,18 +33,19 @@ class StudentForm {
 
         // Default rules
         $rules = array(
-            'user_id'            => 'required|unique:users,id',
+            'student_no'         => 'required|unique:students,student_no',
             'first_name'         => 'required',
             'last_name'          => 'required',
-            'course'             => 'required',
-            'year'               => 'required',
-            'email'              => 'required',
+            'status'             => 'required',
+            'course_code'        => 'required|exists:courses,course_code',
+            'course_year_code'   => 'required',
+            'email'              => 'required|unique:users,email',
             'password'           => 'required',
-            'confirmed_password' => 'required|same:password',
+            'password_confirmation' => 'required|same:password',
         );
 
         // If Edit
-        if ( ! empty($this->model->id))
+        if ( ! empty($this->model->student_no))
         {
             // We don't want to
             if ($this->model->user)
@@ -56,7 +57,7 @@ class StudentForm {
             }
 
             // Another condition if edit
-            $rules['user_id'] = 'required|exists:students,user_id';
+            $rules['student_no'] = 'required|exists:students,student_no';
 
             // Check if password is set, then set new password
             if (Input::has('password') && trim(array_get($input, 'password')) != "")
@@ -126,21 +127,12 @@ class StudentForm {
         // save instructor and his associated user account
         $user->save();
 
-        // Do a security check  // Do save
-        $this->model->id      = array_get($input, 'student_id');
-        $this->model->user_id = $user->id;
+        // Do a security check
+        $this->model->student_no    = array_get($input, 'student_no');
+        $this->model->user_id       = $user->id;
+        $this->model->course_code   = array_get($input, 'course_code');
+        $this->model->course_year_code = array_get($input, 'course_year_code');
         $this->model->save();
-
-        // Save instructor subject category
-        // delete old data
-        InstructorSubjectCategory::where('student_id', $this->model->id)->delete();
-        foreach (Input::get('subject_category_code', array()) as $subject_code)
-        {
-            InstructorSubjectCategory::insert(array(
-                'subject_category_code' => $subject_code,
-                'instructor_id' => $this->model->id,
-            ));
-        }
 
         return $this->model;
     }

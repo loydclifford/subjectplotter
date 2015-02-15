@@ -28,6 +28,11 @@ class Student extends Eloquent {
         'IV' => 'IV',
     );
 
+    public function user()
+    {
+        return $this->hasOne('User', 'id', 'user_id');
+    }
+
     public static function getAges(){
 
         $ret = array();
@@ -37,5 +42,20 @@ class Student extends Eloquent {
         }
 
         return $ret;
+    }
+
+    public static function generateStudentNo()
+    {
+        $newId = NULL;
+
+        while ($newId == NULL)
+        {
+            $newIdVal = rand(99999,9999939);
+            $hasExists = Student::where('student_no', $newIdVal)->count();
+            if ($hasExists) $newId = NULL;
+            else $newId = $newIdVal;
+        }
+
+        return $newId;
     }
 }

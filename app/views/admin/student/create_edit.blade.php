@@ -54,9 +54,9 @@ if (isset($students))
 
 <div class="row">
     <div class="col-md-6">
-        {{ Former::text('user_id', lang('student/attributes.labels.user_id') . ' <span class="required">*</span> ' )
+        {{ Former::text('student_no', lang('student/attributes.labels.user_id') . ' <span class="required">*</span> ' )
             ->placeholder(lang('student/attributes.placeholders.user_id'))
-            ->forceValue(isset($student) ? $student->id : '')
+            ->forceValue(isset($student) ? $student->student_no : $generated_student_no)
             ->setAttributes(isset($student) ? array(
                   'readonly' => 'readonly'
             ) : array()) }}
@@ -67,11 +67,11 @@ if (isset($students))
         {{ Former::text('last_name', lang('student/attributes.labels.last_name') . ' <span class="required">*</span> ' )
             ->placeholder(lang('student/attributes.placeholders.last_name')) }}
 
-        {{ Former::select('course', lang('student/attributes.labels.course') . ' <span class="required">*</span> ' )
+        {{ Former::select('course_code', lang('student/attributes.labels.course') . ' <span class="required">*</span> ' )
             ->placeholder(lang('student/attributes.placeholders.course'))
-            ->options(Course::all()->lists('course_code')) }}
+            ->options(Course::all()->lists('course_code', 'course_code')) }}
 
-        {{ Former::select('year', lang('student/attributes.labels.year') . ' <span class="required">*</span> ' )
+        {{ Former::select('course_year_code', lang('student/attributes.labels.year') . ' <span class="required">*</span> ' )
             ->placeholder(lang('student/attributes.placeholders.year'))
             ->options(Student::$year) }}
     </div>
@@ -81,21 +81,25 @@ if (isset($students))
     <div class="col-md-6">
         {{ Former::legend(lang('instructor/texts.legend_login_credentials')) }}
 
+        {{ Former::select('status', lang('instructor/attributes.labels.status') . ' <span class="required">*</span> ' )
+            ->placeholder(lang('instructor/attributes.placeholders.status'))
+            ->options(User::$statuses) }}
+
         {{ Former::text('email',lang('student/attributes.labels.email') . ' <span class="required">*</span> ' )
             ->placeholder(lang('student/attributes.placeholders.email')) }}
 
         @if (isset($student))
             {{ Former::password('password',lang('instructor/attributes.labels.password'))
-                ->inlineHelp(lang('student/texts.new_password_help_text'))
+                ->inlineHelp('Leave empty if you don\'t want to modify student password.')
                 ->placeholder(lang('student/attributes.placeholders.password')) }}
 
-            {{ Former::password('confirmed_password',lang('instructor/attributes.labels.password_confirmation'))
+            {{ Former::password('password_confirmation',lang('instructor/attributes.labels.password_confirmation'))
                 ->placeholder(lang('instructor/attributes.placeholders.password_confirmation')) }}
         @else
             {{ Former::password('password',lang('instructor/attributes.labels.password') . ' <span class="required">*</span> ' )
                 ->placeholder(lang('instructor/attributes.placeholders.password')) }}
 
-            {{ Former::password('confirmed_password',lang('instructor/attributes.labels.password_confirmation') . ' <span class="required">*</span> ' )
+            {{ Former::password('password_confirmation',lang('instructor/attributes.labels.password_confirmation') . ' <span class="required">*</span> ' )
                 ->placeholder(lang('instructor/attributes.placeholders.password_confirmation')) }}
         @endif
     </div>

@@ -1,6 +1,6 @@
 <?php
 
-class Admin_SubjectScheduleController extends Admin_BaseController {
+class Admin_SubjectScheduleController extends BaseController {
 
     /**
      * General

@@ -1,6 +1,6 @@
 <?php
 
-class Admin_HomeController extends Admin_BaseController {
+class Admin_HomeController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------

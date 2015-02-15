@@ -1,6 +1,6 @@
 <?php
 
-class Admin_AuthController extends Admin_BaseController {
+class Admin_AuthController extends BaseController {
 
     public function getLogin()
     {

@@ -11,17 +11,40 @@
 |
 */
 
-Route::filter('guest', function()
+Route::filter('admin_guest', function()
 {
-	if (user_check())
+	if (user_check() && user_get()->user_type == User::USER_TYPE_ADMIN)
 	{
 		return Redirect::intended(admin_url('/dashboard'));
 	}
 });
 
-Route::filter('auth', function()
+Route::filter('admin_auth', function()
 {
-	if ( ! user_check())
+	if ( ! user_check() || user_get()->user_type != User::USER_TYPE_ADMIN)
+	{
+		if (Request::ajax())
+		{
+			return Response::json(array(
+				'status' => RESULT_NOT_LOG_IN
+			), 401);
+		}
+
+		return Redirect::guest('/admin/login');
+	}
+});
+
+Route::filter('student_guest', function()
+{
+	if (user_check() && user_get()->user_type == User::USER_TYPE_STUDENT)
+	{
+		return Redirect::intended(url('/dashboard'));
+	}
+});
+
+Route::filter('student_auth', function()
+{
+	if ( ! user_check() || user_get()->user_type != User::USER_TYPE_STUDENT)
 	{
 		if (Request::ajax())
 		{
@@ -93,6 +116,58 @@ Route::filter('guest', function()
 
 /*
 |--------------------------------------------------------------------------
+| Handle HTTP Global Errors and Exceptions
+|--------------------------------------------------------------------------
+|
+| If ajax request then return status code and resposne with json
+| else, display page if ENV is production
+|
+*/
+
+App::error(function($exception,$status)
+{
+	if (App::environment() == ENV_PRODUCTION || ! conf('app.debug'))
+	{
+		switch($status)
+		{
+			case 404:
+				// Get data information
+				$controller = new BaseController();
+				$controller->data['enable_breadcrumb'] = false; // disable breadcrumb
+				$controller->data['meta']->title = "404 Not Found";
+
+				// Admin not found
+				if (Request::segment(1) == 'admin')
+				{
+					return Response::view('admin.404', $controller->data, 404);
+				}
+
+				return Response::view('public.404', $controller->data, 404);
+				break;
+
+			default :
+				// Admin error
+				// Get data information
+				$controller = new BaseController();
+				$controller->data['enable_breadcrumb'] = false; // disable breadcrumb
+				$controller->data['meta']->title = "500 Internal Server Error";
+
+				if (Request::segment(1) == 'admin')
+				{
+					return Response::view('admin.500', $controller->data, 500);
+				}
+
+				// public error
+				return Response::view('public.500', $controller->data, 500);
+
+				break;
+		}
+	}
+});
+
+
+/*
+|--------------------------------------------------------------------------
 | CSRF Protection Filter
 |--------------------------------------------------------------------------
 |
@@ -104,8 +179,19 @@ Route::filter('guest', function()
 
 Route::filter('csrf', function()
 {
+
 	if (Session::token() !== Input::get('_token'))
 	{
-		throw new Illuminate\Session\TokenMismatchException;
+		if (Request::ajax())
+		{
+			return Response::json(array(
+				'status' => RESULT_INVALID_TOKEN
+			), 401);
+		}
+		else
+		{
+			throw new Illuminate\Session\TokenMismatchException;
+		}
 	}
 });
+

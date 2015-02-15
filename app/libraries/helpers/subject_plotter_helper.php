@@ -154,3 +154,9 @@ function roman_to_integer($roman)
 
     return $result;
 }
+
+function get_current_school_year()
+{
+    $year = date('Y', time());
+    return $year . '-' . ($year+1);
+}

@@ -1,6 +1,6 @@
 <?php
 
-class Admin_StudentController extends Admin_BaseController {
+class Admin_StudentController extends BaseController {
 
     public function getIndex()
     {
@@ -32,6 +32,8 @@ class Admin_StudentController extends Admin_BaseController {
         $this->data['return_url']  = admin_url('/students/create');
         $this->data['success_url'] = admin_url('/students');
 
+        $this->data['generated_student_no'] = Student::generateStudentNo();
+
         return View::make('admin.student.create_edit')->with($this->data);
     }
 
@@ -58,11 +60,12 @@ class Admin_StudentController extends Admin_BaseController {
 
         $this->data['url']         = URL::current();
         $this->data['method']      = 'POST';
-        $this->data['return_url']  = admin_url("/students/{$student->user_id}/edit");
-        $this->data['success_url'] = admin_url("/students/{$student->user_id}/edit");
+        $this->data['return_url']  = admin_url("/students/{$student->student_no}/edit");
+        $this->data['success_url'] = admin_url("/students/{$student->student_no}/edit");
 
         $this->data['enable_breadcrumb'] = false;
         $this->data['student']           = $student;
+        $this->data['student_user']           = $student->user;
 
         return View::make('admin.student.create_edit')->with($this->data);
     }
@@ -79,7 +82,7 @@ class Admin_StudentController extends Admin_BaseController {
         $student = $student_repo->saveInput();
         Event::fire('student.update', $student);
 
-        return Redirect::to(admin_url("students/{$student->user_id}/edit"))
+        return Redirect::to(admin_url("/students/{$student->student_no}/edit"))
             ->with(SUCCESS_MESSAGE,lang('student/texts.update_success'));
     }
 

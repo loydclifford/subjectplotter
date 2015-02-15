@@ -64,7 +64,7 @@ class StudentPresenter extends Presenter{
     public function deleteUrl()
     {
         $param = array(
-            'user_id[]'    => $this->user_id,
+            'user_id[]'    => $this->student_no,
             '_token'       => csrf_token(),
             '_success_url' => admin_url('/students'),
         );
@@ -75,7 +75,7 @@ class StudentPresenter extends Presenter{
     public function exportUrl()
     {
         $param = array(
-            'user_id[]' => $this->user_id,
+            'user_id[]' => $this->student_no,
             '_token'    => csrf_token(),
         );
 
@@ -84,21 +84,21 @@ class StudentPresenter extends Presenter{
 
     public function editUrl()
     {
-        return admin_url("/students/{$this->user_id}/edit");
+        return admin_url("/students/{$this->student_no}/edit");
     }
 
     public function viewUrl()
     {
-        return admin_url("/students/{$this->user_id}/view");
+        return admin_url("/students/{$this->student_no}/view");
     }
 
     public function idLink()
     {
-        return HTML::link(admin_url("/students/{$this->user_id}/edit"), $this->student_no);
+        return HTML::link(admin_url("/students/{$this->student_no}/edit"), $this->student_no);
     }
 
     public function displayNameLink()
     {
-        return HTML::link(admin_url("/students/{$this->user_id}/edit"), $this->getDisplayName());
+        return HTML::link(admin_url("/students/{$this->student_no}/edit"), $this->getDisplayName());
     }
 }

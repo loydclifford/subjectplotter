@@ -1,6 +1,6 @@
 <?php
 
-class Admin_RemindersController extends Admin_BaseController {
+class Admin_RemindersController extends BaseController {
 
 	public function getRemind()
 	{

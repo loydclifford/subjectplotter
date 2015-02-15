@@ -1,6 +1,6 @@
 <?php
 
-class Admin_CourseYearController extends Admin_BaseController {
+class Admin_CourseYearController extends BaseController {
 
     public function postCreate()
     {

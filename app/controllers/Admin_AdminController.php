@@ -1,6 +1,6 @@
 <?php
 
-class Admin_AdminController extends Admin_BaseController {
+class Admin_AdminController extends BaseController {
 
     public function getIndex() {
         $this->data['meta']->title  = "Subject Plotter";

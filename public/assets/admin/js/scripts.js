@@ -347,5 +347,23 @@ $(function () {
         template: 'dropdown'
     });
 
+    $('#course_code').change(function() {
+        var $this = $(this);
+
+        $.ajax({
+            type: 'get',
+            url: utils.adminUrl('/courses/get-course-years-options'),
+            data: $(this).serialize(),
+            dataType: 'JSON',
+            success: function (data) {
+                // Process redirect
+                if (utils.result.RESULT_SUCCESS == data.status)
+                {
+                    $('#course_year_code').html(data.html);
+                }
+            }
+        });
+
+    });
 
 });

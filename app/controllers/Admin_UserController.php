@@ -1,6 +1,6 @@
 <?php
 
-class Admin_UserController extends Admin_BaseController {
+class Admin_UserController extends BaseController {
     
     public function getTest()
     {

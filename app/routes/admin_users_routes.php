@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-Route::group(array('before'=>'guest'), function()
+Route::group(array('before'=>'admin_guest'), function()
 {
     Route::get('/admin/login','Admin_AuthController@getLogin');
     Route::post('/admin/login','Admin_AuthController@postLogin');
@@ -22,7 +22,7 @@ Route::group(array('before'=>'guest'), function()
 
 Route::get('/admin/logout','Admin_AuthController@getLogout');
 
-Route::group(array('prefix'=>'admin', 'before'=>'auth'), function()
+Route::group(array('prefix'=>'admin', 'before'=>'admin_auth'), function()
 {
     // [url]/admin
     Route::group(array('prefix'=>'users'), function()

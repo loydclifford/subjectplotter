@@ -1,6 +1,6 @@
 <?php
 
-class Admin_RoomController extends Admin_BaseController {
+class Admin_RoomController extends BaseController {
 
     public function getIndex()
     {

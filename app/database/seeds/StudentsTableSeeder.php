@@ -31,6 +31,7 @@ class StudentsTableSeeder extends Seeder {
             $user->save();
 
             $model = new Student();
+            $model->student_no =  Student::generateStudentNo();
             $model->course_code =  $faker->randomElement(Course::all()->lists('course_code'));
             $model->course_year_code = $faker->randomElement(array(
                 'I',

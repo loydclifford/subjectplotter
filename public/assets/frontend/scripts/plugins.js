@@ -1,8 +1,0 @@
-// @codekit-append "classie.js"
-// @codekit-append "singlePageNav.js"
-// @codekit-append "placeholders.js"
-// @codekit-append "bootstrap/bootstrap-transition.js"
-// @codekit-append "bootstrap/bootstrap-tab.js"
-// @codekit-append "bootstrap/bootstrap-collapse.js"
-// @codekit-append "validator/languages/jquery.validationEngine-en.js"
-// @codekit-append "validator/jquery.validationEngine.js"

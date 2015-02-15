@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-Route::group(array('before'=>'auth'),function() {
+Route::group(array('before'=>'admin_auth'),function() {
 
     Route::group(array('prefix'=>"admin"), function()
     {

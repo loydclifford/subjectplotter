@@ -1,6 +1,6 @@
 <?php
 
-class Admin_CourseController extends Admin_BaseController {
+class Admin_CourseController extends BaseController {
 
     protected $langPrefix = 'course/';
 
@@ -229,5 +229,19 @@ class Admin_CourseController extends Admin_BaseController {
         $ret['courses'] = $course_assoc;
 
         return Response::json($ret);
+    }
+
+    public function getCourseYearsOptions()
+    {
+        $html = '<option value="">Enter Year</option>';
+        foreach (CourseYear::where('course_code', Input::get('course_code'))->orderBy('course_year_code', 'asc')->get() as $course_year)
+        {
+            $html .= "<option value=\"{$course_year->course_year_code}\">{$course_year->course_year_code}</option>";
+        }
+
+        return Response::json(array(
+            'status' => RESULT_SUCCESS,
+            'html' => $html,
+        ));
     }
 }

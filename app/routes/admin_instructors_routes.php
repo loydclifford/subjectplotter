@@ -8,7 +8,7 @@
 
 
 
-Route::group(array('prefix'=>'admin', 'before'=>'auth'), function()
+Route::group(array('prefix'=>'admin', 'before'=>'admin_auth'), function()
 {
     // [url]/admin
     Route::group(array('prefix'=>'instructors'), function()
