@@ -25,7 +25,7 @@
                 </a>
                 <li class="treeview">
                     <a href="{{ admin_url('/courses') }}" data-url="^/admin/courses/[0-9]+">
-                        <i class="fa  fa-group"></i>
+                        <i class="fa  fa-book"></i>
                         <span>Courses</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -36,7 +36,7 @@
                 </li>
                 <li class="treeview">
                     <a href="{{ admin_url('/rooms') }}" data-url="^/admin/rooms/[0-9]+">
-                        <i class="fa  fa-group"></i>
+                        <i class="fa  fa-home"></i>
                         <span>Rooms</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -47,7 +47,7 @@
                 </li>
                 <li class="treeview">
                     <a href="{{ admin_url('/subjects') }}" data-url="^/admin/subjects/[0-9]+">
-                        <i class="fa  fa-group"></i>
+                        <i class="fa  fa-leanpub"></i>
                         <span>Subjects</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -59,7 +59,7 @@
                 </li>
                 <li class="treeview">
                     <a href="{{ admin_url('/instructors') }}" data-url="^/admin/instructors/[0-9]+">
-                        <i class="fa  fa-group"></i>
+                        <i class="fa  fa-user-plus"></i>
                         <span>Instructors</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -70,7 +70,7 @@
                 </li>
                 <li class="treeview">
                     <a href="{{ admin_url('/students') }}" data-url="^/admin/students/[0-9]+">
-                        <i class="fa  fa-group"></i>
+                        <i class="fa  fa-user-plus"></i>
                         <span>Students</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -81,13 +81,13 @@
                 </li>
                 <li >
                     <a href="{{ admin_url('/grade-entry') }}" data-url="^/admin/grade-entry/[0-9]+">
-                        <i class="fa  fa-group"></i>
+                        <i class="fa  fa-pencil-square-o"></i>
                         <span>Grade Entry</span>
                     </a>
                 </li>
                 <li >
                     <a href="{{ admin_url('/subject-schedules') }}" data-url="^/admin/subject-schedules/[0-9]+">
-                        <i class="fa  fa-group"></i>
+                        <i class="fa  fa-list"></i>
                         <span>Subject Schedules</span>
                     </a>
                 </li>
@@ -98,7 +98,7 @@
             {{-- Users/User --}}
             <li >
                 <a href="{{ admin_url('/schedule-requests') }}" data-url="^/admin/schedule-requests/[0-9]+">
-                    <i class="fa  fa-group"></i>
+                    <i class="fa  fa-bell-o"></i>
                     <span>Schedule Requests</span>
                 </a>
             </li>
@@ -119,7 +119,7 @@
 
             <li >
                 <a href="{{ admin_url('/settings') }}" data-url="^/admin/settings/[0-9]+">
-                    <i class="fa  fa-group"></i>
+                    <i class="fa  fa-cogs"></i>
                     <span>Settings</span>
                 </a>
             </li>

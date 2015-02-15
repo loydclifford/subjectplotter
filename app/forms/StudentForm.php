@@ -36,8 +36,6 @@ class StudentForm {
             'user_id'            => 'required|unique:users,id',
             'first_name'         => 'required',
             'last_name'          => 'required',
-            'gender'             => 'required',
-            'age'                => 'required',
             'course'             => 'required',
             'year'               => 'required',
             'email'              => 'required',
@@ -49,9 +47,27 @@ class StudentForm {
         if ( ! empty($this->model->id))
         {
             // We don't want to
-            if ($this->model->user == array_get($input, 'user_id'))
+            if ($this->model->user)
             {
-                unset($rules['user_id']);
+                if ($this->model->user->email == array_get($input, 'email'))
+                {
+                    unset($rules['email']);
+                }
+            }
+
+            // Another condition if edit
+            $rules['user_id'] = 'required|exists:students,user_id';
+
+            // Check if password is set, then set new password
+            if (Input::has('password') && trim(array_get($input, 'password')) != "")
+            {
+                $rules['password'] = 'password';
+                $rules['password_confirmation'] = 'same:password|required';
+            }
+            else
+            {
+                unset($rules['password']);
+                unset($rules['password_confirmation']);
             }
         }
 
@@ -62,7 +78,7 @@ class StudentForm {
             return Redirect::to($return_url)
                 ->withErrors($validator)
                 ->withInput()
-                ->with(ERROR_MESSAGE,"Please correct the error below.");
+                ->with(ERROR_MESSAGE, "Please correct the error below.");
         }
         else
         {
@@ -91,7 +107,7 @@ class StudentForm {
         $user->first_name = array_get($input, 'first_name');
         $user->last_name  = array_get($input, 'last_name');
         $user->email      = array_get($input, 'email');
-        $user->user_type  = User::USER_TYPE_INSTRUCTOR;
+        $user->user_type  = User::USER_TYPE_STUDENT;
         $user->status     = array_get($input, 'status');
 
         // if edit
@@ -111,13 +127,13 @@ class StudentForm {
         $user->save();
 
         // Do a security check  // Do save
-        $this->model->id      = array_get($input, 'instructor_id');
+        $this->model->id      = array_get($input, 'student_id');
         $this->model->user_id = $user->id;
         $this->model->save();
 
         // Save instructor subject category
         // delete old data
-        InstructorSubjectCategory::where('instructor_id', $this->model->id)->delete();
+        InstructorSubjectCategory::where('student_id', $this->model->id)->delete();
         foreach (Input::get('subject_category_code', array()) as $subject_code)
         {
             InstructorSubjectCategory::insert(array(

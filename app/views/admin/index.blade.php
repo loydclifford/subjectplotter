@@ -37,7 +37,7 @@
         <div class="nav-tabs-custom romeo_head">
             <div class="tab-content">
                 <!-- big buttons holder-->
-                <div class="chart tab-pane meo_body" id="revenue-chart" style="position: relative; display: inline; color: rgba(20,20,20,.8);">
+                <div class="chart tab-pane meo_body" id="revenue-chart" style="position: relative; display: inline; color: rgba(20,20,20,.7);">
                     
                     <ul class="nav meo_courses" >
                         <i class="fa fa-book fa-3x" style="position: relative; border: solid 1px transparent;"></i>
