@@ -32,13 +32,13 @@ class InstructorForm {
 
         // Default rules
         $rules = array(
-            'instructor_id'                => 'required|unique:instructors,id',
-            'email'                     => 'required|email|unique:users,email',
-            'first_name'                => 'required',
-            'last_name'                 => 'required',
-            'password'			        => 'password|required',
-            'password_confirmation' 	=> 'same:password|required',
-            'status'                     => 'required',
+            'instructor_id'            => 'required|unique:instructors,id',
+            'email'                    => 'required|email|unique:users,email',
+            'first_name'               => 'required',
+            'last_name'                => 'required',
+            'password'			       => 'password|required',
+            'password_confirmation' => 'same:password|required',
+            'status'                   => 'required',
         );
 
         // If Edit
@@ -104,12 +104,11 @@ class InstructorForm {
             $user = new User();
         }
 
-        $user->first_name           = array_get($input, 'first_name');
-        $user->last_name            = array_get($input, 'last_name');
-        $user->email                = array_get($input, 'email');
-
-        $user->user_type                = User::USER_TYPE_INSTRUCTOR;
-        $user->status                = array_get($input, 'status');
+        $user->first_name = array_get($input, 'first_name');
+        $user->last_name  = array_get($input, 'last_name');
+        $user->email      = array_get($input, 'email');
+        $user->user_type  = User::USER_TYPE_INSTRUCTOR;
+        $user->status     = array_get($input, 'status');
 
         // if edit
         if ( ! empty($user->id) && $user->id > 0)
@@ -126,10 +125,10 @@ class InstructorForm {
 
         // save instructor and his associated user account
         $user->save();
-        // Do a security check  // Do save
 
-        $this->model->id   = array_get($input, 'instructor_id');
-        $this->model->user_id   = $user->id;
+        // Do a security check  // Do save
+        $this->model->id      = array_get($input, 'instructor_id');
+        $this->model->user_id = $user->id;
         $this->model->save();
 
         // Save instructor subject category
@@ -145,5 +144,4 @@ class InstructorForm {
 
         return $this->model;
     }
-
 }

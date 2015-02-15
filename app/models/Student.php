@@ -15,4 +15,27 @@ class Student extends Eloquent {
     protected $primaryKey = 'student_no';
 
     public $timestamps = false;
+
+    public static $gender = array(
+        'male' => 'Male',
+        'female' => 'Female',
+    );
+
+    public static $year = array(
+        'I' => 'I',
+        'II' => 'II',
+        'III' => 'III',
+        'IV' => 'IV',
+    );
+
+    public static function getAges(){
+
+        $ret = array();
+        for($i=1; $i<=100; $i++)
+        {
+            $ret[$i] = $i;
+        }
+
+        return $ret;
+    }
 }

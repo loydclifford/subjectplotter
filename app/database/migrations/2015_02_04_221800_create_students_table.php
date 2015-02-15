@@ -17,7 +17,7 @@ Schema::create('students', function(Blueprint $table)
 {
 	$table->bigIncrements('student_no');
 	$table->string('course_code', 20);
-	$table->string('course_level_code', 20);
+	$table->string('course_year_code', 20);
 	$table->bigInteger('user_id');
 	$table->string('first_name', 255)->index();
 	$table->string('last_name', 255)->index();

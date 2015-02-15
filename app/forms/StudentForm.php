@@ -33,21 +33,25 @@ class StudentForm {
 
         // Default rules
         $rules = array(
-            'student_code'          => 'required|unique:students,student_code',
-            'student_name'          => 'required',
-            'units'                 => 'required',
-            'description'           => '',
-            'prerequisite'          => 'required',
-            'student_category_code' => 'required',
+            'user_id'            => 'required|unique:users,id',
+            'first_name'         => 'required',
+            'last_name'          => 'required',
+            'gender'             => 'required',
+            'age'                => 'required',
+            'course'             => 'required',
+            'year'               => 'required',
+            'email'              => 'required',
+            'password'           => 'required',
+            'confirmed_password' => 'required|same:password',
         );
 
         // If Edit
-        if ( ! empty($this->model->student_code))
+        if ( ! empty($this->model->id))
         {
             // We don't want to
-            if ($this->model->student_code == array_get($input, 'student_code'))
+            if ($this->model->user == array_get($input, 'user_id'))
             {
-                unset($rules['student_code']);
+                unset($rules['user_id']);
             }
         }
 
@@ -77,16 +81,51 @@ class StudentForm {
     {
         $input = ! empty($input) ? $input : Input::all();
 
-        // Do a security check  // Do save
-        $this->model->student_code          = array_get($input, 'student_code');
-        $this->model->student_name          = array_get($input, 'student_name');
-        $this->model->units                 = array_get($input, 'units');
-        $this->model->description           = array_get($input, 'description');
-        $this->model->prerequisite          = array_get($input, 'prerequisite');
-        $this->model->student_category_code = array_get($input, 'student_category_code');
+        $user = $this->model->user;
+
+        if ( ! $user)
+        {
+            $user = new User();
+        }
+
+        $user->first_name = array_get($input, 'first_name');
+        $user->last_name  = array_get($input, 'last_name');
+        $user->email      = array_get($input, 'email');
+        $user->user_type  = User::USER_TYPE_INSTRUCTOR;
+        $user->status     = array_get($input, 'status');
 
         // if edit
+        if ( ! empty($user->id) && $user->id > 0)
+        {
+            if (Input::has('password') && trim(array_get($input, 'password')) != "")
+            {
+                $user->password = \Hash::make(array_get($input, 'password'));
+            }
+        }
+        else
+        {
+            $user->password = \Hash::make(array_get($input, 'password'));
+        }
+
+        // save instructor and his associated user account
+        $user->save();
+
+        // Do a security check  // Do save
+        $this->model->id      = array_get($input, 'instructor_id');
+        $this->model->user_id = $user->id;
         $this->model->save();
+
+        // Save instructor subject category
+        // delete old data
+        InstructorSubjectCategory::where('instructor_id', $this->model->id)->delete();
+        foreach (Input::get('subject_category_code', array()) as $subject_code)
+        {
+            InstructorSubjectCategory::insert(array(
+                'subject_category_code' => $subject_code,
+                'instructor_id' => $this->model->id,
+            ));
+        }
+
         return $this->model;
     }
 }

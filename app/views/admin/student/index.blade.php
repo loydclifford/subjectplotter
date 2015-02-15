@@ -3,8 +3,8 @@
 
 @section('main-content-header')
 <h1>
-    {{ lang('subject/texts.page_title') }}
-    <a  class="btn btn-primary" href="{{ admin_url('/subjects/create') }}"><i class="fa fa-plus"></i> {{ lang('subject/texts.create') }}</a>
+    {{ lang('student/texts.page_title') }}
+    <a  class="btn btn-primary" href="{{ admin_url('/students/create') }}"><i class="fa fa-plus"></i> {{ lang('student/texts.create') }}</a>
 </h1>
 @overwrite
 
@@ -12,5 +12,5 @@
 
     @include('admin._partials._messages')
 
-    @include('admin.subject._tblist')
+    @include('admin.student._tblist')
 @stop
