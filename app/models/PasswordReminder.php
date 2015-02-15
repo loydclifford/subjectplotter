@@ -8,7 +8,7 @@
  * MULTI-AUTH does not support the default PasswordReminder so we
  * need to write our own here from scratch.
  *
- * Class RemindersController
+ * Class Admin_RemindersController
  * @package App\CMS\Modules\Admin\Controller
  * @author: Rex Taylor <rex@lightmedia.com.au>
  */

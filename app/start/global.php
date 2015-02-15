@@ -84,7 +84,7 @@ App::down(function()
 {
 	if (Request::segment(1) == "admin")
 	{
-		$ac = new \Base\AdminController();
+		$ac = new \Base\Admin_AdminController();
 		return Response::view('admin.down', $ac->data, 503);
 	}
 	else

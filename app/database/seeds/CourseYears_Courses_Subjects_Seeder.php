@@ -39,6 +39,7 @@ class CourseYears_Courses_Subjects_Seeder extends Seeder {
                     $course->description = $course_code;
                     $course->save();
                 }
+
                 $course_year = CourseYear::where('course_code', $course->course_code)->where('course_year_code', $course_year_code)->first();
                 if ( ! $course_year)
                 {

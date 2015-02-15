@@ -10,7 +10,7 @@ Route::group(array('before'=>'auth'),function() {
 
     Route::group(array('prefix'=>"admin"), function()
     {
-        Route::get('/dashboard','AdminController@getIndex');
+        Route::get('/dashboard','Admin_AdminController@getIndex');
     });
 
 });

@@ -72,9 +72,9 @@ function admin_url($path = '', $parameters = array(), $secure = null)
  *
  * @return mixed
  */
-function admin_logout_url() {
+function logout_url() {
 
-    return admin_url("/logout/?_token=" . urlencode(Session::get('_token')));
+    return url('/logout/');
 }
 
 /**

@@ -10,17 +10,17 @@ Route::model('instructor','Instructor');
 Route::model('student','Student');
 
 include(__DIR__.'/routes/admin_routes.php');
-include(__DIR__.'/routes/users_routes.php');
-include(__DIR__.'/routes/rooms_routes.php');
-include(__DIR__.'/routes/subjects_routes.php');
-include(__DIR__.'/routes/courses_routes.php');
-include(__DIR__.'/routes/course_years_routes.php');
-include(__DIR__.'/routes/instructors_routes.php');
-include(__DIR__.'/routes/settings_routes.php');
-include(__DIR__.'/routes/subjectschedules_routes.php');
-include(__DIR__.'/routes/subjectschedulesetschedules_routes.php');
-include(__DIR__.'/routes/subjectcategories_routes.php');
-include(__DIR__.'/routes/students_routes.php');
+include(__DIR__.'/routes/admin_users_routes.php');
+include(__DIR__.'/routes/admin_rooms_routes.php');
+include(__DIR__.'/routes/admin_subjects_routes.php');
+include(__DIR__.'/routes/admin_courses_routes.php');
+include(__DIR__.'/routes/admin_course_years_routes.php');
+include(__DIR__.'/routes/admin_instructors_routes.php');
+include(__DIR__.'/routes/admin_settings_routes.php');
+include(__DIR__.'/routes/admin_subjectschedules_routes.php');
+include(__DIR__.'/routes/admin_subjectschedulesetschedules_routes.php');
+include(__DIR__.'/routes/admin_subjectcategories_routes.php');
+include(__DIR__.'/routes/admin_students_routes.php');
 
 
 define('ENV_DEVELOPMENT', 'local');
