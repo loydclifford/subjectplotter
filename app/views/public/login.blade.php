@@ -38,10 +38,7 @@
         <h4><i class="icon-question"></i>&nbsp;&nbsp;Registration</h4>
         <div class="box">
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in.
+                Only authorized student can sign in.
             </p>
         </div>
     </div>
