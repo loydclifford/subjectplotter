@@ -125,7 +125,6 @@ $(function () {
 
 
     });
-
     /*
      * Bootbox
      * ---------------------------------------------
@@ -232,14 +231,6 @@ $(function () {
         allowClear: true
     });
 
-
-    /*
-     * Select2 for customer picker
-     * ---------------------------------------------
-     !**/
-    var $search = new utils.searchUser($('.select2-select-user'));
-    $search.placeholder = utils.lang.search_customer;
-    $search.init();
 
     /*
      * Bootstrap Datepicker

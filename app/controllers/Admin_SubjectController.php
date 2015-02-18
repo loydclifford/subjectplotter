@@ -79,7 +79,7 @@ class Admin_SubjectController extends BaseController {
         $subject = $subject_repo->saveInput();
         Event::fire('subject.update', $subject);
 
-        return Redirect::to(admin_url("subjects/{$subject->subject_code}/edit"))
+        return Redirect::to(admin_url("/subjects/{$subject->subject_code}/edit"))
             ->with(SUCCESS_MESSAGE,lang('subject/texts.update_success'));
     }
 

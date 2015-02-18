@@ -8,10 +8,10 @@ class Public_StudentController extends BaseController {
 		$this->data['active_menu'] = 'dashboard';
 
 		$this->data['course_subjects'] = CourseSubject::where('school_year', get_current_school_year())
-				->where('course_code', user_get()->course_code)
-				->where('course_year_code', user_get()->course_year_code)
-				->where('semester', '');
-
+				->where('course_code', user_get()->student->course_code)
+				->where('course_year_code', user_get()->student->course_year_code)
+				->where('semester', 'first_semester')
+				->get();
 
 		return View::make('public.student.dashboard', $this->data);
 	}

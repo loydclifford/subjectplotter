@@ -94,7 +94,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="buttons">
-                        {{ create_save_button() }}
+                        <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Save</button>
                         {{ create_cancel_button(admin_url('/students'),lang('texts.cancel_button')) }}
                     </div>
                 </div>

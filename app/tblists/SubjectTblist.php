@@ -25,7 +25,7 @@ class SubjectTblist extends BaseTblist {
     protected function setQuery()
     {
         // all subjects
-        $this->query = Subject::where('subject_code', '<>', '0');
+        $this->query = Subject::with('subjectPrequisites')->where('subject_code', '<>', '0');
 
         if (Input::has('subject_code'))
         {
@@ -88,9 +88,8 @@ class SubjectTblist extends BaseTblist {
 
         $this->columns['prerequisite'] = array(
             'label'           => 'Prerequisites',
-            'sortable'        => true,
+            'sortable'        => false,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'subjects.prerequisite',
             'thead_attr'      => ' style="width:140px" ',
         );
 
@@ -104,7 +103,10 @@ class SubjectTblist extends BaseTblist {
         $this->addActionColumn();
     }
 
-
+    protected function colSetPrerequisite($row)
+    {
+        echo $row->present()->getSubjectPrerequisites();
+    }
     protected function colSetAction($row)
     {
         echo $row->present()->actionButtons();

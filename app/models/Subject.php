@@ -25,6 +25,11 @@ class Subject extends Eloquent {
         4 => 4,
     );
 
+    public function subjectPrequisites()
+    {
+        return $this->hasMany('SubjectPrerequisite', 'subject_code', 'subject_code');
+    }
+
     // Static Helpers
     public static function generateNewId()
     {

@@ -4,6 +4,17 @@ class SubjectPresenter extends Presenter{
 
     // Actions Buttons and URLS Presenters
 
+    public function getSubjectPrerequisites()
+    {
+        if ($this->subjectPrequisites)
+        {
+            $subject_names = Subject::whereIn('subject_code', $this->subjectPrequisites->lists('prerequisite_subject_code'))->lists('subject_name');
+            return $subject_names ? join(', ', $subject_names) : NULL;
+        }
+
+        return NULL;
+    }
+
     public function actionButtons()
     {
         ob_start(); ?>

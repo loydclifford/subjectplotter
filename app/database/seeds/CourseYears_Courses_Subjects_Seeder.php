@@ -96,10 +96,20 @@ class CourseYears_Courses_Subjects_Seeder extends Seeder {
                         $subject->description = $description;
 
                         // prerequisite
-                        $subject->prerequisite = $subject_name;
                         $subject->subject_category_code = $subject_category_code;
                         $subject->save();
                         $model = $subject;
+                    }
+
+                    // save prerequisite
+                    foreach (explode(',', $pre_requisite) as $prerequisite_subject_code) {
+                        if (!empty($prerequisite_subject_code))
+                        {
+                            $subject_prerequisite = new SubjectPrerequisite();
+                            $subject_prerequisite->subject_code = $subject_code;
+                            $subject_prerequisite->prerequisite_subject_code = $prerequisite_subject_code;
+                            $subject_prerequisite->save();
+                        }
                     }
 
                     // create course subjects
@@ -135,6 +145,7 @@ class CourseYears_Courses_Subjects_Seeder extends Seeder {
         }
         catch (Exception $e)
         {
+            echo '<pre><dd>'.var_export($e->getMessage(), true).'</dd></pre>';
             echo '<pre><dd>'.var_export($model, true).'</dd></pre>';
             die();
         }

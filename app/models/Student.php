@@ -58,4 +58,9 @@ class Student extends Eloquent {
 
         return $newId;
     }
+
+    public static function checkSchedule($subject_id)
+    {
+        return $subject_id;
+    }
 }

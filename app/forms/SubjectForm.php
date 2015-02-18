@@ -37,7 +37,6 @@ class SubjectForm {
             'subject_name'          => 'required',
             'units'                 => 'required',
             'description'           => '',
-            'prerequisite'          => 'required',
             'subject_category_code' => 'required',
         );
 
@@ -82,8 +81,19 @@ class SubjectForm {
         $this->model->subject_name          = array_get($input, 'subject_name');
         $this->model->units                 = array_get($input, 'units');
         $this->model->description           = array_get($input, 'description');
-        $this->model->prerequisite          = array_get($input, 'prerequisite');
         $this->model->subject_category_code = array_get($input, 'subject_category_code');
+
+
+        SubjectPrerequisite::where('subject_code', $this->model->subject_code)->delete();
+
+        foreach (array_get($input, 'prerequisite', array()) as $prerequisite_subject_code)
+        {
+            $subject_prerequisite = new SubjectPrerequisite();
+            $subject_prerequisite->subject_code = $this->model->subject_code;
+            $subject_prerequisite->prerequisite_subject_code = $prerequisite_subject_code;
+            $subject_prerequisite->save();
+        }
+
 
         // if edit
         $this->model->save();
