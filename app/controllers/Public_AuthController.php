@@ -56,4 +56,29 @@ class Public_AuthController extends BaseController {
         return Redirect::to('/login');
     }
 
+    public function getReset()
+    {
+        {
+            if ($this->isPostRequest()) {
+                $response = $this->getPasswordRemindResponse();
+
+                if ($this->isInvalidUser($response)) {
+                    return Redirect::back()
+                        ->withInput()
+                        ->with("error", Lang::get($response));
+                }
+
+                return Redirect::back()
+                    ->with("status", Lang::get($response));
+            }
+
+            return View::make("user/request");
+        }
+    }
+
+    public function postReset()
+    {
+        $credentials = array('email' => Input::get('email'));
+        return Password::remind($credentials);
+    }
 }
