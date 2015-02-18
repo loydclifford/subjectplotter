@@ -4,7 +4,7 @@ class Public_AuthController extends BaseController {
 
     public function getLogin()
     {
-        $this->data['meta']->title = "Admin Login";
+        $this->data['meta']->title = "Student Login";
         $this->data['active_menu'] = 'login';
 
         return View::make('public.login')->with($this->data);

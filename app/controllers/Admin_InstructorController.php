@@ -65,11 +65,11 @@ class Admin_InstructorController extends BaseController {
         $this->data['return_url']   = admin_url("/instructors/{$instructor->id}/edit");
         $this->data['success_url']  = admin_url("/instructors/{$instructor->id}/edit");
 
-        $this->data['enable_breadcrumb']   = false;
-        $this->data['instructor']         = $instructor;
-        $this->data['instructor_user']         = $instructor->user;
+        $this->data['enable_breadcrumb'] = false;
+        $this->data['instructor']        = $instructor;
+        $this->data['instructor_user']   = $instructor->user;
 
-        $this->data['selected_subject_categories']   = $instructor->subjectCategory->lists('subject_category_code');
+        $this->data['selected_subject_categories'] = $instructor->subjectCategory->lists('subject_category_code');
 
         return View::make('admin.instructor.create_edit')->with($this->data);
     }

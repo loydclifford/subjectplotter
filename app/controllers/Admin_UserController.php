@@ -70,8 +70,8 @@ class Admin_UserController extends BaseController {
         $this->data['return_url']   = admin_url("/users/{$user->id}/edit");
         $this->data['success_url']  = admin_url("/users/{$user->id}/edit");
 
-        $this->data['enable_breadcrumb']   = false;
-        $this->data['user']         = $user;
+        $this->data['enable_breadcrumb'] = false;
+        $this->data['user']              = $user;
 
         return View::make('admin.user.create_edit')->with($this->data);
     }

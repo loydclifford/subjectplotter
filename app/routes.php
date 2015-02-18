@@ -1,6 +1,15 @@
 <?php
 
 
+Route::get('/', function() {
+    return Redirect::to('/login');
+});
+
+Route::get('/admin', function() {
+    return Redirect::to('/admin/login');
+});
+
+
 Route::model('user','User');
 Route::model('room','Room');
 Route::model('subject','Subject');
@@ -56,3 +65,4 @@ define('RESULT_NOT_LOG_IN', 'not_logged_in');
 define('SUCCESS_MESSAGE', '_success_message');
 define('INFO_MESSAGE', '_info_message');
 define('ERROR_MESSAGE', '_error_message');
+

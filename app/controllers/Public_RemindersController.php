@@ -82,5 +82,4 @@ class Public_RemindersController extends BaseController {
 				break;
 		}
 	}
-
 }

@@ -63,7 +63,7 @@ class Admin_SubjectCategoryController extends BaseController {
         $subjectcategory = $subjectcategory_repo->saveInput();
         Event::fire('subjectcategory.update', $subjectcategory);
 
-        return Redirect::to(admin_url("subjects/categories/{$subjectcategory->subject_category_code}/edit"))
+            return Redirect::to(admin_url("subjects/categories/{$subjectcategory->$subject_category_codes}/edit"))
             ->with(SUCCESS_MESSAGE,lang('subjects/categories/texts.update_success'));
     }
 

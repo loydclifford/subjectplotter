@@ -65,7 +65,7 @@ class Admin_StudentController extends BaseController {
 
         $this->data['enable_breadcrumb'] = false;
         $this->data['student']           = $student;
-        $this->data['student_user']           = $student->user;
+        $this->data['student_user']      = $student->user;
 
         return View::make('admin.student.create_edit')->with($this->data);
     }
