@@ -10,6 +10,7 @@
     <link href="{{ asset_url('/public/css/preview.min.css') }}" rel="stylesheet" />
     <link href="{{ asset_url('/public/css/custom.css') }}" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css' />
+    <link href="{{ asset_url('/public/styles/fa/font-awesome.min.css') }}" rel="stylesheet" />
     <link href="{{ asset_url('/public/styles/font-awesome.min.css') }}" rel="stylesheet" />
     <link href="{{ asset_url('/public/scripts/plugins/DataTables-1.10.5/media/css/jquery.dataTables.css') }}" rel="stylesheet" />
 

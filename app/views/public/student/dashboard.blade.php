@@ -3,30 +3,6 @@
 @section('main-content')
 <div class="row-fluid">
     <div class="span12">
-        <div>
-            <div class="row">
-
-                <div class="col-xs-6">
-                    <h3>MATH 1 <small>BSIT-I</small></h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <ul class="nav">
-                        <li><strong>Descriptive Title:  </strong> Descriptive Title</li>
-                        <li><strong>DAY: </strong> Mon-Wed-Fri</li>
-                        <li><strong>Time: </strong> 11:00 am - 12:00 pm</li>
-                    </ul>
-                </div>
-                <div class="col-xs-6">
-                    <ul class="nav">
-                        <li><strong>Room: </strong> RM-02</li>
-                        <li><strong>Units: </strong> 3</li>
-                        <li><strong>Instructor: </strong> Skyla Romaguera</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <h4><i class="icon-user"></i>&nbsp;&nbsp; Subject Plotting - {{ get_current_school_year() }} - First Semester ({{ user_get()->student->course_code }} - {{ user_get()->student->course_year_code }})</h4>
         <table class="table table-striped table-bordered" id="course_subject_schedule_lists">
             <thead>
@@ -51,10 +27,11 @@
                         <td>{{ $course_subject->subject->description }}</td>
                         <td>{{ $course_subject->subject->units }}</td>
                             @foreach (CourseSubjectSchedule::getDataPresetByCourseSubjectId($course_subject->id) as $course_subject_schedule)
+
                             <td>{{ $course_subject_schedule->present()->getDayString() }}</td>
                             <td>{{ $course_subject_schedule->present()->getTimeSchedule() }}</td>
                             <td>{{ $course_subject_schedule->room_id }}</td>
-                            <td>{{ $course_subject_schedule->instructor->first_name }} {{ $course_subject_schedule->instructor->last_name }}</td>
+                            <td>{{ $course_subject_schedule->instructor->user->first_name }} {{ $course_subject_schedule->instructor->user->last_name }}</td>
                             <td align="center">
                                 @if (Student::checkSchedule($course_subject->id))
                                 <i class="fa fa-check-circle alert-success"></i>
