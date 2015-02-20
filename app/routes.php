@@ -34,6 +34,7 @@ include(__DIR__.'/routes/admin_students_routes.php');
 include(__DIR__.'/routes/public_auth_routes.php');
 include(__DIR__.'/routes/public_contact_routes.php');
 include(__DIR__.'/routes/public_student_routes.php');
+include(__DIR__.'/routes/public_subject_routes.php');
 
 define('ENV_DEVELOPMENT', 'local');
 define('ENV_STAGING', 'staging');

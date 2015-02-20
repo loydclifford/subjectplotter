@@ -25,7 +25,7 @@ class CourseYears_Courses_Subjects_Seeder extends Seeder {
 
                 list($course_code, $course_year_code, $semester) = explode('_', substr($file_name, 0, -4));
 
-                $semester = $semester == 'SECONDSEMESTER' ? 'first_semester' : 'second_semester';
+                $semester = $semester == 'SECONDSEMESTER' ? 'second_semester' : 'first_semester';
                 $course_code = trim($course_code);
                 $course_year_code = trim($course_year_code);
 

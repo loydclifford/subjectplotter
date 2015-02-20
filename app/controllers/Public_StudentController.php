@@ -13,6 +13,12 @@ class Public_StudentController extends BaseController {
 				->where('semester', 'first_semester')
 				->get();
 
+		$this->data['total_available_units'] = Subject::countUnits(
+			get_current_school_year(),
+			user_get()->student->course_code,
+			user_get()->student->course_year_code
+		);
+
 		return View::make('public.student.dashboard', $this->data);
 	}
 

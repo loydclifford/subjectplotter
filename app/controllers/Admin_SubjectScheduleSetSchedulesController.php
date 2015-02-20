@@ -22,6 +22,13 @@ class Admin_SubjectScheduleSetSchedulesController extends BaseController {
             Session::put('selected_course_subject_id', Input::get('course_subject_id'));
         }
 
+        if (!Session::get('selected_school_year', false)
+            || !Session::get('selected_course_code', false)
+        )
+        {
+            return Redirect::to('/admin/subject-schedules');
+        }
+
         // Lists
         $this->data['meta']->title  = lang('subjectschedule/setschedules.page_title');
         $this->data['course']  = Course::find(Session::get('selected_course_code'));

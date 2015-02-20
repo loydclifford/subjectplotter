@@ -21,6 +21,11 @@ class CourseSubjectSchedule extends Eloquent {
         return $this->belongsTo('CourseSubject', 'course_subject_id', 'id');
     }
 
+    public function instructor()
+    {
+        return $this->belongsTo('Instructor', 'instructor_id', 'id');
+    }
+
     public static function getDataPresetByCourseSubjectId($course_subject_id)
     {
         $ret = CourseSubjectSchedule::leftJoin('course_subjects', 'course_subjects.id', '=','course_subject_schedules.course_subject_id')

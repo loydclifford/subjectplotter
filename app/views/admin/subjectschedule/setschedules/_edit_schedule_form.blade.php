@@ -54,3 +54,15 @@
 
 <input type="hidden" name="course_subject_id" value="{{ $course_subject->id }}" />
 <input type="hidden" name="course_subject_schedule_id" value="{{ $course_subject_schedule->id }}" />
+
+<script>
+    $(function() {
+        $('.timepicker1').timepicker({
+            defaultTime: '07:00 AM',
+            minuteStep: 30,
+            showSeconds: false,
+            showMeridian: true,
+            template: 'dropdown'
+        });
+    });
+</script>
