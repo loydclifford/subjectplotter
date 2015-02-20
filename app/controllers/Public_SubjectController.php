@@ -168,6 +168,13 @@ class Public_SubjectController extends BaseController {
 			$course_subject_schedules->whereNotIn('course_subject_schedules.id', $excluded_id);
 		}
 
+		$excluded_subject_codes = explode(',', Input::get('exclude_subject_code', ''));
+
+		if (count($excluded_subject_codes))
+		{
+			$course_subject_schedules->whereNotIn('course_subjects.subject_code', $excluded_subject_codes);
+		}
+
 		$results = $course_subject_schedules->skip($offset)
 			->take($per_page)
 			->get();

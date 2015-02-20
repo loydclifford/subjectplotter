@@ -28,9 +28,10 @@
             </tr>
             </thead>
             <tbody>
-                <?php $total_units = 0; ?>
+                <?php $total_units = 0; $subject_codes = array() ;?>
                     @foreach ($course_subject_schedules as $course_subject_schedule)
                     <tr>
+                        <?php $subject_codes[] = $course_subject_schedule->courseSubject->subject_code; ?>
                         <?php $total_units = $total_units + (int) $course_subject_schedule->courseSubject->subject->units ?>
                         <td>{{ $course_subject_schedule->courseSubject->subject->subject_name }}</td>
                         <td>{{ $course_subject_schedule->courseSubject->subject->description }}</td>
@@ -60,7 +61,7 @@
 
         <div class="pull-right">
             @if (!$has_plotted || ($has_plotted && $has_plotted->status == StudentPlotting::STATUS_DENIED))
-            <a href="{{ url('/subject/load-default') }}" class="btn btn-default confirm_action" data-message="Are you sure you want to load default plotting?" >Load Defaults </a>
+            <a href="{{ url('/subject/load-default') }}" class="btn btn-default confirm_action" data-message="Are you sure you want to load Recommended plotting?" >Load Recommended </a>
             <a class="btn btn-success " id="submit_plotting_form_triggerer" >Plot Schedule <i class="fa fa-check-square"></i></a>
 
             {{ Former::vertical_open(url('/subject/submit-plotting'))->method('POST')
@@ -123,15 +124,17 @@
             var markup = '';
             markup += '<table class="customer" width="500px"><tr><td class="customer-info">';
             markup += '<div>';
-            markup += '<h3>'+subject.name+'<small>'+subject.course_year+'</small></h3>';
+            markup += '<h3>'+subject.name+' &nbsp; &nbsp; <small>'+subject.course_year+'</small></h3>';
             markup += '</div>';
             markup += '<div>';
-            markup += '<strong>Descriptive Title:  </strong> '+subject.descriptive_title;
-            markup += ', <strong>DAY: </strong> '+subject.day;
-            markup += ', <strong>Time: </strong> '+subject.time;
-            markup += ', <strong>Room: </strong> '+subject.room;
-            markup += ', <strong>Units: </strong> '+subject.units;
-            markup += ', <strong>Instructor: </strong> '+subject.instructor_name;
+            markup += '<ul style="margin:0;padding:0; background: transparent">';
+            markup += '<li><strong>Descriptive Title:  </strong> '+subject.descriptive_title + '</li>';
+            markup += '<li> <strong>DAY: </strong> '+subject.day + '</li>';
+            markup += '<li> <strong>Time: </strong> '+subject.time + '</li>';
+            markup += '<li> <strong>Room: </strong> '+subject.room + '</li>';
+            markup += '<li> <strong>Units: </strong> '+subject.units + '</li>';
+            markup += '<li> <strong>Instructor: </strong> '+subject.instructor_name + '</li>';
+            markup += '</ul>';
             markup += '</div>';
             markup += '</div>';
             markup += "</td></tr></table>";
@@ -176,10 +179,9 @@
                             per_page: 25,
                             page: page,
                             exclude_course_subject_schedules_id: '{{ join(',', $course_subject_schedules->lists('id')) }}',
+                            exclude_subject_code: '{{ join(',', $subject_codes) }}',
                             _token: utils._token
                         };
-
-
 
                         // @note return format must be an json with a {total:20}{items:items_array
                         return param;

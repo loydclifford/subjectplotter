@@ -49,7 +49,6 @@ class StudentSubject extends Eloquent {
 
     public static function doLoadDefaultSchedule($student_no, $school_year, $course_code, $course_year_code, $semester = 'first_semester')
     {
-
         $course_subjects = CourseSubject::where('school_year', $school_year)
             ->where('course_code', $course_code)
             ->where('course_year_code', $course_year_code)
