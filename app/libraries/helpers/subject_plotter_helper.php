@@ -61,7 +61,7 @@ function has_schedule_conflict($days, $timestamp_time_start, $timestamp_time_end
         $model = CourseSubjectSchedule::whereRaw('((? BETWEEN time_start AND time_end)
               OR (? BETWEEN time_start AND time_end))', array(
             date('Y-m-d H:i:s', ($timestamp_time_start + 1)),
-            date('Y-m-d H:i:s', ($timestamp_time_end + 1)),
+            date('Y-m-d H:i:s', ($timestamp_time_end - 1)),
         ))->where('room_id', $room_id);
 
         $day_formatted = get_schedule_days($day);
