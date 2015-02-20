@@ -82,7 +82,7 @@ function has_schedule_conflict($days, $timestamp_time_start, $timestamp_time_end
         $model_student_conflict = CourseSubjectSchedule::whereRaw('((? BETWEEN time_start AND time_end)
               OR (? BETWEEN time_start AND time_end))', array(
             date('Y-m-d H:i:s', ($timestamp_time_start + 1)),
-            date('Y-m-d H:i:s', ($timestamp_time_end + 1)),
+            date('Y-m-d H:i:s', ($timestamp_time_end - 1)),
         ))->whereIn('course_subject_id', $course_subject_ids);
 
         // if has exemption, the current day loop is not belong
