@@ -25,6 +25,20 @@ class Subject extends Eloquent {
         4 => 4,
     );
 
+    public static function countUnits($school_year, $course_code, $course_year_code, $semester = 'first_semester')
+    {
+        $course_subjects = CourseSubject::where('school_year', $school_year)
+            ->where('course_code', $course_code)
+            ->where('course_year_code', $course_year_code)
+            ->where('semester', $semester)
+            ->get()
+            ->lists('subject_code');
+
+        $units = Subject::whereIn('subject_code', $course_subjects)->select(DB::raw('SUM(units) as total_units'))->get()->first();
+
+        return $units ? $units->total_units : 0;
+    }
+
     public function subjectPrequisites()
     {
         return $this->hasMany('SubjectPrerequisite', 'subject_code', 'subject_code');

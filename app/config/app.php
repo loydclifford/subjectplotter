@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost/public_html/loyd/subjectplotter/public',
+	'url' => 'http://subjectplotter.local',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => 'x2s0YOXO13TFs1HEWfJbvSDlZ07a82Fo',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
