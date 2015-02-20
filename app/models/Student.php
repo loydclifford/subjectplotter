@@ -63,4 +63,5 @@ class Student extends Eloquent {
     {
         return $subject_id;
     }
+
 }

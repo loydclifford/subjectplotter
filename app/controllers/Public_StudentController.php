@@ -7,17 +7,34 @@ class Public_StudentController extends BaseController {
 		$this->data['meta']->title = 'Student Dashboard';
 		$this->data['active_menu'] = 'dashboard';
 
-		$this->data['course_subjects'] = CourseSubject::where('school_year', get_current_school_year())
-				->where('course_code', user_get()->student->course_code)
-				->where('course_year_code', user_get()->student->course_year_code)
-				->where('semester', 'first_semester')
-				->get();
+		$student_course_subject_schedule_ids = StudentSubject::getCourseSubjectScheduleId(
+			user_get()->student->student_no,
+			get_current_school_year(),
+			user_get()->student->course_code,
+			user_get()->student->course_year_code,
+			'first_semester'
+		);
+
+		$this->data['course_subject_schedules'] = CourseSubjectSchedule::whereIn('id', $student_course_subject_schedule_ids)->get();
 
 		$this->data['total_available_units'] = Subject::countUnits(
 			get_current_school_year(),
 			user_get()->student->course_code,
 			user_get()->student->course_year_code
 		);
+
+		$this->data['course_code'] = user_get()->student->course_code;
+		$this->data['student_no'] = user_get()->student->student_no;
+		$this->data['course_year_code'] = user_get()->student->course_year_code;
+		$this->data['semester'] = 'first_semester';
+		$this->data['school_year'] = get_current_school_year();
+
+		$this->data['has_plotted'] = StudentPlotting::where('school_year', get_current_school_year())
+			->where('course_code', user_get()->student->course_code)
+			->where('course_year_code', user_get()->student->course_year_code)
+			->where('semester', 'first_semester')
+			->where('student_no', user_get()->student->student_no)
+			->first();
 
 		return View::make('public.student.dashboard', $this->data);
 	}

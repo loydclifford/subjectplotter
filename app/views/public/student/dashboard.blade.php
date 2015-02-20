@@ -4,6 +4,11 @@
 <div class="row-fluid">
     <div class="span12">
         <h4><i class="icon-user"></i>&nbsp;&nbsp; Subject Plotting - {{ get_current_school_year() }} - First Semester ({{ user_get()->student->course_code }} - {{ user_get()->student->course_year_code }})</h4>
+        <br />
+
+        @if ($has_plotted)
+            <p class="alert alert-info">You already plotted for this semester. status: {{ $has_plotted->status }}</p>
+        @endif
         <table class="table table-striped table-bordered" id="course_subject_schedule_lists">
             <thead>
             <tr>
@@ -20,28 +25,24 @@
             </thead>
             <tbody>
                 <?php $total_units = 0; ?>
-                @foreach ($course_subjects as $course_subject)
-                    <?php $total_units = $total_units + (int) $course_subject->subject->units ?>
+                    @foreach ($course_subject_schedules as $course_subject_schedule)
                     <tr>
-                        <td>{{ $course_subject->subject->subject_name }}</td>
-                        <td>{{ $course_subject->subject->description }}</td>
-                        <td>{{ $course_subject->subject->units }}</td>
-                            @foreach (CourseSubjectSchedule::getDataPresetByCourseSubjectId($course_subject->id) as $course_subject_schedule)
-
-                            <td>{{ $course_subject_schedule->present()->getDayString() }}</td>
-                            <td>{{ $course_subject_schedule->present()->getTimeSchedule() }}</td>
-                            <td>{{ $course_subject_schedule->room_id }}</td>
-                            <td>{{ $course_subject_schedule->instructor->user->first_name }} {{ $course_subject_schedule->instructor->user->last_name }}</td>
-                            <td align="center">
-                                @if (Student::checkSchedule($course_subject->id))
-                                <i class="fa fa-check-circle alert-success"></i>
-                                @else
-                                <i class="fa fa-check-circle alert-error"></i>
-                                @endif
-                            </td>
-                            <td align="center"><a class="confirm_action" href="#" data-message="Are you sure you want to remove this subject to your schedule?"><i class="fa fa-remove"></i></a></td>
-                            <?php break; ?>
-                        @endforeach
+                        <?php $total_units = $total_units + (int) $course_subject_schedule->courseSubject->subject->units ?>
+                        <td>{{ $course_subject_schedule->courseSubject->subject->subject_name }}</td>
+                        <td>{{ $course_subject_schedule->courseSubject->subject->description }}</td>
+                        <td>{{ $course_subject_schedule->courseSubject->subject->units }}</td>
+                        <td>{{ $course_subject_schedule->present()->getDayString() }}</td>
+                        <td>{{ $course_subject_schedule->present()->getTimeSchedule() }}</td>
+                        <td>{{ $course_subject_schedule->room_id }}</td>
+                        <td>{{ $course_subject_schedule->instructor->user->first_name }} {{ $course_subject_schedule->instructor->user->last_name }}</td>
+                        <td align="center">
+                            @if (Student::checkSchedule($course_subject_schedule->courseSubject->id))
+                            <i class="fa fa-check-circle alert-success"></i>
+                            @else
+                            <i class="fa fa-check-circle alert-error"></i>
+                            @endif
+                        </td>
+                        <td align="center"><a class="confirm_action" href="{{ url('/subject/getRemove?course_subject_schedule_id='.urlencode($course_subject_schedule->id)) }}" data-message="Are you sure you want to remove this subject to your schedule?"><i class="fa fa-remove"></i></a></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -50,19 +51,62 @@
         <br />
 
         <div class="pull-left">
+            @if (!$has_plotted)
             <a href="#add_subject_modal" class="btn btn-default" data-toggle="modal" >Add Subjects</a> &nbsp;
+            @endif
             <strong>Total Units: {{ $total_units }}</strong>&nbsp;
-            <strong>Total Available Units: {{ $total_available_units }}</strong>
+            <strong>Total Available Units: {{ $total_available_units - $total_units }}</strong>
         </div>
 
         <div class="pull-right">
-            <a href="{{ url('/plotting/load-defaults') }}" class="btn btn-default confirm_action" data-message="Are you sure you want to load default plotting?" >Load Defaults </a>
-            <a href="{{ url('/plotting/load-defaults') }}" class="btn btn-success">Plot Schedule <i class="fa fa-check-square"></i></a>
+            @if (!$has_plotted)
+            <a href="{{ url('/subject/load-default') }}" class="btn btn-default confirm_action" data-message="Are you sure you want to load default plotting?" >Load Defaults </a>
+            <a class="btn btn-success " id="submit_plotting_form_triggerer" >Plot Schedule <i class="fa fa-check-square"></i></a>
+
+            {{ Former::vertical_open(url('/subject/submit-plotting'))->method('POST')
+                ->setAttribute('id', 'submit_plotting_form')}}
+
+                <input type="hidden" name="student_no" value="{{ $student_no }}" />
+                <input type="hidden" name="course_year_code" value="{{ $course_year_code }}" />
+                <input type="hidden" name="course_code" value="{{ $course_code }}" />
+                <input type="hidden" name="semester" value="{{ $semester }}" />
+                <input type="hidden" name="school_year" value="{{ $school_year }}" />
+            {{ Former::close() }}
+            @endif
         </div>
     </div>
 
 </div>
 <script>
+
+    $(function() {
+
+        $('#submit_plotting_form_triggerer').click(function(e) {
+            e.preventDefault();
+
+            bootbox.confirm('Are you sure you want to submit this plotting?', function(result) {
+                if (result === true)
+                {
+                    $('#submit_plotting_form').submit();
+                }
+            });
+        });
+
+        var $searchSubject = new searchSubject($('#js_search_subject'));
+        $searchSubject.init();
+
+        $('#course_subject_schedule_lists').DataTable(
+                {
+                    "order": [[ 3, "asc" ], [ 4, "desc" ]],
+                    "paging":   false,
+                    "aoColumnDefs": [
+                        { 'bSortable': false, 'aTargets': [ 5, 6 ] }
+                    ]
+                }
+        );
+    });
+
+
     var searchSubject = function ($element) {
         this.$select = $element;
         this.endPoint = utils.baseUrl("/subject/search-select");
@@ -103,7 +147,7 @@
          * @returns {string}
          */
         this.formatSelection = function(subject) {
-            return subject.name+'<small>'+subject.course_year+'</small>';
+            return '<strong>'+subject.name+'</strong> <small>'+subject.course_year+' ('+subject.day+' - '+subject.time+')</small>';
         };
 
         /**
@@ -131,8 +175,11 @@
                             q: term, // search term
                             per_page: 25,
                             page: page,
+                            exclude_course_subject_schedules_id: '{{ join(',', $course_subject_schedules->lists('id')) }}',
                             _token: utils._token
                         };
+
+
 
                         // @note return format must be an json with a {total:20}{items:items_array
                         return param;
@@ -173,22 +220,6 @@
         };
     };
 
-
-    $(function() {
-        var $searchSubject = new searchSubject($('#js_search_subject'));
-        $searchSubject.init();
-
-        $('#course_subject_schedule_lists').DataTable(
-                {
-                    "order": [[ 3, "asc" ], [ 4, "desc" ]],
-                    "paging":   false,
-                    "aoColumnDefs": [
-                        { 'bSortable': false, 'aTargets': [ 5, 6 ] }
-                    ]
-                }
-        );
-    });
-
 </script>
 
 @stop
@@ -204,21 +235,26 @@
                 <h4 class="modal-title" style="color:black;">Add Subject</h4>
             </div>
 
-            {{ Former::vertical_open(admin_url('/subject-schedules/set-schedules/add-subject'))->method('POST')
+            {{ Former::vertical_open(url('/subject/add-subject'))->method('POST')
                 ->addClass('form-check-ays parsley-form form-inline')
                 ->rules(array('school_year'=>'required', 'course_code'=>'required')) }}
 
             <div class="modal-body">
-                {{ Former::text('subject_id', 'Subject' )
+                {{ Former::text('course_subject_schedule_id', 'Subject' )
                     ->setAttribute('style','width: 100%')
                     ->setAttribute('id','js_search_subject') }}
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="submiot" class="btn btn-primary">Add Subject</button>
             </div>
 
-            <input type="hidden" name="course_code" value="{{ $course_subject->id }}" />
+            <input type="hidden" name="student_no" value="{{ $student_no }}" />
+            <input type="hidden" name="course_year_code" value="{{ $course_year_code }}" />
+            <input type="hidden" name="course_code" value="{{ $course_code }}" />
+            <input type="hidden" name="semester" value="{{ $semester }}" />
+            <input type="hidden" name="school_year" value="{{ $school_year }}" />
             {{ Former::close() }}
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
