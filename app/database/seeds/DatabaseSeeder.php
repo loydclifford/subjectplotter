@@ -15,10 +15,11 @@ class DatabaseSeeder extends Seeder {
 		$this->call('RoomTableSeeder');
 
 		$this->call('CourseYears_Courses_Subjects_Seeder');
-		$this->call('CourseSubjectScheduleSeeder');
 
 		$this->call('StudentsTableSeeder');
 		$this->call('InstructorTableSeeder');
+
+        $this->call('CourseSubjectScheduleSeeder');
 	}
 
 }

@@ -12,7 +12,7 @@ class SubjectCategoryForm {
     /**
      * Create instance of UserRepo
      *
-     * @param
+     * @param GradeEntry $grade_entry
      */
     public function __construct(GradeEntry $grade_entry)
     {

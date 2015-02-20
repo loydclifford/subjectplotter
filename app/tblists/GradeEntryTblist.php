@@ -141,5 +141,4 @@ class GradeEntryTblist extends BaseTblist {
     {
         $row->present()->getOrganizationName();
     }
-
 }
