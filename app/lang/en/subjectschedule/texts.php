@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'meta_title' => 'Courses',
-    'page_title' => 'Courses',
+    'meta_title' => 'Set Schedules',
+    'page_title' => 'Set Schedules',
 
-    'create'        => 'New Course',
+    'create'   => 'New Course',
     'contacts' => 'Course Contacts',
-    'details' => 'Course Details',
+    'details'  => 'Course Details',
 
     'no_result_found' => 'No courses found',
 
