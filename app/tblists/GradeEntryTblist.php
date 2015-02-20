@@ -87,7 +87,7 @@ class GradeEntryTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.first_name',
-            'thead_attr'      => ' style="width:200px" ',
+            'thead_attr'      => ' style="width:160px" ',
         );
 
         $this->columns['user_last_name'] = array(
@@ -97,12 +97,20 @@ class GradeEntryTblist extends BaseTblist {
             'table_column'    => 'users.last_name',
         );
 
+        $this->columns['user_email'] = array(
+            'label'           => 'Email',
+            'sortable'        => true,
+            'classes'         => 'hidden-xs hidden-sm',
+            'table_column'    => 'students.user_email',
+            'thead_attr'      => ' style="width:150px" ',
+        );
+
         $this->columns['course_code'] = array(
             'label'           => 'Course Code',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'students.course_code',
-            'thead_attr'      => ' style="width:150px" ',
+            'thead_attr'      => ' style="width:100px" ',
         );
 
         $this->columns['course_year_code'] = array(
@@ -110,7 +118,7 @@ class GradeEntryTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'students.course_year_code',
-            'thead_attr'      => ' style="width:100px" ',
+            'thead_attr'      => ' style="width:90px" ',
         );
 
         $this->addActionColumn();
