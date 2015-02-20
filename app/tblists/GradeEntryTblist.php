@@ -2,7 +2,7 @@
 
 class GradeEntryTblist extends BaseTblist {
 
-    public $table   = "students";
+    public $table   = "grade-entry";
     public $tableId = "user_id";
 
     public $cbName  = "";
