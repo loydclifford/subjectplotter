@@ -8,7 +8,7 @@ return array(
     'contacts'   => 'Grade Entry Contacts',
     'details'    => 'Grade Entry Details',
 
-    'no_result_found'    => 'No subject categories found',
+    'no_result_found'    => 'No subject found',
 
     // Sidebar Title
     'sidebar_main_title' => 'Grade Entry Category',

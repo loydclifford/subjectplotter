@@ -38,15 +38,17 @@ class Admin_GradeEntryController extends BaseController {
 
     public function getEdit(GradeEntry $grade_entry)
     {
+        var_dump(Input::all());
+        die('');
         $this->data['meta']->title = lang('gradeentry/texts.update_meta_title');
         $this->data['page_title']  = lang('gradeentry/texts.update_page_title');
         $this->data['url']         = URL::current();
         $this->data['method']      = 'POST';
-        $this->data['return_url']  = admin_url("/grade-entry{$grade_entry->subject_name}/edit");
-        $this->data['success_url'] = admin_url("/grade-entry{$grade_entry->subject_name}/edit");
+        $this->data['return_url']  = admin_url("/grade-entry{$grade_entry->user_id}/edit");
+        $this->data['success_url'] = admin_url("/grade-entry{$grade_entry->user_id}/edit");
 
         $this->data['enable_breadcrumb'] = false;
-        $this->data['grade_entry']   = $grade_entry;
+        $this->data['grade_entry'] = $grade_entry;
 
         return View::make('admin.grade-entry.create_edit')->with($this->data);
     }

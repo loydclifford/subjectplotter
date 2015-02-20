@@ -18,7 +18,7 @@ Route::model('course_year','CourseYear');
 Route::model('instructor','Instructor');
 Route::model('student','Student');
 Route::model('subjectcategory','SubjectCategory');
-
+Route::model('gradeentry','GradeEntry');
 
 include(__DIR__.'/routes/admin_routes.php');
 include(__DIR__.'/routes/admin_users_routes.php');

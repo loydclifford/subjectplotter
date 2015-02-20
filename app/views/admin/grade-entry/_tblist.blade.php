@@ -1,19 +1,42 @@
 <!-- Main Content -->
 <form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="gradeentry_tblist_form">
+
     <div class="row form-inline tblist-form-toolbar" >
         <div class="col-sm-9">
             <div class="form-group">
-                <input type="text" name="subject_name" class="form-control" placeholder="{{ lang('gradeentry/attributes.placeholders.subject_name') }}" value="{{ Input::get('subject_name') }}" style="width:180px">
+                <input type="text" name="user_id" class="form-control" placeholder="{{ lang('student/attributes.placeholders.user_id') }}" value="{{ Input::get('user_id') }}" style="width:180px">
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="student_name" class="form-control" placeholder="{{ lang('student/attributes.placeholders.student_name') }}" value="{{ Input::get('student_name') }}" style="width:180px">
+            </div>
+
+            <div class="form-group">
+                <select name="course_code" class="form-control">
+                    <option value=""> Select Course </option>
+                    @foreach (Course::all() as $course)
+                        <option value="{{ $course->course_code }}" {{ is_selected($course->course_code, Input::get('course_code')) }}>{{ $course->course_code }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <select name="course_year_code" class="form-control">
+                    <option value=""> Select Course Year </option>
+                    @foreach (Student::$year as $key=>$value)
+                        <option value="{{ $key }}" {{ is_selected($key, Input::get('course_year_code')) }}>{{ $value }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
+
         <div class="col-sm-3">
             <div class="pull-right">
-                <button type="reset" class="btn btn-info"><i class="fa fa-times"></i> {{ lang('texts.reset_button') }}</button>
+                <button type="reset" class="btn btn-info"><i class="fa fa-times"></i> {{  lang('texts.reset_button') }}</button>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> {{ lang('texts.filter_button') }}</button>
             </div>
         </div>
     </div><!-- /.row -->
-
 
     {{ $list->getTableData() }}
 
@@ -52,7 +75,7 @@
 </form>
 <script>
     $(function(){
-        var $tblist = $('#gradeentry_tblist_form');
+        var $tblist = $('#grade-entry_tblist_form');
 
         var $backAction = new utils.buckAction();
         $backAction.init($tblist,function(actionData)
@@ -62,7 +85,7 @@
                 switch (actionData.action)
                 {
                     case 'delete':
-                        bootbox.confirm('{{ lang("gradeentry::texts.delete_confirmation_many") }}', function(result) {
+                        bootbox.confirm('{{ lang("grade-entry::texts.delete_confirmation_many") }}', function(result) {
                             if (result === true)
                             {
                                 utils.redirect(utils.adminUrl('/grade-entry/delete'+actionData.param));

@@ -27,19 +27,9 @@ class SubjectTblist extends BaseTblist {
         // all subjects
         $this->query = Subject::with('subjectPrequisites')->where('subject_code', '<>', '0');
 
-        if (Input::has('subject_code'))
-        {
-            $this->query->where('subjects.subject_code',trim(Input::get('subject_code')));
-        }
-
         if (Input::has('subject_name'))
         {
             $this->query->where('subjects.subject_name','like','%'.Input::get('subject_name').'%');
-        }
-
-        if (Input::has('subject_category_code'))
-        {
-            $this->query->where('subjects.subject_category_code','like','%'.Input::get('subject_category_code').'%');
         }
 
         // Debug query

@@ -13,7 +13,7 @@
 
             <div class="form-group">
                 <select name="course_code" class="form-control">
-                    <option value="">-- Select Course --</option>
+                    <option value=""> Select Course </option>
                     @foreach (Course::all() as $course)
                         <option value="{{ $course->course_code }}" {{ is_selected($course->course_code, Input::get('course_code')) }}>{{ $course->course_code }}</option>
                     @endforeach
@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <select name="course_year_code" class="form-control">
-                    <option value="">-- Select Course --</option>
+                    <option value=""> Select Course Year </option>
                     @foreach (Student::$year as $key=>$value)
                         <option value="{{ $key }}" {{ is_selected($key, Input::get('course_year_code')) }}>{{ $value }}</option>
                     @endforeach

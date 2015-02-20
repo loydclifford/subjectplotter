@@ -3,7 +3,7 @@
 @section('main-content-header')
 <h1>
     {{ $page_title }}
-    {{ create_back_button(admin_url('/subjects/categories')) }}
+    {{ create_back_button(admin_url('/grade-entry')) }}
 
     @if (isset($subjectcategory))
     <div class="pull-right">

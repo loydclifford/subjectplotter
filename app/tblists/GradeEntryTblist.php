@@ -2,17 +2,16 @@
 
 class GradeEntryTblist extends BaseTblist {
 
-    public $table   = "subjects";
-    public $tableId = "subject_name";
+    public $table   = "students";
+    public $tableId = "user_id";
 
-    public $cbName  = "subject_name";
+    public $cbName  = "";
 
     function __construct()
     {
         parent::__construct();
 
         $this->noResults = lang('gradeentry/texts.no_result_found');
-
         // we need to create a custom method setQuery,
         $this->setQuery();
 
@@ -25,19 +24,44 @@ class GradeEntryTblist extends BaseTblist {
 
     protected function setQuery()
     {
-        // all subjects
-        $this->query = GradeEntry::where('subject_name', '<>', '0');
+        // all students
+        $this->query = Student::leftJoin('users', 'users.id', '=', 'students.user_id');
 
-        if (Input::has('subject_name'))
+        if (Input::has('student_name'))
         {
-            $this->query->where('subjects.subject_name',trim(Input::get('subject_name')));
+            $this->query->where(function($query) {
+                $query->where('users.first_name', 'LIKE', '%'.trim(Input::get('student_name')).'%');
+                return $query->orWhere('users.last_name', 'LIKE', '%'.trim(Input::get('student_name')).'%');
+            });
+        }
+
+        if (Input::has('user_id'))
+        {
+            $this->query->where('students.user_id',trim(Input::get('user_id')));
+        }
+
+        if (Input::has('course_code'))
+        {
+            $this->query->where('students.course_code',trim(Input::get('course_code')));
+        }
+
+        if (Input::has('course_year_code'))
+        {
+            $this->query->where('students.course_year_code',trim(Input::get('course_year_code')));
         }
 
         // Debug query
         $this->columnOrders = array();
 
         $this->columnsToSelect = array(
-            'subjects.*',
+            'students.*',
+            'users.id as user_id',
+            'users.first_name as user_first_name',
+            'users.last_name as user_last_name',
+            'users.email as user_email',
+            'users.status as user_status',
+            'users.last_login as user_last_login',
+            'users.registration_date as user_registration_date',
         );
     }
 
@@ -45,26 +69,42 @@ class GradeEntryTblist extends BaseTblist {
     {
         $this->addCheckableColumn();
 
-        $this->columns['id'] = array(
-            'label'           => 'Subject',
+        $this->columns['user_id'] = array(
+            'label'           => 'Student ID',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'subjects.subject_code',
+            'table_column'    => 'students.student_code',
+            'thead_attr'      => ' style="width:120px" ',
         );
 
-        $this->columns['unit'] = array(
-            'label'           => 'Units',
+        $this->columns['user_first_name'] = array(
+            'label'           => 'First Name',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'subjects.subject_code',
-            'thead_attr'      => ' style="width:60px" ',
+            'table_column'    => 'users.first_name',
+            'thead_attr'      => ' style="width:200px" ',
         );
 
-        $this->columns['rating'] = array(
-            'label'           => 'Rating',
+        $this->columns['user_last_name'] = array(
+            'label'           => 'Last Name',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'subjects.subject_code',
+            'table_column'    => 'users.last_name',
+        );
+
+        $this->columns['course_code'] = array(
+            'label'           => 'Course Code',
+            'sortable'        => true,
+            'classes'         => 'hidden-xs hidden-sm',
+            'table_column'    => 'students.course_code',
+            'thead_attr'      => ' style="width:150px" ',
+        );
+
+        $this->columns['course_year_code'] = array(
+            'label'           => 'Year Level',
+            'sortable'        => true,
+            'classes'         => 'hidden-xs hidden-sm',
+            'table_column'    => 'students.course_year_code',
             'thead_attr'      => ' style="width:100px" ',
         );
 
