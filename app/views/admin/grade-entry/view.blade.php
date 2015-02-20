@@ -44,15 +44,15 @@
                 <td>{{ $course_subject_schedule->room_id }}</td>
                 <td>{{ $course_subject_schedule->instructor->user->first_name }} {{ $course_subject_schedule->instructor->user->last_name }}</td>
             <td>
-
                     <select name="average[{{ $student_subject->id }}]">
                         <option value="">-- Grade --</option>
                         @for ($i=1.0;$i<=5.0;$i+=.1)
                             <option {{ (trim($i) == trim($student_subject->average)) ? 'selected="selected"' : NULL }} value="{{ number_format($i, 1) }}">{{ number_format($i, 1) }}</option>
                         @endfor
-                        <option {{ is_selected(0, $student_subject->average) }} value="0">0</option>
-                        <option {{ is_selected('NA', $student_subject->average) }} value="NA">NA</option>
-                        <option {{ is_selected('INC', $student_subject->average) }} value="INC">INC</option>
+
+                        <option {{ is_selected('NA', trim($student_subject->average)) }} value="NA">NA</option>
+                        <option {{ is_selected('NG', trim($student_subject->average)) }} value="NG">NG</option>
+                        <option {{ is_selected('INC', trim($student_subject->average)) }} value="INC">INC</option>
                     </select>
             </tr>
         @endforeach
