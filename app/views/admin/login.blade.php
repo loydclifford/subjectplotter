@@ -3,7 +3,7 @@
 @section('main-content')
 
 <div class="form-box" id="login-box">
-    <div class="header">{{ lang('user/texts.sign_in') }}</div>
+    <div class="header"  style="background: #3c8dbc !important;">{{ lang('user/texts.sign_in') }}</div>
     {{ Former::vertical_open('#')->method('POST')->addClass('') }}
 
         <input type="hidden" name="return_url" value="{{ URL::current() }}"/>
@@ -27,7 +27,7 @@
             @endif
         </div>
         <div class="footer">
-            <button type="submit" class="btn bg-olive btn-block">{{ lang('user/texts.sign_in') }}</button>
+            <button type="submit" class="btn bg-olive btn-block" style="background: #3c8dbc !important;">{{ lang('user/texts.sign_in') }}</button>
             <p><a href="{{ admin_url('/password/forgot') }}">{{ lang('user/texts.forgot_password') }}</a></p>
         </div>
 
