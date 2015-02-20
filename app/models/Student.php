@@ -17,15 +17,15 @@ class Student extends Eloquent {
     public $timestamps = true;
 
     public static $gender = array(
-        'male' => 'Male',
+        'male'   => 'Male',
         'female' => 'Female',
     );
 
     public static $year = array(
-        'I' => 'I',
-        'II' => 'II',
+        'I'   => 'I',
+        'II'  => 'II',
         'III' => 'III',
-        'IV' => 'IV',
+        'IV'  => 'IV',
     );
 
     public function user()

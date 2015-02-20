@@ -10,7 +10,7 @@
 
 Route::group(array('prefix'=>'admin', 'before'=>'admin_auth'), function()
 {
-    // [url]/admin
+    //[url]/[prefix]
     Route::group(array('prefix'=>'subjects'), function()
     {
         Route::group(array('prefix'=>'categories'), function()

@@ -1,29 +1,29 @@
 <?php
 
 return array(
-    'meta_title' => 'Subject Categories',
-    'page_title' => 'Subject Categories',
+    'meta_title' => 'Subject Category',
+    'page_title' => 'Subject Category',
 
     'create'     => 'New Subject Category',
-    'contacts'   => 'Subject Contacts',
-    'details'    => 'Subject Details',
+    'contacts'   => 'Subject Category Contacts',
+    'details'    => 'Subject Category Details',
 
-    'no_result_found'    => 'No subjects found',
+    'no_result_found'    => 'No Subject Category found',
 
     // Sidebar Title
-    'sidebar_main_title' => 'Subjects',
+    'sidebar_main_title' => 'Subject Category',
     'sidebar_all'        => 'All',
     'sidebar_new'        => 'New',
 
     // Create
-    'create_meta_title'  => 'Create Subject',
-    'create_page_title'  => 'New Subject',
-    'create_success'     => 'Successfully created subject.',
+    'create_meta_title'  => 'Create Subject Category',
+    'create_page_title'  => 'New Subject Category',
+    'create_success'     => 'Successfully created subject category.',
 
     // Update
-    'update_meta_title'  => 'Update Subject',
-    'update_page_title'  => 'Update Subject',
-    'update_success'     => 'Successfully updated subject',
+    'update_meta_title'  => 'Update Subject Category',
+    'update_page_title'  => 'Update Subject Category',
+    'update_success'     => 'Successfully updated subject category',
 
     'view_meta_title'    => 'View Client',
 
@@ -49,16 +49,16 @@ return array(
 
     // Tblist Search
     'email'             => 'Email Address',
-    'email_placeholder' => 'Enter Subject email',
+    'email_placeholder' => 'Enter Subject Category email',
 
     'activities'    => array(
         'register'  => ':link has successfully registered',
         'created'   => 'New :link is created',
-        'updated'   => 'Subject :link is updated',
-        'deleted'   => 'Subject :name is deleted',
-        'confirmed' => 'Subject :link is confirmed',
-        'forgot'    => 'Subject :link request new password',
-        'reset'     => 'Subject :link has successfully changed password'
+        'updated'   => 'Subject Category :link is updated',
+        'deleted'   => 'Subject Category :name is deleted',
+        'confirmed' => 'Subject Category :link is confirmed',
+        'forgot'    => 'Subject Category :link request new password',
+        'reset'     => 'Subject Category :link has successfully changed password'
     ),
 
     // Help Texts

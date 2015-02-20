@@ -40,9 +40,14 @@ class StudentTblist extends BaseTblist {
             $this->query->where('students.user_id',trim(Input::get('user_id')));
         }
 
-        if (Input::has('email'))
+        if (Input::has('course_code'))
         {
-            $this->query->where('users.email',trim(Input::get('email')));
+            $this->query->where('students.course_code',trim(Input::get('course_code')));
+        }
+
+        if (Input::has('course_year_code'))
+        {
+            $this->query->where('students.course_year_code',trim(Input::get('course_year_code')));
         }
 
         // Debug query

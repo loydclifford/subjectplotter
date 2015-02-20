@@ -22,7 +22,7 @@ return array(
         'website'=> 'Website',
         'work_phone'=> 'Company Phone',
         'email'=> 'Email',
-        'instructorname'=> 'Instructorname',
+        'instructor_name'=> 'Instructorname',
         'password'=> 'Password',
         'password_confirmation'=> 'Password Confirmation',
 
@@ -55,7 +55,7 @@ return array(
         'website'=> 'Enter Website',
         'work_phone'=> 'Enter Company Phone',
         'email'=> 'Enter Email',
-        'instructorname'=> 'Enter Instructorname',
+        'instructor_name'=> 'Enter Instructorname',
         'password'=> 'Password',
         'password_confirmation'=> 'Password Confirmation',
 

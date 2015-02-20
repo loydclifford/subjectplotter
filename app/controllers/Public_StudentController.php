@@ -28,10 +28,10 @@ class Public_StudentController extends BaseController {
 		$this->data['active_menu'] = 'accounts';
 
 		// form data
-		$this->data['url']         	= URL::current();
-		$this->data['method']      	= 'POST';
-		$this->data['return_url']  	= URL::current();
-		$this->data['success_url'] 	= URL::current();
+		$this->data['url']         = URL::current();
+		$this->data['method']      = 'POST';
+		$this->data['return_url']  = URL::current();
+		$this->data['success_url'] = URL::current();
 
 		$this->data['student']     	= user_get()->student;
 		$this->data['student_user']	= $this->data['student']->user;
@@ -54,6 +54,4 @@ class Public_StudentController extends BaseController {
 		return Redirect::back()
 			->with(SUCCESS_MESSAGE, 'Successfully updated account info.');
 	}
-
-
 }

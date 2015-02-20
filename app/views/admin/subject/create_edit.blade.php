@@ -25,7 +25,6 @@
 ->setAttribute('id','subjects_update_form')
 ->rules(array(
     'subject_code' => 'required',
-    'subject_capacity' => 'required|integer',
 ))
 }}
 @if (isset($subject))

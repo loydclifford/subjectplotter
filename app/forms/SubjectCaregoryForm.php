@@ -33,7 +33,7 @@ class SubjectCategoryForm {
 
         // Default rules
         $rules = array(
-            'subject_category_code' => 'required|unique:subjects,subject_code',
+            'subject_category_code' => 'required|unique:subject_categories,subject_category_code',
             'subject_category_name' => 'required',
         );
 
@@ -78,7 +78,6 @@ class SubjectCategoryForm {
         $this->model->subject_category_name = array_get($input, 'subject_category_name');
 
         // if edit
-
         $this->model->save();
         return $this->model;
     }

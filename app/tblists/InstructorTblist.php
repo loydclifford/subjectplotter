@@ -53,7 +53,6 @@ class InstructorTblist extends BaseTblist {
             'users.last_login as user_last_login',
             'users.registration_date as user_registration_date',
         );
-
     }
 
     protected function setColumns()
@@ -61,19 +60,19 @@ class InstructorTblist extends BaseTblist {
         $this->addCheckableColumn();
 
         $this->columns['id'] = array(
-            'label'           => 'Instructor ID',
+            'label'           => 'ID',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'instructors.id',
-            'thead_attr'      => ' style="width:40px" ',
+            'thead_attr'      => ' style="width:110px" ',
         );
 
         $this->columns['user_id'] = array(
-            'label'           => 'First Name',
+            'label'           => 'User ID',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.user_id',
-            'thead_attr'      => ' style="width:120px" ',
+            'thead_attr'      => ' style="width:110px" ',
         );
 
         $this->columns['user_first_name'] = array(
@@ -81,7 +80,7 @@ class InstructorTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.first_name',
-            'thead_attr'      => ' style="width:120px" ',
+            'thead_attr'      => ' style="width:130px" ',
         );
 
         $this->columns['user_last_name'] = array(
@@ -89,15 +88,15 @@ class InstructorTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.last_name',
-            'thead_attr'      => ' style="width:120px" ',
+            'thead_attr'      => ' style="width:130px" ',
         );
 
         $this->columns['user_email'] = array(
             'label'           => 'Email',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'users.last_name',
-            'thead_attr'      => ' style="width:120px" ',
+            'table_column'    => 'users.user_email',
+            'thead_attr'      => ' ',
         );
 
         $this->columns['user_status'] = array(
@@ -105,7 +104,7 @@ class InstructorTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.status',
-            'thead_attr'      => '',
+            'thead_attr'      => ' style="width:30px" ',
         );
 
         $this->columns['user_last_login'] = array(
@@ -113,7 +112,7 @@ class InstructorTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.last_login',
-            'thead_attr'      => '',
+            'thead_attr'      => ' style="width:100px" ',
         );
 
         $this->addActionColumn();
@@ -154,5 +153,4 @@ class InstructorTblist extends BaseTblist {
     {
         $row->present()->getOrganizationName();
     }
-
 }
