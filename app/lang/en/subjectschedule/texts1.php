@@ -2,7 +2,7 @@
 
 return array(
     'meta_title' => 'Courses',
-    'page_title' => 'Courses',
+    'page_title' => 'Set Schedules',
 
     'create'   => 'New Course',
     'contacts' => 'Course Contacts',

@@ -30,7 +30,7 @@ class Admin_SubjectScheduleSetSchedulesController extends BaseController {
         }
 
         // Lists
-        $this->data['meta']->title = lang('subjectschedule/texts.page_title');
+        $this->data['meta']->title = lang('subjectschedule/texts1.page_title');
         $this->data['course']      = Course::find(Session::get('selected_course_code'));
         $this->data['school_year'] = Session::get('selected_school_year');
         $this->data['semester']    = Session::get('selected_semester');
