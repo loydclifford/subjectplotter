@@ -54,7 +54,7 @@
                     <ul class="treeview-menu">
                         <li><a data-url="^/admin/subjects" href="{{ admin_url('/subjects') }}"><i class="fa fa-angle-double-right"></i> All </a></li>
                         <li><a data-url="^/admin/subjects/create$" href="{{ admin_url('/subjects/create') }}"><i class="fa fa-angle-double-right"></i>Create</a></li>
-                        <li><a data-url="^/admin/subjects/categories" href="{{ admin_url('/subjects/categories') }}"><i class="fa fa-angle-double-right"></i>Subject Categories</a></li>
+                        <li><a data-url="^/admin/subjects/categories" href="{{ admin_url('/subjects/categories') }}"><i class="fa fa-angle-double-right"></i>Subject Category</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

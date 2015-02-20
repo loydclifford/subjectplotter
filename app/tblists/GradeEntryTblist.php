@@ -1,17 +1,18 @@
 <?php
 
-class SubjectCategoryTblist extends BaseTblist {
+class GradeEntryTblist extends BaseTblist {
 
-    public $table   = "subject_categories";
-    public $tableId = "subject_category_code";
+    public $table   = "subjects";
+    public $tableId = "subject_name";
 
-    public $cbName  = "subject_category_code";
+    public $cbName  = "subject_name";
 
     function __construct()
     {
         parent::__construct();
 
-        $this->noResults = lang('subjectcategory/texts.no_result_found');
+        $this->noResults = lang('gradeentry/texts.no_result_found');
+
         // we need to create a custom method setQuery,
         $this->setQuery();
 
@@ -25,23 +26,18 @@ class SubjectCategoryTblist extends BaseTblist {
     protected function setQuery()
     {
         // all subjects
-        $this->query = SubjectCategory::where('subject_category_code', '<>', '0');
+        $this->query = GradeEntry::where('subject_name', '<>', '0');
 
-        if (Input::has('subject_category_code'))
+        if (Input::has('subject_name'))
         {
-            $this->query->where('subject_categories.subject_category_code',trim(Input::get('subject_category_code')));
-        }
-
-        if (Input::has('subject_category_name'))
-        {
-            $this->query->where('subject_category_name','like','%'.Input::get('subject_category_name').'%');
+            $this->query->where('subjects.subject_name',trim(Input::get('subject_name')));
         }
 
         // Debug query
         $this->columnOrders = array();
 
         $this->columnsToSelect = array(
-            'subject_categories.*',
+            'subjects.*',
         );
     }
 
@@ -49,21 +45,28 @@ class SubjectCategoryTblist extends BaseTblist {
     {
         $this->addCheckableColumn();
 
-        $this->columns['subject_category_code'] = array(
-            'label'           => 'Subject Category Code',
-            'sortable'        => true,
-            'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'subjects.subject_code',
-            'thead_attr'      => ' style="width:400px" ',
-        );
-
-        $this->columns['subject_category_name'] = array(
-            'label'           => 'Subject Category Name',
+        $this->columns['id'] = array(
+            'label'           => 'Subject',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'subjects.subject_code',
         );
 
+        $this->columns['unit'] = array(
+            'label'           => 'Units',
+            'sortable'        => true,
+            'classes'         => 'hidden-xs hidden-sm',
+            'table_column'    => 'subjects.subject_code',
+            'thead_attr'      => ' style="width:60px" ',
+        );
+
+        $this->columns['rating'] = array(
+            'label'           => 'Rating',
+            'sortable'        => true,
+            'classes'         => 'hidden-xs hidden-sm',
+            'table_column'    => 'subjects.subject_code',
+            'thead_attr'      => ' style="width:100px" ',
+        );
 
         $this->addActionColumn();
     }

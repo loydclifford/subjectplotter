@@ -4,39 +4,39 @@ return array(
     'meta_title' => 'Instructors',
     'page_title' => 'Instructors',
 
-    'create'        => 'New Instructor',
-    'contacts' => 'Instructor Contacts',
-    'details' => 'Instructor Details',
+    'create'     => 'New Instructor',
+    'contacts'   => 'Instructor Contacts',
+    'details'    => 'Instructor Details',
 
     'no_result_found' => 'No instructors found',
 
     // Sidebar Title
     'sidebar_main_title' => 'Instructors',
-    'sidebar_all' => 'All',
-    'sidebar_new' => 'New',
+    'sidebar_all'        => 'All',
+    'sidebar_new'        => 'New',
 
     // Create
     'create_meta_title' => 'Create Instructor',
     'create_page_title' => 'New Instructor',
-    'create_success' => 'Successfully created instructor.',
+    'create_success'    => 'Successfully created instructor.',
 
     // Update
     'update_meta_title' => 'Update Instructor',
     'update_page_title' => 'Update Instructor',
-    'update_success' => 'Successfully updated instructor',
+    'update_success'    => 'Successfully updated instructor',
 
-    'view_meta_title' => 'View Client',
+    'view_meta_title'   => 'View Client',
 
     // Delete
-    'delete_confirmation' => 'Are you sure you want to delete this instructor?',
+    'delete_confirmation'      => 'Are you sure you want to delete this instructor?',
     'delete_confirmation_many' => 'Are you sure you want to delete all selected instructor(s)?',
-    'delete_failed' => 'Instructor deletion failed.',
-    'delete_success' => 'Successfully deleted instructor(s)',
+    'delete_failed'            => 'Instructor deletion failed.',
+    'delete_success'           => 'Successfully deleted instructor(s)',
 
     // Tblist Action
-    'edit' => 'Edit',
+    'edit'   => 'Edit',
     'delete' => 'Delete',
-    'view' => 'View',
+    'view'   => 'View',
     'export' => 'Export',
     'import' => 'Import',
 

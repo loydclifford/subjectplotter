@@ -25,6 +25,7 @@ class InstructorPresenter extends Presenter{
                 </li>
             </ul>
         </div>
+
         <?php
 
         return ob_get_clean();

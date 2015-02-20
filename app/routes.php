@@ -17,6 +17,8 @@ Route::model('course','Course');
 Route::model('course_year','CourseYear');
 Route::model('instructor','Instructor');
 Route::model('student','Student');
+Route::model('subjectcategory','SubjectCategory');
+
 
 include(__DIR__.'/routes/admin_routes.php');
 include(__DIR__.'/routes/admin_users_routes.php');
@@ -30,6 +32,7 @@ include(__DIR__.'/routes/admin_subjectschedules_routes.php');
 include(__DIR__.'/routes/admin_subjectschedulesetschedules_routes.php');
 include(__DIR__.'/routes/admin_subjectcategories_routes.php');
 include(__DIR__.'/routes/admin_students_routes.php');
+include(__DIR__.'/routes/admin_gradeentry_routes.php');
 
 include(__DIR__.'/routes/public_auth_routes.php');
 include(__DIR__.'/routes/public_contact_routes.php');

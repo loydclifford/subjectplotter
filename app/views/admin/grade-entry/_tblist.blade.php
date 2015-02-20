@@ -1,30 +1,9 @@
-
-
 <!-- Main Content -->
-<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="instructors_tblist_form">
+<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="gradeentry_tblist_form">
     <div class="row form-inline tblist-form-toolbar" >
         <div class="col-sm-9">
             <div class="form-group">
-                <label class="sr-only" for="input_instructor_id">{{ lang('instructor/attributes.labels.instructor_name') }}</label>
-                <input type="text" name="instructor_id" class="form-control" placeholder="{{ lang('instructor/attributes.placeholders.instructor_id') }}" value="{{ Input::get('instructor_id') }}" style="width:180px">
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="input_name">{{ lang('instructor/attributes.labels.instructor_name') }}</label>
-                <input type="text" name="name" class="form-control" id="input_name" placeholder="{{ lang('instructor/attributes.placeholders.instructor_name') }}" value="{{ Input::get('name') }}">
-            </div>
-
-            <div class="form-group">
-                <label class="sr-only" for="action_bulk">{{ lang('instructor/attributes.labels.status') }}</label>
-                <select name="status" class="form-control">
-                    <option value="">{{ lang('instructor/attributes.placeholders.status') }}</option>
-                    @foreach(User::$statuses as $key=>$value)
-                    <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="input_email">{{ lang('instructor/texts.label.email') }}</label>
-                <input type="text" name="email" class="form-control" id="input_email" placeholder="{{ lang('instructor/attributes.placeholders.email') }}" value="{{ Input::get('email') }}">
+                <input type="text" name="subject_name" class="form-control" placeholder="{{ lang('gradeentry/attributes.placeholders.subject_name') }}" value="{{ Input::get('subject_name') }}" style="width:180px">
             </div>
         </div>
         <div class="col-sm-3">
@@ -73,7 +52,7 @@
 </form>
 <script>
     $(function(){
-        var $tblist = $('#instructors_tblist_form');
+        var $tblist = $('#gradeentry_tblist_form');
 
         var $backAction = new utils.buckAction();
         $backAction.init($tblist,function(actionData)
@@ -83,15 +62,15 @@
                 switch (actionData.action)
                 {
                     case 'delete':
-                        bootbox.confirm('{{ lang("instructor/texts.delete_confirmation_many") }}', function(result) {
+                        bootbox.confirm('{{ lang("gradeentry::texts.delete_confirmation_many") }}', function(result) {
                             if (result === true)
                             {
-                                utils.redirect(utils.adminUrl('/instructors/delete'+actionData.param));
+                                utils.redirect(utils.adminUrl('/grade-entry/delete'+actionData.param));
                             }
                         });
                         break;
                     case 'export':
-                        utils.newTab(utils.adminUrl('/instructors/export'+actionData.param));
+                        utils.newTab(utils.adminUrl('/grade-entry/export'+actionData.param));
                         break;
                 }
             }
