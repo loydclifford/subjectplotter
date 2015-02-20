@@ -36,6 +36,7 @@ class Public_SubjectController extends BaseController {
 		// intended to search
 		$course_subject_schedule = CourseSubjectSchedule::select(DB::raw('course_subject_schedules.*,
 					  subjects.subject_name,
+					  subjects.units,
 					  users.first_name AS instructor_first_name,
 					  users.last_name AS instructor_last_name,
 					  subjects.subject_name AS subject_name,
@@ -73,16 +74,21 @@ class Public_SubjectController extends BaseController {
 
 			$day = join('-',$str);
 
+
+			$formatted_start_time = date('h:i a', strtotime($subject->time_start));
+			$formatted_end_time = date('h:i a', strtotime($subject->time_end));
+			$time = $formatted_start_time . ' - ' . $formatted_end_time;
+
 			$subjects_assoc[] = array(
 				'id'                => $subject->id,
 				'name'              => $subject->subject_name,
 				'course_year'       => $subject->course_code . '-' .$subject->course_year_code,
 				'descriptive_title' => $subject->description,
 				'day'               => $day,
-				'time'              => $subject->time_start . '-' . $subject->time_end,
+				'time'              => $time,
 				'room'              => $subject->room_id,
 				'units'             => $subject->units,
-				'instructor_name'   => $subject->first_name . ' ' . $subject->last_name,
+				'instructor_name'   => $subject->instructor_first_name . ' ' . $subject->instructor_last_name,
 			);
 		}
 
