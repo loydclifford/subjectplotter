@@ -19,8 +19,9 @@
                 <th>Time Schedule</th>
                 <th>Room</th>
                 <th>Instructor</th>
-                <th style="width:20px;" align="center">Status</th>
+                @if (!$has_plotted || ($has_plotted && $has_plotted->status == StudentPlotting::STATUS_DENIED))
                 <th style="width:20px;" align="center">Remove</th>
+                @endif
             </tr>
             </thead>
             <tbody>
@@ -35,14 +36,10 @@
                         <td>{{ $course_subject_schedule->present()->getTimeSchedule() }}</td>
                         <td>{{ $course_subject_schedule->room_id }}</td>
                         <td>{{ $course_subject_schedule->instructor->user->first_name }} {{ $course_subject_schedule->instructor->user->last_name }}</td>
-                        <td align="center">
-                            @if (Student::checkSchedule($course_subject_schedule->courseSubject->id))
-                            <i class="fa fa-check-circle alert-success"></i>
-                            @else
-                            <i class="fa fa-check-circle alert-error"></i>
-                            @endif
-                        </td>
+
+                            @if (!$has_plotted || ($has_plotted && $has_plotted->status == StudentPlotting::STATUS_DENIED))
                         <td align="center"><a class="confirm_action" href="{{ url('/subject/getRemove?course_subject_schedule_id='.urlencode($course_subject_schedule->id)) }}" data-message="Are you sure you want to remove this subject to your schedule?"><i class="fa fa-remove"></i></a></td>
+                            @endif
                     </tr>
                 @endforeach
             </tbody>
@@ -51,7 +48,7 @@
         <br />
 
         <div class="pull-left">
-            @if (!$has_plotted)
+            @if (!$has_plotted || ($has_plotted && $has_plotted->status == StudentPlotting::STATUS_DENIED))
             <a href="#add_subject_modal" class="btn btn-default" data-toggle="modal" >Add Subjects</a> &nbsp;
             @endif
             <strong>Total Units: {{ $total_units }}</strong>&nbsp;
@@ -59,7 +56,7 @@
         </div>
 
         <div class="pull-right">
-            @if (!$has_plotted)
+            @if (!$has_plotted || ($has_plotted && $has_plotted->status == StudentPlotting::STATUS_DENIED))
             <a href="{{ url('/subject/load-default') }}" class="btn btn-default confirm_action" data-message="Are you sure you want to load default plotting?" >Load Defaults </a>
             <a class="btn btn-success " id="submit_plotting_form_triggerer" >Plot Schedule <i class="fa fa-check-square"></i></a>
 

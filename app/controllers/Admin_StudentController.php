@@ -86,6 +86,33 @@ class Admin_StudentController extends BaseController {
             ->with(SUCCESS_MESSAGE,lang('student/texts.update_success'));
     }
 
+    public function getView(Student $student)
+    {
+        $studentPlotting = StudentPlotting::getLatestPlotting($student);
+
+        if ($studentPlotting)
+        {
+            $this->data['meta']->title  = 'Student Plotting Request';
+
+            $this->data['student_plotting']  = $studentPlotting;
+            $this->data['student']  = $studentPlotting->student;
+            $this->data['course_code']  = $studentPlotting->course_code;
+            $this->data['course_year_code']  = $studentPlotting->course_year_code;
+            $this->data['semester']  = $studentPlotting->semester == 'first_semester' ? 'First Semester' : 'Second Semester';
+
+            $course_subject_schedule_id = StudentSubject::where('student_plotting_id', $studentPlotting->id)->get()->lists('course_subject_schedule_id');
+
+            $this->data['course_subject_schedules'] = CourseSubjectSchedule::whereIn('id',$course_subject_schedule_id )->get();
+
+            return View::make('admin.student.view', $this->data);
+        }
+        else
+        {
+            $this->data['student']  = $student;
+            return View::make('admin.student.view_no_plotting', $this->data);
+        }
+    }
+
     public function getDelete()
     {
         Utils::validateBulkArray('user_id');

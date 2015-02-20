@@ -31,7 +31,8 @@ class Public_SubjectController extends BaseController {
 		{
 			$student_schedule->status = StudentPlotting::STATUS_PLOTTED;
 			$student_schedule->student_plotting_id = $student_plotting->id;
-			$student_plotting->save();
+			$student_schedule->save();
+
 		}
 
 		return Redirect::to('/dashboard')->with(SUCCESS_MESSAGE, 'Successfully plotted subjects.');

@@ -8,7 +8,7 @@ class StudentPresenter extends Presenter{
     {
         ob_start(); ?>
         <div class="btn-group" id="">
-            <?php echo $this->editButton() ?>
+            <?php echo $this->viewButton() ?>
             <button data-toggle="dropdown" type="button" class="btn btn-info dropdown-toggle">
                 <span class="caret"></span>
             </button>
@@ -16,6 +16,9 @@ class StudentPresenter extends Presenter{
                 <li>
                     <a class="confirm_action" data-message="<?php echo lang('student/texts.delete_confirmation') ?>" href="<?php echo $this->deleteUrl() ?>">
                         <?php echo lang('student/texts.delete') ?>
+                    </a>
+                    <a   href="<?php echo $this->editUrl() ?>">
+                        <?php echo lang('student/texts.edit') ?>
                     </a>
                 </li>
             </ul>
