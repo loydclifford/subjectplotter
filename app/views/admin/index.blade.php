@@ -5,8 +5,8 @@
    <div class="col-lg-6">
     <div class="input-group">
       <div class="input-group-btn meo_year"><h3>Filter Status</h3>
-          <select name="--select Year--" id="sy">
-              <option > --Select School Year-- </option>
+          <select style="padding-left:10px; margin-left:-24px;" name="select Year" id="sy">
+              <option > Select School Year </option>
               <option > 2009-2010 </option>
               <option > 2010-2011 </option>
               <option > 2011-2012 </option>
@@ -15,14 +15,14 @@
               <option > 2014-2015 </option>   
           </select>
 
-          <select name="--select Year--" id="sem">
-              <option > --Select Semester-- </option>
+          <select style="padding-left:10px; margin-left:-14px;" name="select Year" id="sem">
+              <option > Select Semester</option>
               <option > 1st Semester </option>
               <option > 2st Semester </option>   
           </select>
 
           <div class="btn-group meo_btn" role="group" aria-label="...">
-              <button type="button" class="btn btn-primary" >Apply</button>
+              <button type="button" class="btn btn-primary" style="padding-left:30px; padding-right:30px;" >Filter</button>
           </div>
       </div><!-- /btn-group -->
     </div><!-- /input-group -->
@@ -46,12 +46,12 @@
                              
         
                     <ul class="nav meo_teachers">
-                        <i class="fa fa-user fa-3x" style="position: relative; border: solid 1px transparent;"></i>
+                        <i class="fa fa-users fa-3x" style="position: relative; border: solid 1px transparent;"></i>
                         <li class="header" style="position: relative; float: right; top: 12px; left: 4px; "><strong>Total Teachers</strong> </li>
                     </ul>
               
                     <ul class="nav meo_students">
-                        <i class="fa fa-user fa-3x" style="position: relative; border: solid 1px transparent;"></i>
+                        <i class="fa fa-users fa-3x" style="position: relative; border: solid 1px transparent;"></i>
                         <li class="header" style="position: relative; float: right; top: 12px; left: 4px; "><strong>Total Students</strong> </li>
                     </ul>
           
@@ -69,7 +69,7 @@
 
 
 <div class="page-header navigation">
-  <h3>Quick Navigation</h3>
+    <h3>Quick Navigation</h3>
 </div>
 
 <button type="button" class="btn btn-default btn-lg active manage_rooms">
@@ -92,28 +92,6 @@
 
 <button type="button" class="btn btn-default btn-lg active grade_entry">
 <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Grade Entry</button>
-
-<nav>
-  <ul class="pagination page">
-    <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-
-
 
                 
 @stop
