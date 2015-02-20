@@ -50,6 +50,11 @@ class GradeEntryTblist extends BaseTblist {
             $this->query->where('students.course_year_code',trim(Input::get('course_year_code')));
         }
 
+        if (Input::has('email'))
+        {
+            $this->query->where('users.email','LIKE', '%'.trim(Input::get('email')).'%');
+        }
+
         // Debug query
         $this->columnOrders = array();
 
@@ -112,9 +117,15 @@ class GradeEntryTblist extends BaseTblist {
     }
 
 
+
     protected function colSetAction($row)
     {
-        echo $row->present()->actionButtons();
+        ?>
+
+        <div class="btn-group" id="">
+            <a href="<?php echo admin_url("/grade-entry/{$row->student_no}/view") ?>" class="btn btn-primary"><?php echo lang('student/texts.view') ?></a>
+        </div>
+    <?php
     }
 
     protected function colSetId($row)

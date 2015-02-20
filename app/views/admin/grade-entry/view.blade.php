@@ -1,73 +1,65 @@
 @extends('admin._partials._layout')
 
 @section('main-content-header')
-<h1>
-    {{ $subject->present()->getDisplayName() }}
-        - #{{ $subject->subject_code }}
-    <small>
-        {{ $subject->subject_type }}
-    </small>
-
-    {{ create_back_button(admin_url('/subjects')) }}
-
-    @if (isset($subject))
-        <div class="pull-right">
-            {{ $subject->present()->editButton() }}
-            {{ $subject->present()->exportButton() }}
-            {{ $subject->present()->deleteButton() }}
-        </div>
-    @endif
-</h1>
+    <h1>
+        {{ $student->user->first_name }} {{ $student->user->last_name }}
+        <small>{{ $course_code }}-{{ $course_year_code }} ({{ $semester }})</small>
+        -
+        <small>{{ $student_plotting->status }}</small>
+    </h1>
 
 @overwrite
 
 @section('main-content')
 
-@include('admin._partials._messages')
+    {{ Former::vertical_open(URL::current())->method('POST')
+        ->setAttribute('autocomplete','off')
+        ->setAttribute('id','grade_entry_form') }}
+        @include('admin._partials._messages')
+        <table class="table table-striped table-bordered" id="course_subject_schedule_lists">
+            <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Descriptive Title</th>
+                <th>Units</th>
+                <th>DAY</th>
+                <th>Time Schedule</th>
+                <th>Room</th>
+                <th>Instructor</th>
+                <th>Final</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $total_units = 0; ?>
+            @foreach ($student_subjects as $student_subject)
+                <?php $course_subject_schedule = $student_subject->courseSubjectSchedule;
+                ?>
+                <tr>
+                    <?php $total_units = $total_units + (int) $course_subject_schedule->courseSubject->subject->units ?>
+                    <td>{{ $course_subject_schedule->courseSubject->subject->subject_name }}</td>
+                <td>{{ $course_subject_schedule->courseSubject->subject->description }}</td>
+                <td>{{ $course_subject_schedule->courseSubject->subject->units }}</td>
+                <td>{{ $course_subject_schedule->present()->getDayString() }}</td>
+                <td>{{ $course_subject_schedule->present()->getTimeSchedule() }}</td>
+                <td>{{ $course_subject_schedule->room_id }}</td>
+                <td>{{ $course_subject_schedule->instructor->user->first_name }} {{ $course_subject_schedule->instructor->user->last_name }}</td>
+            <td>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h3>{{ trans('subject::texts.details') }}</h3>
-            <p>{{ $subject->subjectDetail->getAddress() }}</p>
-            <p>{{ $subject->subjectDetail->getPhone() }}</p>
-        </div>
-        <div class="col-md-5">
-            <h3>{{ trans('subject::texts.contacts') }}</h3>
-            {{ $subject->present()->getContactDetails() }}
-        </div>
+                    <select name="average[{{ $student_subject->id }}]">
+                        <option value="">-- Grade --</option>
+                        @for ($i=1.0;$i<=5.0;$i+=.1)
+                            <option {{ (trim($i) == trim($student_subject->average)) ? 'selected="selected"' : NULL }} value="{{ number_format($i, 1) }}">{{ number_format($i, 1) }}</option>
+                        @endfor
+                        <option {{ is_selected(0, $student_subject->average) }} value="0">0</option>
+                        <option {{ is_selected('NA', $student_subject->average) }} value="NA">NA</option>
+                        <option {{ is_selected('INC', $student_subject->average) }} value="INC">INC</option>
+                    </select>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <div>
+        <button type="submit" class="btn btn-primary">Submit Grade</button>
     </div>
-
-    <p>&nbsp;</p>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#tab_vehicles">Vehicles</a></li>
-                    <li class=""><a data-toggle="tab" href="#tab_orders">Orders</a></li>
-                    <li class=""><a data-toggle="tab" href="#tab_enquiries">Enquiries</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div id="tab_vehicles" class="tab-pane active">
-                        @include('admin.listing._tblist',array(
-                        'list' => $listing_list,
-                        'list_action' => $listing_list_action
-                        ))
-                    </div><!-- /.tab-pane -->
-                    <div id="tab_orders" class="tab-pane">
-                        @include('admin.order._tblist',array(
-                        'list' => $order_list,
-                        'list_action' => $order_list_action
-                        ))
-                    </div><!-- /.tab-pane -->
-                    <div id="tab_enquiries" class="tab-pane">
-                        @include('admin.listing_enquiry._tblist',array(
-                            'list' => $listing_enquiry_list,
-                            'list_action' => $listing_enquiry_action
-                        ))
-                    </div><!-- /.tab-pane -->
-                </div><!-- /.tab-content -->
-            </div>
-        </div>
-    </div>
+    {{ Former::close() }}
 @stop

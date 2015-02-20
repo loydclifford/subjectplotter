@@ -20,90 +20,43 @@ class Admin_GradeEntryController extends BaseController {
         return View::make('admin.grade-entry.index', $this->data);
     }
 
-    public function postCreate()
+    public function getView(Student $student)
     {
-        // Check for taxonomy slugs
-        $grade_entry_repo = new GradeEntryForm(new GradeEntry());
-        if ($has_error = $grade_entry_repo->validateInput())
+        $studentPlotting = StudentPlotting::getLatestPlotting($student);
+
+        if ($studentPlotting)
         {
-            return $has_error;
-        }
+            $this->data['meta']->title  = 'Student Plotting Request';
 
-        $grade_entry = $grade_entry_repo->saveInput();
-        Event::fire('grade_entry.add', $grade_entry);
+            $this->data['student_plotting']  = $studentPlotting;
+            $this->data['student']  = $studentPlotting->student;
+            $this->data['course_code']  = $studentPlotting->course_code;
+            $this->data['course_year_code']  = $studentPlotting->course_year_code;
+            $this->data['semester']  = $studentPlotting->semester == 'first_semester' ? 'First Semester' : 'Second Semester';
 
-        return Redirect::to(Input::get('_success_url'))
-            ->with(SUCCESS_MESSAGE, lang('grade_entry/texts.create_success'));
-    }
+            $this->data['student_subjects'] = StudentSubject::where('student_plotting_id', $studentPlotting->id)->get();
 
-    public function getEdit(GradeEntry $grade_entry)
-    {
-        var_dump(Input::all());
-        die('');
-        $this->data['meta']->title = lang('gradeentry/texts.update_meta_title');
-        $this->data['page_title']  = lang('gradeentry/texts.update_page_title');
-        $this->data['url']         = URL::current();
-        $this->data['method']      = 'POST';
-        $this->data['return_url']  = admin_url("/grade-entry{$grade_entry->user_id}/edit");
-        $this->data['success_url'] = admin_url("/grade-entry{$grade_entry->user_id}/edit");
-
-        $this->data['enable_breadcrumb'] = false;
-        $this->data['grade_entry'] = $grade_entry;
-
-        return View::make('admin.grade-entry.create_edit')->with($this->data);
-    }
-
-    public function postEdit(GradeEntry $grade_entry)
-    {
-        // Check for taxonomy slugs
-        $grade_entry_repo = new GradeEntryForm($grade_entry);
-        if ($has_error = $grade_entry_repo->validateInput())
-        {
-            return $has_error;
-        }
-
-        $grade_entry = $grade_entry_repo->saveInput();
-        Event::fire('grade-entry.update', $grade_entry);
-
-            return Redirect::to(admin_url("subjects/categories/{$grade_entry->$subject_category_code}/edit"))
-            ->with(SUCCESS_MESSAGE,lang('gradeentry/texts.update_success'));
-    }
-
-    public function getDelete()
-    {
-        Utils::validateBulkArray('subject_category_codes');
-
-        // The subject
-        $subject_category_codes = Input::get('subject_category_codes', array());
-        $subjectcategories = GradeEntry::whereIn('subject_category_code', $subject_category_codes)->delete();
-
-        // Delete Subjects
-        Event::fire('grade_entry.delete', $subjectcategories);
-
-        if (Input::has('_success_url'))
-        {
-            return Redirect::to(Input::get('_success_url'))
-                ->with(SUCCESS_MESSAGE, lang('gradeentry/texts.delete_success'));
+            return View::make('admin.grade-entry.view', $this->data);
         }
         else
         {
-            return Redirect::back()
-                ->with(SUCCESS_MESSAGE, lang('gradeentry/texts.delete_success'));
+            $this->data['student']  = $student;
+            return View::make('admin.grade-entry.view_no_plotting', $this->data);
         }
     }
 
-    // Import
-    public function getExport()
+    public function postView(Student $student)
     {
-        Utils::validateBulkArray('subject_category_codes');
-
-        $array = GradeEntry::whereIn('subject_category_code', Input::get('subject_category_codes'))->get()->toArray();
-
-        // Start export if not empty
-        if ( ! empty($array))
+        foreach (Input::get('average', array()) as $student_subject_id =>$average)
         {
-            $headers = array_keys($array[0]);
-            Utils::csvDownload('subjectcategories_data_csv', $array, $headers);
+            $student_subject = StudentSubject::find($student_subject_id);
+            if ($student_subject)
+            {
+                $student_subject->average = $average;
+                $student_subject->save();
+            }
         }
+
+        return Redirect::back()->with(SUCCESS_MESSAGE, 'Successfully updated grade.');
     }
 }

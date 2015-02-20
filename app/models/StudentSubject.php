@@ -16,6 +16,11 @@ class StudentSubject extends Eloquent {
 
     public $timestamps = false;
 
+    public function courseSubjectSchedule()
+    {
+        return $this->belongsTo('CourseSubjectSchedule', 'course_subject_schedule_id', 'id');
+    }
+
     /**
      * Return array of subject schedule id that the student has taken to
      *
@@ -88,5 +93,10 @@ class StudentSubject extends Eloquent {
             $student_subject->status = StudentPlotting::STATUS_PLOTTING;
             $student_subject->save();
         }
+    }
+
+    public static function getGradeAverage($course_subject_schedule_id)
+    {
+        self::where('course_subject_schedule_id', $course_subject_schedule_id)->pluck('average');
     }
 }

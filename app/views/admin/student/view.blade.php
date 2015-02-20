@@ -7,17 +7,6 @@
         <small>{{ $course_code }}-{{ $course_year_code }} ({{ $semester }})</small>
         -
         <small>{{ $student_plotting->status }}</small>
-
-        <div class="pull-right">
-            @if ($student_plotting->status != StudentPlotting::STATUS_APPROVED)
-                <a class="confirm_action btn btn-success" data-message="Are you sure you want to approve this plotting?" href="{{ url("/admin/schedule-requests/{$student_plotting->id}/approved") }}">
-                    Approve Plotting
-                </a>
-                <a class="confirm_action btn btn-warning" data-message="Are you sure you want to deny plotting?" href="{{ url("/admin/schedule-requests/{$student_plotting->id}/deny") }}">
-                    Deny
-                </a>
-            @endif
-        </div>
     </h1>
 
 @overwrite

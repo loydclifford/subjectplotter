@@ -10,6 +10,9 @@
             <div class="form-group">
                 <input type="text" name="student_name" class="form-control" placeholder="{{ lang('student/attributes.placeholders.student_name') }}" value="{{ Input::get('student_name') }}" style="width:180px">
             </div>
+            <div class="form-group">
+                <input type="text" name="email" class="form-control" placeholder="Email" value="{{ Input::get('email') }}" style="width:180px">
+            </div>
 
             <div class="form-group">
                 <select name="course_code" class="form-control">

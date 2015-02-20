@@ -1,5 +1,5 @@
 <!-- Main Content -->
-<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="gradeentry_tblist_form">
+<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="students_tblist_form">
 
     <div class="row form-inline tblist-form-toolbar" >
         <div class="col-sm-9">
@@ -9,6 +9,9 @@
 
             <div class="form-group">
                 <input type="text" name="student_name" class="form-control" placeholder="{{ lang('student/attributes.placeholders.student_name') }}" value="{{ Input::get('student_name') }}" style="width:180px">
+            </div>
+            <div class="form-group">
+                <input type="text" name="email" class="form-control" placeholder="Email" value="{{ Input::get('email') }}" style="width:180px">
             </div>
 
             <div class="form-group">
@@ -32,7 +35,7 @@
 
         <div class="col-sm-3">
             <div class="pull-right">
-                <button type="reset" class="btn btn-info"><i class="fa fa-times"></i> {{  lang('texts.reset_button') }}</button>
+                <button type="reset" class="btn btn-info"><i class="fa fa-times"></i> {{ lang('texts.reset_button') }}</button>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> {{ lang('texts.filter_button') }}</button>
             </div>
         </div>
@@ -75,7 +78,7 @@
 </form>
 <script>
     $(function(){
-        var $tblist = $('#grade-entry_tblist_form');
+        var $tblist = $('#students_tblist_form');
 
         var $backAction = new utils.buckAction();
         $backAction.init($tblist,function(actionData)
@@ -85,15 +88,15 @@
                 switch (actionData.action)
                 {
                     case 'delete':
-                        bootbox.confirm('{{ lang("grade-entry::texts.delete_confirmation_many") }}', function(result) {
+                        bootbox.confirm('{{ lang("student::texts.delete_confirmation_many") }}', function(result) {
                             if (result === true)
                             {
-                                utils.redirect(utils.adminUrl('/grade-entry/delete'+actionData.param));
+                                utils.redirect(utils.adminUrl('/students/delete'+actionData.param));
                             }
                         });
                         break;
                     case 'export':
-                        utils.newTab(utils.adminUrl('/grade-entry/export'+actionData.param));
+                        utils.newTab(utils.adminUrl('/students/export'+actionData.param));
                         break;
                 }
             }

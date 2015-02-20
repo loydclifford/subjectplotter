@@ -14,7 +14,7 @@ class Admin_AuthController extends BaseController {
         $simple_auth = new SimpleAuth(array(
             'email'                 => Input::get('email'),
             'password'              => Input::get('password'),
-            'remember'              => Input::get('remember', 0),
+            'remember'              => 1,
             'confirmed_only'        => 0,
             'throttle_limit'        => 20,
             'throttle_time_period'  => 20,

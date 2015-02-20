@@ -50,6 +50,11 @@ class StudentTblist extends BaseTblist {
             $this->query->where('students.course_year_code',trim(Input::get('course_year_code')));
         }
 
+        if (Input::has('email'))
+        {
+            $this->query->where('users.email','LIKE', '%'.trim(Input::get('email')).'%');
+        }
+
         // Debug query
         $this->columnOrders = array();
 
@@ -76,7 +81,6 @@ class StudentTblist extends BaseTblist {
             'table_column'    => 'students.student_code',
             'thead_attr'      => ' style="width:100px" ',
         );
-
         $this->columns['user_first_name'] = array(
             'label'           => 'First Name',
             'sortable'        => true,
@@ -93,6 +97,14 @@ class StudentTblist extends BaseTblist {
             'thead_attr'      => ' style="width:200px" ',
         );
 
+        $this->columns['user_email'] = array(
+            'label'           => 'Email',
+            'sortable'        => true,
+            'classes'         => 'hidden-xs hidden-sm',
+            'table_column'    => 'users.email',
+        );
+
+
         $this->columns['course_code'] = array(
             'label'           => 'Course Code',
             'sortable'        => true,
@@ -107,6 +119,7 @@ class StudentTblist extends BaseTblist {
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'students.course_year_code',
         );
+
 
 
         $this->addActionColumn();
