@@ -11,12 +11,16 @@ class Public_SubjectController extends BaseController {
 
 	public function postSubmitPlotting()
 	{
+
+
 		$student_schedules = StudentSubject::where('school_year', Input::get('school_year'))
 			->where('course_code', Input::get('course_code'))
 			->where('course_year_code', Input::get('course_year_code'))
 			->where('semester', Input::get('semester'))
 			->where('student_no', Input::get('student_no'))
 			->get();
+
+
 
 		$student_plotting = new StudentPlotting();
 		$student_plotting->student_no = Input::get('student_no');
@@ -32,7 +36,6 @@ class Public_SubjectController extends BaseController {
 			$student_schedule->status = StudentPlotting::STATUS_PLOTTED;
 			$student_schedule->student_plotting_id = $student_plotting->id;
 			$student_schedule->save();
-
 		}
 
 		return Redirect::to('/dashboard')->with(SUCCESS_MESSAGE, 'Successfully plotted subjects.');
@@ -44,6 +47,35 @@ class Public_SubjectController extends BaseController {
 
 		if ($course_subject_schedule)
 		{
+
+			$student_course_subject_schedule_ids = StudentSubject::getCourseSubjectScheduleId(
+				Input::get('student_no'),
+				Input::get('school_year'),
+				Input::get('course_code'),
+				Input::get('course_year_code'),
+				Input::get('semester')
+			);
+
+			$course_subject_schedules = CourseSubjectSchedule::whereIn('id', $student_course_subject_schedule_ids)->get();
+
+			$total_units = 0;
+
+			foreach ($course_subject_schedules as $course_subject_schedule)
+			{
+				$total_units += $course_subject_schedule->courseSubject->subject->units;
+			}
+
+			$max_units = Subject::countUnits(
+				Input::get('school_year'),
+				Input::get('course_code'),
+				Input::get('course_year_code')
+			);
+
+			if ($max_units < $total_units)
+			{
+				return Redirect::back()->with(ERROR_MESSAGE, 'Invalid entry. You reached the maximum units.');
+			}
+
 			$student_subject = new StudentSubject();
 			$student_subject->school_year = Input::get('school_year');
 			$student_subject->semester = Input::get('semester');

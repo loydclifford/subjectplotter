@@ -56,6 +56,12 @@ class StudentSubject extends Eloquent {
             ->where('semester', $semester)
             ->get();
 
+        StudentSubject::where('school_year', $school_year)
+            ->where('course_code', $course_code)
+            ->where('course_year_code', $course_year_code)
+            ->where('semester', $semester)
+            ->delete();
+
         foreach ($course_subjects as $course_subject)
         {
             $student_subject = new StudentSubject();

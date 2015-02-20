@@ -9,6 +9,9 @@
         @if ($has_plotted)
             <p class="alert alert-info">You already plotted for this semester. status: {{ $has_plotted->status }}</p>
         @endif
+        @include('admin._partials._messages')
+
+
         <table class="table table-striped table-bordered" id="course_subject_schedule_lists">
             <thead>
             <tr>
