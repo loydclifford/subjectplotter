@@ -26,9 +26,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface{
     const USER_TYPE_ADMIN = 1;
     const USER_TYPE_INSTRUCTOR = 2;
     const USER_TYPE_STUDENT = 3;
+    const USER_TYPE_DEAN = 4;
 
     public static $userTypes = array(
-        self::USER_TYPE_ADMIN   => 'admin',
+        self::USER_TYPE_ADMIN   => 'Registrar',
+        self::USER_TYPE_DEAN   => 'Dean',
         self::STATUS_INACTIVE   => 'Instructor',
         self::USER_TYPE_STUDENT => 'Student'
     );

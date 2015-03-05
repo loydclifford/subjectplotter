@@ -25,7 +25,10 @@ class UserTblist extends BaseTblist {
     protected function setQuery()
     {
         // all users
-        $this->query = User::where('user_type', User::USER_TYPE_ADMIN);
+        $this->query = User::whereIn('user_type', array(
+            User::USER_TYPE_ADMIN,
+            User::USER_TYPE_DEAN,
+        ));
 
         if (Input::has('user_id'))
         {
@@ -100,7 +103,7 @@ class UserTblist extends BaseTblist {
             'label'           => 'User Type',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'groups.display_name',
+            'table_column'    => 'users.user_type',
             'thead_attr'      => ' style="width:70px" ',
         );
 
@@ -127,6 +130,11 @@ class UserTblist extends BaseTblist {
     protected function colSetAction($row)
     {
         echo $row->present()->actionButtons();
+    }
+
+    protected function colSetUserType(User $row)
+    {
+        echo User::$userTypes[$row->user_type];
     }
 
     protected function colSetId($row)

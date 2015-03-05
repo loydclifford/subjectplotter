@@ -79,25 +79,27 @@
                         <li><a data-url="^/admin/students/create$" href="{{ admin_url('/students/create') }}"><i class="fa fa-angle-double-right"></i>Create</a></li>
                     </ul>
                 </li>
-                <li >
-                    <a href="{{ admin_url('/deans') }}" data-url="^/admin/deans/[0-9]+">
-                        <i class="fa  fa-users"></i>
-                        <span>Deans</span>
-                    </a>
-                </li>
+
+
+                @if (user_get()->user_type == User::USER_TYPE_ADMIN)
                 <li >
                     <a href="{{ admin_url('/grade-entry') }}" data-url="^/admin/grade-entry/[0-9]+">
                         <i class="fa  fa-pencil-square-o"></i>
                         <span>Grade Entry</span>
                     </a>
                 </li>
+                @endif
+
+                @if (user_get()->user_type == User::USER_TYPE_DEAN)
                 <li >
                     <a href="{{ admin_url('/subject-schedules') }}" data-url="^/admin/subject-schedules/[0-9]+">
                         <i class="fa  fa-list"></i>
                         <span>Subject Schedules</span>
                     </a>
                 </li>
+                @endif
             </li>
+            @if (user_get()->user_type == User::USER_TYPE_ADMIN)
 
             <li class="tree-separator">Notifications</li>
 
@@ -130,6 +132,7 @@
                 </a>
             </li>
             <li class="tree-separator">&nbsp;</li>
+            @endif
         </ul>
     </section>
     <!-- /.sidebar -->

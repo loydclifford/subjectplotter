@@ -83,7 +83,7 @@ class Public_SubjectController extends BaseController {
 			$student_subject->course_year_code =  Input::get('course_year_code');
 
 			$student_subject->student_no = Input::get('student_no');
-			$student_subject->course_subject_schedule_id = $course_subject_schedule->id;
+			$student_subject->course_subject_schedule_id = Input::get('course_subject_schedule_id', 0);
 			$student_subject->course_subject_id = $course_subject_schedule->course_subject_id;
 
 			$student_subject->average = 'NA';

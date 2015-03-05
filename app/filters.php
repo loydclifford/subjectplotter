@@ -13,15 +13,22 @@
 
 Route::filter('admin_guest', function()
 {
-	if (user_check() && user_get()->user_type == User::USER_TYPE_ADMIN)
+	if (user_check() && in_array(user_get()->user_type, array(User::USER_TYPE_ADMIN, User::USER_TYPE_DEAN)))
 	{
-		return Redirect::intended(admin_url('/dashboard'));
+        if (Request::url() == admin_url('/login'))
+        {
+            return Redirect::to(admin_url('/dashboard'));
+        }
+        else
+        {
+            return Redirect::intended(admin_url('/dashboard'));
+        }
 	}
 });
 
 Route::filter('admin_auth', function()
 {
-	if ( ! user_check() || user_get()->user_type != User::USER_TYPE_ADMIN)
+	if ( ! user_check() || ! in_array(user_get()->user_type, array(User::USER_TYPE_ADMIN, User::USER_TYPE_DEAN)) )
 	{
 		if (Request::ajax())
 		{

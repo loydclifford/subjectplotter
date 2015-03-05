@@ -17,12 +17,12 @@
 </a>
 <div class="navbar-right">
 <ul class="nav navbar-nav">
-
 <!-- User Account: style can be found in dropdown.less -->
 <li class="dropdown user user-menu">
+
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="glyphicon glyphicon-user"></i>
-        <span>{{ user_get()->present()->getDisplayName() }} <i class="caret"></i></span>
+        <span>{{ user_get()->present()->getDisplayName() }} ({{ User::USER_TYPE_DEAN == user_get()->user_type ? "Dean" : "Admin" }}) <i class="caret"></i></span>
     </a>
     <ul class="dropdown-menu">
         <!-- User image -->

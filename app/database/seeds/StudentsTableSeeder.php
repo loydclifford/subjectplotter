@@ -18,7 +18,6 @@ class StudentsTableSeeder extends Seeder {
         // use the factory to create a Faker\Generator instance
         $faker = Faker\Factory::create();
 
-
         $user = new User();
         $user->first_name = $faker->firstName;
         $user->last_name  = $faker->lastName;

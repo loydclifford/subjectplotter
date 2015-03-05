@@ -9,4 +9,11 @@ class Admin_AdminController extends BaseController {
         return View::make('admin.index',$this->data);
     }
 
+    public function getLogout()
+    {
+        Auth::logout();
+
+        return Redirect::to(admin_url('/'));
+    }
+
 }

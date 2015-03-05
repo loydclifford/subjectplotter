@@ -91,8 +91,17 @@ class StudentSubject extends Eloquent {
 
             $student_subject->average = 0;
             $student_subject->status = StudentPlotting::STATUS_PLOTTING;
-            $student_subject->save();
+
+            try
+            {
+                $student_subject->save();
+            }
+            catch (Exception $e)
+            {
+                continue;
+            }
         }
+
     }
 
     public static function getGradeAverage($course_subject_schedule_id)

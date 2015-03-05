@@ -74,6 +74,13 @@
             ->placeholder(lang('user/attributes.placeholders.status'))
             ->options(User::$statuses) }}
 
+        {{ Former::select('user_type', 'User Type' )
+            ->placeholder('Select User Type')
+            ->options(array(
+                User::USER_TYPE_ADMIN => 'Registrar',
+                User::USER_TYPE_DEAN => 'Dean',
+            )) }}
+
         @if (isset($user))
         {{ Former::password('password',lang('user/attributes.labels.password'))
             ->inlineHelp(lang('user/texts.new_password_help_text'))
@@ -103,7 +110,6 @@
 
 <input type="hidden" name="_success_url" value="{{ $success_url }}"/>
 <input type="hidden" name="_return_url" value="{{ $return_url }}"/>
-<input type="hidden" name="user_type" value="{{ User::USER_TYPE_ADMIN }}"/>
 {{ Former::close() }}
 
 @stop

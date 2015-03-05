@@ -25,7 +25,6 @@ class Admin_AuthController extends BaseController {
         {
             Event::fire('user.login');
 
-            if (User::USER_ROOT)
             return Redirect::intended(admin_url('/dashboard'));
         }
         else
