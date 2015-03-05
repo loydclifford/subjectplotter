@@ -32,12 +32,12 @@ class UserForm {
 
         // Default rules
         $rules = array(
-            'first_name'                => 'required',
-            'last_name'                 => 'required',
+            'first_name'                => 'Required|Min:3|Max:80|Alpha',
+            'last_name'                 => 'Required|Min:3|Max:80|Alpha',
             'password'			        => 'password|required',
             'password_confirmation' 	=> 'same:password|required',
             'email'                     => 'required|email|unique:users,email',
-            'user_type'                  => 'required',
+            'user_type'                 => 'required',
         );
 
         // If Edit

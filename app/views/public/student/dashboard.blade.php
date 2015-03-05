@@ -79,7 +79,6 @@
 
 </div>
 <script>
-
     $(function() {
 
         $('#submit_plotting_form_triggerer').click(function(e) {

@@ -1,17 +1,17 @@
 <?php
 
-class GradeEntryTblist extends BaseTblist {
+class DeanTblist extends BaseTblist {
 
-    public $table   = "grade-entry";
-    public $tableId = "user_id";
+    public $table = "deans";
+    public $tableId = "id";
 
-    public $cbName  = "";
+    public $cbName = "deans_id";
 
     function __construct()
     {
         parent::__construct();
 
-        $this->noResults = lang('gradeentry/texts.no_result_found');
+        $this->noResults = lang('instructor/texts.no_result_found');
         // we need to create a custom method setQuery,
         $this->setQuery();
 
@@ -24,42 +24,27 @@ class GradeEntryTblist extends BaseTblist {
 
     protected function setQuery()
     {
-        // all students
-        $this->query = Student::leftJoin('users', 'users.id', '=', 'students.user_id');
+        // all deans
+        $this->query = Dean::leftJoin('users', 'users.id', '=', 'deans.user_id');
 
-        if (Input::has('student_name'))
+        if (Input::has('instructor_id'))
+        {
+            $this->query->where('deans.id', trim(Input::get('instructor_id')));
+        }
+
+        if (Input::has('name'))
         {
             $this->query->where(function($query) {
-                $query->where('users.first_name', 'LIKE', '%'.trim(Input::get('student_name')).'%');
-                return $query->orWhere('users.last_name', 'LIKE', '%'.trim(Input::get('student_name')).'%');
+                $query->where('users.first_name', 'LIKE', '%'.Input::get('name').'%');
+                $query->where('users.last_name', 'LIKE', '%'.Input::get('name').'%');
             });
-        }
-
-        if (Input::has('user_id'))
-        {
-            $this->query->where('students.user_id',trim(Input::get('user_id')));
-        }
-
-        if (Input::has('course_code'))
-        {
-            $this->query->where('students.course_code',trim(Input::get('course_code')));
-        }
-
-        if (Input::has('course_year_code'))
-        {
-            $this->query->where('students.course_year_code',trim(Input::get('course_year_code')));
-        }
-
-        if (Input::has('email'))
-        {
-            $this->query->where('users.email','LIKE', '%'.trim(Input::get('email')).'%');
         }
 
         // Debug query
         $this->columnOrders = array();
 
         $this->columnsToSelect = array(
-            'students.*',
+            'deans.*',
             'users.id as user_id',
             'users.first_name as user_first_name',
             'users.last_name as user_last_name',
@@ -74,12 +59,20 @@ class GradeEntryTblist extends BaseTblist {
     {
         $this->addCheckableColumn();
 
-        $this->columns['user_id'] = array(
-            'label'           => 'Student ID',
+        $this->columns['id'] = array(
+            'label'           => 'ID',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'students.student_code',
-            'thead_attr'      => ' style="width:120px" ',
+            'table_column'    => 'deans.id',
+            'thead_attr'      => ' style="width:110px" ',
+        );
+
+        $this->columns['user_id'] = array(
+            'label'           => 'User ID',
+            'sortable'        => true,
+            'classes'         => 'hidden-xs hidden-sm',
+            'table_column'    => 'users.user_id',
+            'thead_attr'      => ' style="width:110px" ',
         );
 
         $this->columns['user_first_name'] = array(
@@ -87,7 +80,7 @@ class GradeEntryTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.first_name',
-            'thead_attr'      => ' style="width:180px" ',
+            'thead_attr'      => ' style="width:130px" ',
         );
 
         $this->columns['user_last_name'] = array(
@@ -95,50 +88,50 @@ class GradeEntryTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.last_name',
-            'thead_attr'      => ' style="width:180px" ',
+            'thead_attr'      => ' style="width:130px" ',
         );
 
         $this->columns['user_email'] = array(
             'label'           => 'Email',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'students.user_email',
+            'table_column'    => 'users.user_email',
+            'thead_attr'      => ' ',
         );
 
-        $this->columns['course_code'] = array(
-            'label'           => 'Course Code',
+        $this->columns['user_status'] = array(
+            'label'           => 'Status',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'students.course_code',
-            'thead_attr'      => ' style="width:150px" ',
+            'table_column'    => 'users.status',
+            'thead_attr'      => ' style="width:30px" ',
         );
 
-        $this->columns['course_year_code'] = array(
-            'label'           => 'Year Level',
+        $this->columns['user_last_login'] = array(
+            'label'           => 'Last login',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
-            'table_column'    => 'students.course_year_code',
-            'thead_attr'      => ' style="width:90px" ',
+            'table_column'    => 'users.last_login',
+            'thead_attr'      => ' style="width:100px" ',
         );
 
         $this->addActionColumn();
     }
 
 
-
     protected function colSetAction($row)
     {
-        ?>
-
-        <div class="btn-group" id="">
-            <a href="<?php echo admin_url("/grade-entry/{$row->student_no}/view") ?>" class="btn btn-primary"><?php echo lang('student/texts.view') ?></a>
-        </div>
-    <?php
+        echo $row->present()->actionButtons();
     }
 
     protected function colSetId($row)
     {
         echo $row->present()->idLink();
+    }
+
+    protected function colSetUserId($row)
+    {
+        echo Html::link(admin_url("/users/{$row->user_id}/edit"), 'User - ' . $row->user_id);
     }
 
     protected function colSetGroupDisplayName($row)

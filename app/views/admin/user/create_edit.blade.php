@@ -22,12 +22,13 @@
 <?php
     $form_rules = array(
         'salutations'             => 'required',
-        'first_name'              => 'required',
+        'first_name'              => 'Required|Min:3|Max:80|Alpha',
+        'last_name'               => 'Required|Min:3|Max:80|Alpha',
         'user_type'               => 'required',
         'status'                  => 'required',
         'address1'                => 'required',
         'country_id'              => 'required',
-        'email'                   => 'required',
+        'email'                   => 'required|email',
         'password'                => 'required',
         'password_confirmation'   => 'required',
     );

@@ -33,15 +33,15 @@ class StudentForm {
 
         // Default rules
         $rules = array(
-            'student_no'            => 'required|unique:students,student_no',
-            'first_name'            => 'required',
-            'last_name'             => 'required',
+            'student_no'            => 'required|unique:students,student_no|Integer|Min:12',
+            'first_name'            => 'Required|Min:3|Max:80|Alpha',
+            'last_name'             => 'Required|Min:3|Max:80|Alpha',
             'status'                => 'required',
             'course_code'           => 'required|exists:courses,course_code',
             'course_year_code'      => 'required',
-            'email'                 => 'required|unique:users,email',
-            'password'              => 'required',
-            'password_confirmation' => 'required|same:password',
+            'email'                 => 'required|unique:users,email|Email',
+            'password'              => 'Required|AlphaNum|Between:4,8',
+            'password_confirmation' => 'Required|AlphaNum|Between:4,8|same:password',
         );
 
         // If Edit

@@ -12,19 +12,18 @@
                 <label class="sr-only" for="input_name">{{ lang('instructor/attributes.labels.instructor_name') }}</label>
                 <input type="text" name="name" class="form-control" id="input_name" placeholder="{{ lang('instructor/attributes.placeholders.instructor_name') }}" value="{{ Input::get('name') }}">
             </div>
-
+            <div class="form-group">
+                <label class="sr-only" for="input_email">{{ lang('instructor/texts.label.email') }}</label>
+                <input type="text" name="email" class="form-control" id="input_email" placeholder="{{ lang('instructor/attributes.placeholders.email') }}" value="{{ Input::get('email') }}">
+            </div>
             <div class="form-group">
                 <label class="sr-only" for="action_bulk">{{ lang('instructor/attributes.labels.status') }}</label>
                 <select name="status" class="form-control">
                     <option value="">{{ lang('instructor/attributes.placeholders.status') }}</option>
                     @foreach(User::$statuses as $key=>$value)
-                    <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
                 </select>
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="input_email">{{ lang('instructor/texts.label.email') }}</label>
-                <input type="text" name="email" class="form-control" id="input_email" placeholder="{{ lang('instructor/attributes.placeholders.email') }}" value="{{ Input::get('email') }}">
             </div>
         </div>
         <div class="col-sm-3">

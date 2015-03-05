@@ -66,11 +66,11 @@ class UserTblist extends BaseTblist {
         $this->addCheckableColumn();
 
         $this->columns['id'] = array(
-            'label'           => 'Last Name',
+            'label'           => 'ID',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.id',
-            'thead_attr'      => ' style="width:40px" ',
+            'thead_attr'      => ' style="width:100px" ',
         );
 
         $this->columns['first_name'] = array(
@@ -78,7 +78,7 @@ class UserTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.first_name',
-            'thead_attr'      => ' style="width:120px" ',
+            'thead_attr'      => ' style="width:180px" ',
         );
 
         $this->columns['last_name'] = array(
@@ -86,7 +86,7 @@ class UserTblist extends BaseTblist {
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'users.last_name',
-            'thead_attr'      => ' style="width:120px" ',
+            'thead_attr'      => ' style="width:180px" ',
         );
 
         $this->columns['email'] = array(

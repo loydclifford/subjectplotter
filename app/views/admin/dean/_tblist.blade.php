@@ -1,35 +1,32 @@
-<!-- Main Content -->
-<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="students_tblist_form">
 
+
+<!-- Main Content -->
+<form action="{{ $list_action }}" method="get" class="tblist-form js-tblist-default" autocomplete="off" id="deans_tblist_form">
     <div class="row form-inline tblist-form-toolbar" >
         <div class="col-sm-9">
             <div class="form-group">
-                <input type="text" name="user_id" class="form-control" placeholder="{{ lang('student/attributes.placeholders.user_id') }}" value="{{ Input::get('user_id') }}" style="width:150px">
+                <label class="sr-only" for="input_dean_id">{{ lang('dean/attributes.labels.dean_name') }}</label>
+                <input type="text" name="dean_id" class="form-control" placeholder="{{ lang('dean/attributes.placeholders.dean_id') }}" value="{{ Input::get('dean_id') }}" style="width:180px">
             </div>
             <div class="form-group">
-                <input type="text" name="student_name" class="form-control" placeholder="{{ lang('student/attributes.placeholders.student_name') }}" value="{{ Input::get('student_name') }}" style="width:180px">
+                <label class="sr-only" for="input_name">{{ lang('dean/attributes.labels.dean_name') }}</label>
+                <input type="text" name="name" class="form-control" id="input_name" placeholder="{{ lang('dean/attributes.placeholders.dean_name') }}" value="{{ Input::get('name') }}" style="width:220px">
             </div>
             <div class="form-group">
-                <input type="text" name="email" class="form-control" placeholder="Email" value="{{ Input::get('email') }}" style="width:180px">
+                <label class="sr-only" for="input_email">{{ lang('dean/texts.label.email') }}</label>
+                <input type="text" name="email" class="form-control" id="input_email" placeholder="{{ lang('dean/attributes.placeholders.email') }}" value="{{ Input::get('email') }}" style="width:200px">
             </div>
+
             <div class="form-group">
-                <select name="course_code" class="form-control">
-                    <option value=""> Select Course </option>
-                    @foreach (Course::all() as $course)
-                        <option value="{{ $course->course_code }}" {{ is_selected($course->course_code, Input::get('course_code')) }}>{{ $course->course_code }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <select name="course_year_code" class="form-control">
-                    <option value=""> Select Course Year </option>
-                    @foreach (Student::$year as $key=>$value)
-                        <option value="{{ $key }}" {{ is_selected($key, Input::get('course_year_code')) }}>{{ $value }}</option>
+                <label class="sr-only" for="action_bulk">{{ lang('dean/attributes.labels.status') }}</label>
+                <select name="status" class="form-control">
+                    <option value="">{{ lang('dean/attributes.placeholders.status') }}</option>
+                    @foreach(User::$statuses as $key=>$value)
+                    <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
         </div>
-
         <div class="col-sm-3">
             <div class="pull-right">
                 <button type="reset" class="btn btn-info"><i class="fa fa-times"></i> {{ lang('texts.reset_button') }}</button>
@@ -37,6 +34,7 @@
             </div>
         </div>
     </div><!-- /.row -->
+
 
     {{ $list->getTableData() }}
 
@@ -75,7 +73,7 @@
 </form>
 <script>
     $(function(){
-        var $tblist = $('#students_tblist_form');
+        var $tblist = $('#deans_tblist_form');
 
         var $backAction = new utils.buckAction();
         $backAction.init($tblist,function(actionData)
@@ -85,15 +83,15 @@
                 switch (actionData.action)
                 {
                     case 'delete':
-                        bootbox.confirm('{{ lang("student::texts.delete_confirmation_many") }}', function(result) {
+                        bootbox.confirm('{{ lang("dean/texts.delete_confirmation_many") }}', function(result) {
                             if (result === true)
                             {
-                                utils.redirect(utils.adminUrl('/students/delete'+actionData.param));
+                                utils.redirect(utils.adminUrl('/deans/delete'+actionData.param));
                             }
                         });
                         break;
                     case 'export':
-                        utils.newTab(utils.adminUrl('/students/export'+actionData.param));
+                        utils.newTab(utils.adminUrl('/deans/export'+actionData.param));
                         break;
                 }
             }

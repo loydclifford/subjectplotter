@@ -23,13 +23,13 @@
 <?php
     $form_rules = array(
         'salutations'           => 'required',
-        'first_name'            => 'required',
-        'last_name'             => 'required',
+        'first_name'            => 'Required|Min:3|Max:80|Alpha',
+        'last_name'             => 'Required|Min:3|Max:80|Alpha',
         'instructor_type'       => 'required',
         'status'                => 'required',
         'address1'              => 'required',
         'country_id'            => 'required',
-        'email'                 => 'required',
+        'email'                 => 'required|Email',
         'password'              => 'required',
         'password_confirmation' => 'required',
     );

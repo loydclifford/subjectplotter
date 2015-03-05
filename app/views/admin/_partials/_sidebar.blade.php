@@ -80,6 +80,12 @@
                     </ul>
                 </li>
                 <li >
+                    <a href="{{ admin_url('/deans') }}" data-url="^/admin/deans/[0-9]+">
+                        <i class="fa  fa-users"></i>
+                        <span>Deans</span>
+                    </a>
+                </li>
+                <li >
                     <a href="{{ admin_url('/grade-entry') }}" data-url="^/admin/grade-entry/[0-9]+">
                         <i class="fa  fa-pencil-square-o"></i>
                         <span>Grade Entry</span>

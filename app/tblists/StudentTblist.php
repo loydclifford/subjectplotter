@@ -106,15 +106,15 @@ class StudentTblist extends BaseTblist {
 
 
         $this->columns['course_code'] = array(
-            'label'           => 'Course Code',
+            'label'           => 'Course',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'students.course_code',
-            'thead_attr'      => ' style="width:200px" ',
+            'thead_attr'      => ' style="width:180px" ',
         );
 
         $this->columns['course_year_code'] = array(
-            'label'           => 'Course Level Code',
+            'label'           => 'Course Level',
             'sortable'        => true,
             'classes'         => 'hidden-xs hidden-sm',
             'table_column'    => 'students.course_year_code',

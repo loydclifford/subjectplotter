@@ -8,22 +8,17 @@
                 <input type="text" name="user_id" class="form-control" placeholder="{{ lang('user/attributes.placeholders.user_id') }}" value="{{ Input::get('user_id') }}" style="width:180px">
             </div>
             <div class="form-group">
-                <label class="sr-only" for="input_name">{{ lang('user/attributes.labels.user_name') }}</label>
-                <input type="text" name="name" class="form-control" id="input_name" placeholder="{{ lang('user/attributes.placeholders.name') }}" value="{{ Input::get('name') }}">
+                <label class="sr-only" for="input_email">{{ lang('user/texts.label.email') }}</label>
+                <input type="text" name="email" class="form-control" id="input_email" placeholder="{{ lang('user/attributes.placeholders.email') }}" value="{{ Input::get('email') }}">
             </div>
-
             <div class="form-group">
                 <label class="sr-only" for="action_bulk">{{ lang('user/attributes.labels.status') }}</label>
                 <select name="status" class="form-control">
                     <option value="">{{ lang('user/attributes.placeholders.status') }}</option>
                     @foreach(User::$statuses as $key=>$value)
-                    <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
                 </select>
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="input_email">{{ lang('user/texts.label.email') }}</label>
-                <input type="text" name="email" class="form-control" id="input_email" placeholder="{{ lang('user/attributes.placeholders.email') }}" value="{{ Input::get('email') }}">
             </div>
         </div>
         <div class="col-sm-3">

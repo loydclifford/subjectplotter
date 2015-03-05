@@ -1,6 +1,6 @@
 <?php
 
-class InstructorForm {
+class DeanForm {
 
     /**
      * User class instance
@@ -12,11 +12,11 @@ class InstructorForm {
     /**
      * Create instance of UserRepo
      *
-     * @param Instructor $instructor
+     * @param Dean $dean
      */
-    public function __construct(Instructor $instructor)
+    public function __construct(Dean $dean)
     {
-        $this->model = $instructor;
+        $this->model = $dean;
     }
 
     /**
@@ -32,7 +32,7 @@ class InstructorForm {
 
         // Default rules
         $rules = array(
-            'instructor_id'         => 'required|unique:instructors,id|Integer|Min:12',
+            'dean_id'         => 'required|unique:deans,id|Integer|Min:12',
             'email'                 => 'required|email|unique:users,email',
             'first_name'            => 'Required|Min:3|Max:80|Alpha',
             'last_name'             => 'Required|Min:3|Max:80|Alpha',
@@ -54,7 +54,7 @@ class InstructorForm {
             }
 
             // Another condition if edit
-            $rules['instructor_id'] = 'required|exists:instructors,id';
+            $rules['dean_id'] = 'required|exists:deans,id';
 
             // Check if password is set, then set new password
             if (Input::has('password') && trim(array_get($input, 'password')) != "")
@@ -91,7 +91,7 @@ class InstructorForm {
      * Save validated inputs
      *
      * @param null $input
-     * @return Instructor|User
+     * @return Dean|User
      */
     public function saveInput($input = null)
     {
@@ -123,22 +123,22 @@ class InstructorForm {
             $user->password = \Hash::make(array_get($input, 'password'));
         }
 
-        // save instructor and his associated user account
+        // save dean and his associated user account
         $user->save();
 
         // Do a security check  // Do save
-        $this->model->id      = array_get($input, 'instructor_id');
+        $this->model->id      = array_get($input, 'dean_id');
         $this->model->user_id = $user->id;
         $this->model->save();
 
-        // Save instructor subject category
+        // Save dean subject category
         // delete old data
-        InstructorSubjectCategory::where('instructor_id', $this->model->id)->delete();
+        DeanSubjectCategory::where('dean_id', $this->model->id)->delete();
         foreach (Input::get('subject_category_code', array()) as $subject_code)
         {
-            InstructorSubjectCategory::insert(array(
+            DeanSubjectCategory::insert(array(
                 'subject_category_code' => $subject_code,
-                'instructor_id' => $this->model->id,
+                'dean_id' => $this->model->id,
             ));
         }
 
