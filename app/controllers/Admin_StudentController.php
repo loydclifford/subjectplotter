@@ -117,9 +117,9 @@ class Admin_StudentController extends BaseController {
     {
         Utils::validateBulkArray('user_id');
 
-        // The student id56665`
+        // The student id
         $user_ids = Input::get('user_id', array());
-        $students = Student::whereIn('user_id', $user_ids)->delete();
+        $students = Student::whereIn('student_no', $user_ids)->delete();
 
         // Delete Students
          Event::fire('student.delete', $students);
