@@ -40,8 +40,8 @@ class StudentForm {
             'course_code'           => 'required|exists:courses,course_code',
             'course_year_code'      => 'required',
             'email'                 => 'required|unique:users,email|Email',
-            'password'              => 'Required|AlphaNum|Between:4,8',
-            'password_confirmation' => 'Required|AlphaNum|Between:4,8|same:password',
+            'password'              => 'Required|AlphaNum|min:4|max:100',
+            'password_confirmation' => 'Required|AlphaNum|min:4|max:100|same:password',
         );
 
         // If Edit
