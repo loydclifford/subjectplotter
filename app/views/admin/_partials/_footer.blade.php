@@ -2,6 +2,8 @@
 <!-- add new calendar event modal -->
 <!-- jQuery UI 1.10.3 -->
 <script src="{{ asset_url('/admin/js/libraries/jquery-ui-1.10.3.min.js') }}"></script>
+<!-- jQuery 2.0.2 -->
+<script src="{{ asset_url('/public/scripts/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset_url('/admin/js/libraries/bootstrap.min.js') }}"></script>
 <!-- Select2 3.5.1 -->
@@ -10,7 +12,7 @@
 <script src="{{ asset_url('/admin/js/plugins/select2/plugins/placecomplete/jquery.placecomplete.js') }}"></script>
 
 <!-- Morris.js charts -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="/raphael/2.1.0/raphael-min.js"></script>
 
 <script src="{{ asset_url('/admin/js/plugins/morris/morris.min.js') }}"></script>
 <!-- Sparkline -->
