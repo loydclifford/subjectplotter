@@ -68,6 +68,8 @@
                         <li><a data-url="^/admin/instructors/create$" href="{{ admin_url('/instructors/create') }}"><i class="fa fa-angle-double-right"></i>Create</a></li>
                     </ul>
                 </li>
+
+                @if (user_get()->user_type == User::USER_TYPE_ADMIN)
                 <li class="treeview">
                     <a href="{{ admin_url('/students') }}" data-url="^/admin/students/[0-9]+">
                         <i class="fa  fa-user-plus"></i>
@@ -79,6 +81,7 @@
                         <li><a data-url="^/admin/students/create$" href="{{ admin_url('/students/create') }}"><i class="fa fa-angle-double-right"></i>Create</a></li>
                     </ul>
                 </li>
+                @endif
 
 
                 @if (user_get()->user_type == User::USER_TYPE_ADMIN)
