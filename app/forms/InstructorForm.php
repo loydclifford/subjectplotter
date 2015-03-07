@@ -36,8 +36,8 @@ class InstructorForm {
             'email'                 => 'required|email|unique:users,email',
             'first_name'            => 'Required|Min:3|Max:80|Alpha',
             'last_name'             => 'Required|Min:3|Max:80|Alpha',
-            'password'			    => 'password|Required|AlphaNum|Between:4,8',
-            'password_confirmation' => 'same:password|Required|AlphaNum|Between:4,8',
+            'password'			    => 'password|Required|AlphaNum|min:4|max:100',
+            'password_confirmation' => 'same:password|Required|AlphaNum|min:4|max:100|same:password',
             'status'                => 'required',
         );
 
